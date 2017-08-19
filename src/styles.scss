@@ -1,0 +1,36 @@
+/*@import '~@angular/material/prebuilt-themes/indigo-pink.css';*/
+
+html, body {
+  /*-ms-overflow-style: -ms-autohiding-scrollbar;*/
+  height: 100%;
+  -ms-overflow-style: none;  /* IE 10+ */
+  /* overflow: -moz-scrollbars-none;   Firefox */
+}
+::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+  /* width: 0px;   remove scrollbar space */
+  /* background: transparent;   optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+/*::-webkit-scrollbar-thumb {*/
+/*background: #FF0000;*/
+/*}*/
+
+// Custom style for loading elements without height
+.will-load {
+    min-height: 80px;
+}
+// Href line height wasn't right for md-icon-button
+a[md-icon-button] {
+    line-height: 36px;
+}
+
+// Capitalize
+.text-capital {
+  text-transform: capitalize;
+}
+
+// Lighter font weight in sub-toolbars
+td-layout-manage-list .mat-toolbar {
+    font-weight: 400;
+}
