@@ -10,7 +10,7 @@ import { Util } from 'app/shared/util/util';
 
 export class HomeComponent {
 
-  backgroundImage = AppConfig.HOME_BACKGROUND;
+  backgroundImage = AppConfig.USER_BACKGROUND;
   osType;
   deviceType = 'Your device type is ';
 

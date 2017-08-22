@@ -2,10 +2,10 @@
 @import '~@covalent/core/theming/all-theme';
 @import '~@covalent/markdown/markdown-theme';
 @import '~@covalent/highlight/highlight-theme';
-// Plus imports for other components in your app.
+// Plus imports for other components in your common.
 
 // Include the base styles for Angular Material core. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
+// have to load a single css file for Angular Material in your common.
 @include mat-core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
@@ -20,7 +20,7 @@ $warn:    mat-palette($mat-red, 600);
 // Create the theme object (a Sass map containing all of the palettes).
 $theme: mat-light-theme($primary, $accent, $warn);
 
-// Include theme styles for core and each component used in your app.
+// Include theme styles for core and each component used in your common.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($theme);
@@ -77,7 +77,7 @@ md-nav-list {
 $foreground: map-get($theme, foreground);
 $background: map-get($theme, background);
 
-// Apply theme for this app
+// Apply theme for this common
 
 // NGX Charts
 [ngx-charts-axis-label] text {

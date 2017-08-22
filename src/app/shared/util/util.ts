@@ -2,7 +2,7 @@
  * Created by qiz264 on 2017-04-20.
  */
 
-// import { IMessageElement } from 'app/config/interfaces/message-element';
+// import { IMessageElement } from 'common/config/interfaces/message-element';
 
 export class Util {
 

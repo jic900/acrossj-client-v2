@@ -10,8 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { TimeoutError } from 'rxjs/Rx';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 
-import { AppConfig } from 'app/config/common/app.config';
-import { EndPoint } from 'app/config/common/endpoint.config';
+import { HttpConfig, EndPoint } from 'app/config/common/http.config';
 import { LocalStorageService } from './localstorage.service';
 import { LoaderService } from '../components/loader/loader.service';
 
@@ -69,7 +68,7 @@ export class HttpService extends AuthHttp {
       // }, (error: any) => {
       //   this.onError(error);
       // })
-      .timeout(AppConfig.HTTP_TIMEOUT)
+      .timeout(HttpConfig.HTTP_TIMEOUT)
       // .retry(AppConfig.HTTP_RETRY_MAX)
       .retryWhen(this.onRetry)
       // .timeoutWith(AppConfig.HTTP_TIMEOUT, this.onTimeout)
@@ -91,13 +90,13 @@ export class HttpService extends AuthHttp {
     if (error.status === ERR_CONNECTION_REFUSED) {
       error.name = 'SystemUnavailable';
       error.status = ERR_SYSTEM_UNAVAILABLE;
-      error.message = AppConfig.ERROR.SYSTEM_UNAVAILABLE;
+      error.message = HttpConfig.ERROR.SYSTEM_UNAVAILABLE;
     } else if (error instanceof TimeoutError) {
       error = {
         name: 'GatewayTimeout',
         status: ERR_GATEWAY_TIMEOUT,
-        message: AppConfig.ERROR.GATEWAY_TIMEOUT
-      }
+        message: HttpConfig.ERROR.GATEWAY_TIMEOUT
+      };
     } else if (error.status === ERR_UNAUTHORIZED && (error.name === 'TokenExpired' || error.name === 'InvalidToken')) {
       this.localStorageService.deleteToken();
       // this.authService.refreshToken();
@@ -107,7 +106,7 @@ export class HttpService extends AuthHttp {
         error.name = 'Unexpected';
       }
       if (error.name !== 'Validation') {
-        error.message = AppConfig.ERROR.GENERIC;
+        error.message = HttpConfig.ERROR.GENERIC;
       }
     }
     // console.log(error);
@@ -129,7 +128,7 @@ export class HttpService extends AuthHttp {
     return attempts.flatMap(error => {
       if (error instanceof TimeoutError) {
         console.log('retrying');
-        return ++count >= AppConfig.HTTP_RETRY_MAX ? Observable.throw(error) : Observable.timer(count * AppConfig.HTTP_RETRY_DELAY);
+        return ++count >= HttpConfig.HTTP_RETRY_MAX ? Observable.throw(error) : Observable.timer(count * HttpConfig.HTTP_RETRY_DELAY);
       }
       return Observable.throw(error);
     });

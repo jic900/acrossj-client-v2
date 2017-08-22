@@ -1,0 +1,63 @@
+/* :host /deep/ lets shadowdom style child elements */
+:host /deep/ {
+  /**
+  * CSS Overrides for bug fixes
+  */
+
+  /**
+  * END CSS Overrides for bug fixes
+  */
+
+  /* Manage list custom styles */
+  .md-sort-item {
+    /deep/ {
+      .md-list-item-content {
+        padding: 0;
+      }
+    }
+  }
+  .md-sort-icon {
+    font-size: 15px;
+    margin-right: 10px;
+  }
+  .md-sort-header {
+    padding: 10px;
+    &:hover {
+      background-color: #EEEEEE;
+      cursor: pointer;
+    }
+  }
+}
+
+.searchmenu-container {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.searchmenu-container md-sidenav {
+  width: 450px;
+  //opacity: 0.2;
+  //background-color: inherit;
+}
+@media (max-width: 768px) {
+  .searchmenu-container md-sidenav {
+    width: 100%;
+  }
+}
+
+.searchmenu-container md-sidenav {
+  max-width: 500px;
+}
+
+//.searchmenu-container .mat-sidenav-content,
+//.searchmenu-container md-sidenav {
+//  display: flex;
+//  overflow: visible;
+//}
+
+.search-icon {
+  font-size: 30px !important;
+  line-height: 31px !important;
+}
+

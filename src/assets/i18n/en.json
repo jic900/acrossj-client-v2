@@ -1,3 +1,94 @@
 {
+  "MAIN": {
+    "SIDE_NAV": {
+      "ABOUT_US": "About Us",
+      "CREATE_EVENT": "Create an Event",
+      "HELP": "Help",
+      "LANGUAGE": {
+        "LABEL": "Language",
+        "TOOLTIP": "Select a Language",
+        "MENU": {
+          "ENGLISH": "English",
+          "JAPANESE": "Japanese",
+          "CHINESE": "Chinese"
+        }
+      },
+      "USER": {
+        "MENU": {
+          "PROFILE": "Profile",
+          "EVENTS": "My Events",
+          "MESSAGES": "Messages",
+          "UPLOADS": "My Uploads",
+          "SIGNOUT": "Sign Out"
+        }
+      }
+    },
+    "HEADER": {
+      "LANGUAGE": {
+        "TOOLTIP": "Select a Language",
+        "MENU": {
+          "ENGLISH": "English",
+          "JAPANESE": "Japanese",
+          "CHINESE": "Chinese"
+        }
+      },
+      "USER": {
+        "TOOLTIP": "Please sign in or sign up",
+        "MENU": {
+          "SIGNIN": "Sign In",
+          "SIGNUP": "Sign Up"
+        }
+      },
+      "USER_AUTHED": {
+        "MENU": {
+          "SIGNOUT": "Sign Out"
+        }
+      }
+    },
+    "FOOTER": {
+      "CONTENT": "Copyright &copy; 2017 AcrossJapan K.K. All Rights Reserved."
+    },
+    "SEARCH_MENU": {
 
+    }
+  },
+  "ERRORS": {
+    "GENERIC": {
+      "SYSTEM_UNAVAILABLE": "System is currently unavailable, please try again later.",
+      "GATEWAY_TIMEOUT": "Request is timed out, please try again later.",
+      "OTHERS": "Something went wrong, please try again later."
+    },
+    "VALIDATION": {
+      "USER": {
+        "USERNAME": {
+          "UNIQUE": "Username entered already exists, please choose another username.",
+          "REQUIRED": "Username is required",
+          "MINLENGTH": "Invalid Username: minimum 2 characters",
+          "MAXLENGTH": "Invalid Username: maximum 20 characters",
+          "PATTERN": "Invalid Username: special characters not allowed"
+        },
+        "EMAIL": {
+          "UNIQUE": "Email entered already exists, please choose another email.",
+          "REQUIRED": "Email is required",
+          "PATTERN": "Invalid Email"
+        },
+        "OLD_PASSWORD": {
+          "REQUIRED": "Old Password is required",
+          "MINLENGTH": "Invalid Old Password: minimum 4 characters"
+        },
+        "PASSWORD": {
+          "REQUIRED": "Password is required",
+          "MINLENGTH": "Invalid Password: minimum 4 characters"
+        },
+        "CONFIRM_PASSWORD": {
+          "REQUIRED": "Confirm Password is required",
+          "MINLENGTH": "Invalid Confirm Password: minimum 4 characters"
+        },
+        "ROLE": {
+          "MATCH": ""
+        },
+        "PASSWORD_MATCH": "Password does not match"
+      }
+    }
+  }
 }

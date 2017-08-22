@@ -2,6 +2,7 @@
 
 html, body {
   /*-ms-overflow-style: -ms-autohiding-scrollbar;*/
+  //font-family: RobotoDraft,Roboto,Helvetica Neue,sans-serif;
   height: 100%;
   -ms-overflow-style: none;  /* IE 10+ */
   /* overflow: -moz-scrollbars-none;   Firefox */
@@ -11,10 +12,6 @@ html, body {
   /* width: 0px;   remove scrollbar space */
   /* background: transparent;   optional: just make scrollbar invisible */
 }
-/* optional: show position indicator in red */
-/*::-webkit-scrollbar-thumb {*/
-/*background: #FF0000;*/
-/*}*/
 
 // Custom style for loading elements without height
 .will-load {
@@ -25,6 +22,11 @@ a[md-icon-button] {
     line-height: 36px;
 }
 
+md-icon {
+  font-size: 26px !important;
+  line-height: 26px !important;
+}
+
 // Capitalize
 .text-capital {
   text-transform: capitalize;
@@ -33,4 +35,38 @@ a[md-icon-button] {
 // Lighter font weight in sub-toolbars
 td-layout-manage-list .mat-toolbar {
     font-weight: 400;
+}
+
+td-navigation-drawer md-toolbar .md-body-1 {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 500 !important;
+}
+
+td-navigation-drawer md-toolbar .mat-icon.md-icon-logo {
+  width: 160px;
+  height: auto
+}
+
+md-toolbar .mat-icon.md-icon-logo {
+  padding-top: 7px;
+  width: 140px;
+  height: auto
+}
+
+// tweak sidenav language submenu
+.td-expansion-label .mat-list-item-content {
+  padding: 0 !important;
+}
+.td-expansion-label .mat-list-item:hover, .td-expansion-label .mat-list-item.mat-list-item-focus {
+  background: inherit !important;
+}
+.td-expansion-content .mat-list-item-content {
+  padding-left: 40px !important;
+}
+
+md-icon.flag-icon-jp {
+  height: 18px !important;
+  //background-color: rgba(0,0,0,.2) !important;
+  border: solid 1px rgba(0,0,0,.2);
 }

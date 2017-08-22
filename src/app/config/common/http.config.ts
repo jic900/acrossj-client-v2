@@ -1,6 +1,13 @@
-/**
- * Created by LAE84266 on 05/07/2017.
- */
+export const HttpConfig = {
+  HTTP_TIMEOUT: 10000,           // in millisecond
+  HTTP_RETRY_DELAY: 1000,        // in millisecond
+  HTTP_RETRY_MAX: 3,
+  ERROR: {
+    SYSTEM_UNAVAILABLE: 'ERRORS.GENERIC.SYSTEM_UNAVAILABLE',
+    GATEWAY_TIMEOUT: 'ERRORS.GENERIC.GATEWAY_TIMEOUT',
+    GENERIC: 'ERRORS.GENERIC.OTHERS'
+  }
+};
 
 const ENDPOINT_BASE = 'http://127.0.0.1:10007/api/';
 // const ENDPOINT_BASE = 'http://68.149.121.215:8080/api/';

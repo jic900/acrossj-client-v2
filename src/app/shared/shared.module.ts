@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 import {
@@ -13,7 +14,7 @@ import {
   CovalentDataTableModule, CovalentMediaModule, CovalentLoadingModule,
   CovalentNotificationsModule, CovalentLayoutModule, CovalentMenuModule,
   CovalentPagingModule, CovalentSearchModule, CovalentStepsModule,
-  CovalentCommonModule, CovalentDialogsModule
+  CovalentCommonModule, CovalentDialogsModule, CovalentExpansionPanelModule
 } from '@covalent/core';
 import { FlexLayoutModule, } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,6 +25,9 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderService } from './components/loader/loader.service';
 import { LocalStorageService } from './services/localstorage.service';
 import { HttpService } from './services/http.service';
+import { MenuComponent } from './components/menu/menu.component';
+import { NavListComponent } from './components/navlist/navlist.component';
+import { IconComponent } from './components/icon/icon.component';
 
 const FLEX_LAYOUT_MODULES: any[] = [
   FlexLayoutModule,
@@ -45,7 +49,7 @@ const COVALENT_MODULES: any[] = [
   CovalentDataTableModule, CovalentMediaModule, CovalentLoadingModule,
   CovalentNotificationsModule, CovalentLayoutModule, CovalentMenuModule,
   CovalentPagingModule, CovalentSearchModule, CovalentStepsModule,
-  CovalentCommonModule, CovalentDialogsModule
+  CovalentCommonModule, CovalentDialogsModule, CovalentExpansionPanelModule
 ];
 
 export function httpServiceFactory(
@@ -65,6 +69,7 @@ export function httpServiceFactory(
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     ANGULAR_MODULES,
     MATERIAL_MODULES,
     COVALENT_MODULES,
@@ -73,7 +78,10 @@ export function httpServiceFactory(
   ],
   declarations: [
     ValidateOnBlurDirective,
-    LoaderComponent
+    LoaderComponent,
+    MenuComponent,
+    NavListComponent,
+    IconComponent
   ],
   exports: [
     ANGULAR_MODULES,
@@ -82,7 +90,10 @@ export function httpServiceFactory(
     FLEX_LAYOUT_MODULES,
     TranslateModule,
     ValidateOnBlurDirective,
-    LoaderComponent
+    LoaderComponent,
+    MenuComponent,
+    NavListComponent,
+    IconComponent
   ],
   providers: [
     LoaderService,

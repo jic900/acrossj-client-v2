@@ -2,11 +2,13 @@ import {
   OnDestroy,
   Injectable
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { HttpService } from 'app/shared/services/http.service';
 import { LocalStorageService } from 'app/shared/services/localstorage.service';
-import { EndPoint } from 'app/config/common/endpoint.config';
+import { EndPoint } from 'app/config/common/http.config';
 
 @Injectable()
 export class AuthService implements OnDestroy {

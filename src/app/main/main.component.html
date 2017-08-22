@@ -1,0 +1,53 @@
+<td-layout #layout>
+  <td-navigation-drawer [logo]="sideNavData.logo.icon.class" [name]="getName()">
+    <aj-navlist [navListData]="sideNavData.appMenu" (clicked)="layout.close()"></aj-navlist>
+    <div td-navigation-drawer-menu>
+      <aj-navlist [navListData]="sideNavData.userMenu" (clicked)="layout.close() && onUserMenuClicked()"></aj-navlist>
+    </div>
+  </td-navigation-drawer>
+
+  <td-layout-nav>
+    <div td-toolbar-content layout="row" layout-align="center center" flex>
+      <button md-icon-button td-menu-button tdLayoutToggle>
+        <aj-icon [data]="headerData.toggleButton.icon"></aj-icon>
+      </button>
+      <aj-icon
+        [data]="headerData.logo.icon"
+        [cssClass]="'md-icon-logo cursor-pointer'"
+        [link]="headerData.logo.link">
+      </aj-icon>
+      <span flex></span>
+      <button md-icon-button (click)="sidenav.toggle()">
+        <aj-icon [data]="headerData.searchLink.icon" [cssClass]="'search-icon'"></aj-icon>
+      </button>
+      <div *ngIf="!isDeviceWidth()">
+        <aj-menu [menuData]="headerData.languageMenu"></aj-menu>
+      </div>
+      <div *ngIf="!isDeviceWidth() && !authenticated">
+        <aj-menu [menuData]="headerData.userMenu"></aj-menu>
+      </div>
+      <div *ngIf="!isDeviceWidth() && authenticated">
+        <aj-menu [menuData]="headerData.userMenuAuthed"></aj-menu>
+      </div>
+    </div>
+
+    <md-sidenav-container class="searchmenu-container">
+      <md-sidenav #sidenav mode="over" align="end" opened="false">
+        <aj-searchmenu></aj-searchmenu>
+      </md-sidenav>
+      <router-outlet></router-outlet>
+    </md-sidenav-container>
+
+    <td-layout-footer>
+      <div
+        layout="row"
+        layout-align="start center"
+        class="md-caption"
+        innerHTML="{{footerData.content.display | translate}}">
+      </div>
+    </td-layout-footer>
+  </td-layout-nav>
+
+</td-layout>
+
+

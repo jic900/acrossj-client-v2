@@ -1,0 +1,22 @@
+<button md-icon-button mdTooltip="{{menuData.tooltip | translate}}" [mdMenuTriggerFor]="menu">
+  {{menuData.display | translate}}
+  <aj-icon *ngIf="menuData.icon" [data]="menuData.icon"></aj-icon>
+  <!--<md-icon *ngIf="menuData.iconClass" [svgIcon]="menuData.iconType==='svg' ? menuData.iconClass : ''">-->
+    <!--{{menuData.iconType==='md' ? menuData.iconClass : ''}}-->
+  <!--</md-icon>-->
+</button>
+
+<md-menu #menu="mdMenu">
+  <ng-template let-item ngFor [ngForOf]="menuData.list">
+    <button
+      md-menu-item
+      [routerLink]="item.link ? item.link.param ? [item.link.path, item.link.param] : [item.link.path] : []"
+      (click)="onClicked(item.name)">
+      <aj-icon *ngIf="item.icon" [data]="item.icon"></aj-icon>
+      <!--<md-icon *ngIf="item.iconClass" [svgIcon]="item.iconType==='svg' ? item.iconClass : ''">-->
+        <!--{{item.iconType==='md' ? item.iconClass : ''}}-->
+      <!--</md-icon>-->
+      <span *ngIf="item.display">{{item.display | translate}}</span>
+    </button>
+  </ng-template>
+</md-menu>

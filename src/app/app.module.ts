@@ -13,8 +13,10 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './features/auth/services/auth.service';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { MainComponent } from './main/main.component';
+import { HomeComponent } from './main/home/home.component';
 import { PageNotFoundComponent } from './page-not-found.component';
+import { SearchMenuComponent } from './main/searchmenu/searchmenu.component';
 
 export function translateLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -23,8 +25,10 @@ export function translateLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    MainComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SearchMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -61,22 +65,12 @@ export class AppModule {
     // translate.use('zh');
 
     mdIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-
-    mdIconRegistry.addSvgIconInNamespace('assets', 'teradata',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/teradata.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'github',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'covalent',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/covalent.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'covalent-mark',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/covalent-mark.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'teradata-ux',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/teradata-ux.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'appcenter',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/appcenter.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'listener',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/listener.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'querygrid',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/querygrid.svg'));
+    mdIconRegistry.registerFontClassAlias('flag-icon-css', 'flag-icon');
+    mdIconRegistry.addSvgIconInNamespace('assets', 'logo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logo.svg'));
+    mdIconRegistry.addSvgIconInNamespace('assets', 'logo_iconed',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logo-iconed.svg'));
+    mdIconRegistry.addSvgIconInNamespace('assets', 'fa-calendar-plus-o',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/calendar-plus-o.svg'));
   }
 }
