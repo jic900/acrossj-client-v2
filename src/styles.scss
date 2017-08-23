@@ -35,3 +35,8 @@ md-icon {
 md-card[hidden] {
   display: none;
 }
+
+md-icon.flag-icon-jp {
+  height: 18px !important;
+  border: solid 1px rgba(0,0,0,.2) !important;
+}
