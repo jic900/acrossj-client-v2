@@ -17,6 +17,8 @@ export interface IMain {
 export interface ISideNav {
   logo: IElement;
   appMenu: IListElement;
+  authMenu: IListElement;
+  signoutMenu: IListElement;
   userMenu: IListElement;
 }
 
@@ -43,7 +45,7 @@ export class MainConfig implements IMainConfig {
 
 class SideNavConfig implements ISideNavConfig {
   title = 'sideNav';
-  elements: [IElement, IListElement, IListElement] = [
+  elements: [IElement, IListElement, IListElement, IListElement, IListElement] = [
     {
       name: 'logo',
       type: 'icon',
@@ -100,6 +102,38 @@ class SideNavConfig implements ISideNavConfig {
       ]
     },
     {
+      name: 'authMenu',
+      type: 'list',
+      list: [
+        {
+          name: 'signin',
+          type: 'link',
+          display: 'MAIN.HEADER.USER.MENU.SIGNIN',
+          icon: {class: 'fa-sign-in', type: 'fa'},
+          link: {path: '/auth', param: 'signin'}
+        },
+        {
+          name: 'signup',
+          type: 'link',
+          display: 'MAIN.HEADER.USER.MENU.SIGNUP',
+          icon: {class: 'fa-user-plus', type: 'fa'},
+          link: {path: '/auth', param: 'signup'}
+        }
+      ]
+    },
+    {
+      name: 'signoutMenu',
+      type: 'list',
+      list: [
+        {
+          name: 'signout',
+          type: 'link',
+          display: 'MAIN.HEADER.USER_AUTHED.MENU.SIGNOUT',
+          icon: {class: 'fa-sign-out', type: 'fa'}
+        }
+      ]
+    },
+    {
       name: 'userMenu',
       list: [
         {
@@ -129,12 +163,6 @@ class SideNavConfig implements ISideNavConfig {
           display: 'MAIN.SIDE_NAV.USER.MENU.UPLOADS',
           icon: {class: 'fa-upload', type: 'fa'},
           link: {path: '/user/uploads'}
-        },
-        {
-          name: 'signout',
-          type: 'link',
-          display: 'MAIN.SIDE_NAV.USER.MENU.SIGNOUT',
-          icon: {class: 'fa-sign-out', type: 'fa'}
         }
       ]
     }

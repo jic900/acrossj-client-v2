@@ -1,3 +1,54 @@
-<p>
-  auth works!
-</p>
+<div class="auth-container">
+  <div class="auth-panel">
+
+    <md-card [hidden]="authState != 'signin' && authState != 'signup'">
+      <md-tab-group #tabGroup [dynamicHeight]="true"
+                    [(selectedIndex)]="selectedIndex"
+                    (selectedIndexChange)="onSelectedTabIndexChange()">
+        <md-tab label="{{authData.signin.display | translate}}">
+          <aj-signin></aj-signin>
+        </md-tab>
+        <md-tab label="{{authData.signup.display | translate}}">
+          <aj-signup></aj-signup>
+        </md-tab>
+      </md-tab-group>
+    </md-card>
+
+    <md-card [hidden]="authState != 'verifyemail'">
+      <md-card-header>
+        <md-card-title>{{authData.verifyEmail.display | translate}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <aj-verifyemail></aj-verifyemail>
+      </md-card-content>
+    </md-card>
+
+    <md-card [hidden]="authState != 'sendverifyemail'">
+      <md-card-header>
+        <md-card-title>{{authData.sendVerifyEmail.display | translate}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <aj-sendverifyemail></aj-sendverifyemail>
+      </md-card-content>
+    </md-card>
+
+    <md-card [hidden]="authState != 'forgotpassword'">
+      <md-card-header>
+        <md-card-title>{{authData.forgotPassword.display | translate}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <aj-forgotpassword></aj-forgotpassword>
+      </md-card-content>
+    </md-card>
+
+    <md-card [hidden]="authState != 'resetpassword'">
+      <md-card-header>
+        <md-card-title>{{authData.resetPassword.display | translate}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <aj-resetpassword></aj-resetpassword>
+      </md-card-content>
+    </md-card>
+
+  </div>
+</div>

@@ -49,7 +49,99 @@
       "CONTENT": "Copyright &copy; 2017 AcrossJapan K.K. All Rights Reserved."
     },
     "SEARCH_MENU": {
-
+    }
+  },
+  "AUTH": {
+    "SIGNIN": {
+      "LABEL": "Sign In",
+      "USERNAME": "Email or Username",
+      "PASSWORD": "Password",
+      "SHOW_PASSWORD": "Show Password",
+      "FORGOT_PASSWORD": "Forgot Password?",
+      "BTN_LABEL": "Sign In",
+      "SEND_EMAIL": "Send Verification Email"
+    },
+    "SIGNUP": {
+      "LABEL": "Sign Up",
+      "USERNAME": "Username",
+      "EMAIL": "Email",
+      "PASSWORD": "New Password",
+      "CONFIRM_PASSWORD": "Confirm New Password",
+      "SHOW_PASSWORD": "Show Password",
+      "BTN_LABEL": "Sign Up",
+      "SEND_EMAIL": "Resend Verification Email"
+    },
+    "VERIFY_EMAIL": {
+      "LABEL": "Email Verification Status",
+      "SEND_EMAIL": "Resend Verification Email",
+      "BACK_SIGNIN": "Back to Sign In"
+    },
+    "SEND_VERIFY_EMAIL": {
+      "LABEL": "Verification Email",
+      "USERNAME": "Username or Email",
+      "BTN_LABEL": "Send Verification Email",
+      "BACK_SIGNIN": "Back to Sign In"
+    },
+    "FORGOT_PASSWORD": {
+      "LABEL": "Reset Password Email",
+      "USERNAME": "Username or Email",
+      "BTN_LABEL": "Send Reset Password Email",
+      "BACK_SIGNIN": "Back to Sign In"
+    },
+    "RESET_PASSWORD": {
+      "LABEL": "Reset Password",
+      "USERNAME": "Username",
+      "PASSWORD": "New Password",
+      "CONFIRM_PASSWORD": "Confirm New Password",
+      "SHOW_PASSWORD": "Show Password",
+      "BTN_LABEL": "Reset Password",
+      "SEND_EMAIL": "Send Reset Password Email",
+      "BACK_SIGNIN": "Back to Sign In"
+    }
+  },
+  "MESSAGES": {
+    "AUTH": {
+      "SIGNIN": {
+        "SUCCESS": "You are successfully signed in.",
+        "INVALID_USERNAME": "The username or email entered does not exist.",
+        "INVALID_PASSWORD": "The password entered is incorrect.",
+        "NOT_VERIFIED": "Your account is not verified, please verify your account first."
+      },
+      "SIGNUP": {
+        "SUCCESS": "Your account is successfully created and a verification email has been sent."
+      },
+      "VERIFY_EMAIL": {
+        "INPROGRESS": "Verifying account ...",
+        "SUCCESS": "Your account has been successfully verified. Please sign in.",
+        "ALREADY_VERIFIED": "Your account has been previously verified. Please sign in.",
+        "INVALID_TOKEN": "Account verification failed due to invalid or expired email link. Please resend verification email."
+      },
+      "SEND_VERIFY_EMAIL": {
+        "HINT": "Please enter your username or email below. An email will be sent to verify your account.",
+        "SUCCESS": "An email has been successfully sent. Please follow instruction in the email to activate your account.",
+        "INVALID_USERNAME": "The username or email entered does not exist."
+      },
+      "FORGOT_PASSWORD": {
+        "HINT": "Please enter your username or email below. An email will be sent to reset your password.",
+        "SUCCESS": "An email has been successfully sent. Please follow instruction in the email to reset your password.",
+        "INVALID_USERNAME": "The username or email entered does not exist."
+      },
+      "RESET_PASSWORD": {
+        "SUCCESS": "New password has been successfully reset. Please sign in.",
+        "INVALID_TOKEN": "Reset password failed due to invalid or expired email link. Please resend reset password email."
+      }
+    },
+    "USER": {
+      "PROFILE": {
+        "PERSONAL_INFO": {
+        },
+        "CHANGE_PASSWORD": {
+          "SUCCESS": "Your password has been successfully changed.",
+          "INVALID_USERNAME": "The username does not exist.",
+          "INVALID_PASSWORD": "The current password entered is incorrect.",
+          "SAME_PASSWORD": "Your new password cannot be the same as the current password."
+        }
+      }
     }
   },
   "ERRORS": {

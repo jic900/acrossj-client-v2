@@ -6,3 +6,13 @@ td-expansion-panel {
   box-shadow: none;
 }
 
+// tweak sidenav language submenu
+:host /deep/ .td-expansion-label .mat-list-item-content {
+  padding: 0 !important;
+}
+:host /deep/ .td-expansion-label .mat-list-item:hover, .td-expansion-label .mat-list-item.mat-list-item-focus {
+  background: inherit !important;
+}
+:host /deep/ .td-expansion-content .mat-list-item-content {
+  padding-left: 40px !important;
+}

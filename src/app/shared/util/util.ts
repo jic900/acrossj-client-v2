@@ -2,7 +2,7 @@
  * Created by qiz264 on 2017-04-20.
  */
 
-// import { IMessageElement } from 'common/config/interfaces/message-element';
+import { IMessageElement } from 'app/config/interfaces/message-element';
 
 export class Util {
 
@@ -47,14 +47,17 @@ export class Util {
       a[prop].toLowerCase() !== b[prop].toLowerCase() ? a[prop].toLowerCase() < b[prop].toLowerCase() ? -1 : 1 : 0;
   }
 
-  // public static createErrorMessage(name: string, error: string): IMessageElement {
-  //   return {
-  //     name: name,
-  //     message: {
-  //       display: error,
-  //       type: 'error',
-  //       iconClass: 'fa-times-circle'
-  //     }
-  //   }
-  // }
+  public static createErrorMessage(name: string, error: string): IMessageElement {
+    return {
+      name: name,
+      message: {
+        display: error,
+        type: 'error',
+        icon: {
+          class: 'fa-times-circle',
+          type: 'fa'
+        }
+      }
+    };
+  }
 }

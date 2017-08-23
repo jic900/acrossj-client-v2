@@ -1,8 +1,25 @@
 <td-layout #layout>
   <td-navigation-drawer [logo]="sideNavData.logo.icon.class" [name]="getName()">
-    <aj-navlist [navListData]="sideNavData.appMenu" (clicked)="layout.close()"></aj-navlist>
+    <aj-navlist
+      [navListData]="sideNavData.appMenu"
+      (clicked)="layout.close() && sidenav.close()">
+    </aj-navlist>
+
+    <md-divider></md-divider>
+
+    <aj-navlist
+      *ngIf="!authenticated"
+      [navListData]="sideNavData.authMenu"
+      (clicked)="layout.close() && sidenav.close()">
+    </aj-navlist>
+    <aj-navlist
+      *ngIf="authenticated"
+      [navListData]="sideNavData.signoutMenu"
+      (clicked)="layout.close() && sidenav.close() && signout()">
+    </aj-navlist>
+
     <div td-navigation-drawer-menu>
-      <aj-navlist [navListData]="sideNavData.userMenu" (clicked)="layout.close() && onUserMenuClicked()"></aj-navlist>
+      <aj-navlist [navListData]="sideNavData.userMenu" (clicked)="layout.close()"></aj-navlist>
     </div>
   </td-navigation-drawer>
 
@@ -37,7 +54,6 @@
       </md-sidenav>
       <router-outlet></router-outlet>
     </md-sidenav-container>
-
     <td-layout-footer>
       <div
         layout="row"

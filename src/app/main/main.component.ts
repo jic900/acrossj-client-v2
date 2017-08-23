@@ -1,8 +1,7 @@
 import {
   Component,
   OnInit,
-  OnDestroy,
-  ViewEncapsulation
+  OnDestroy
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -18,8 +17,8 @@ import { AppConstant } from '../config/common/app.config';
 @Component({
   selector: 'aj-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./main.component.scss']
+  // encapsulation: ViewEncapsulation.None
 })
 
 export class MainComponent implements OnInit, OnDestroy {
@@ -45,8 +44,6 @@ export class MainComponent implements OnInit, OnDestroy {
     this.footerConfig = this.mainData.footer;
     this.footerData = _.mapKeys(this.footerConfig.elements, 'name');
     this.authenticated = authService.authenticated;
-
-    console.log(this.sideNavData.userMenu);
   }
 
   ngOnInit(): void {
@@ -59,13 +56,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   getName(): string {
-    return !this.authenticated ? 'Hello, user name' : '';
-  }
-
-  onUserMenuClicked(linkName: string): void {
-    if (linkName === 'signout') {
-      this.signout();
-    }
+    return this.authenticated ? `Hello, ${this.authService.getUsername()}` : '';
   }
 
   isDeviceWidth(): boolean {
@@ -73,6 +64,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   signout(): void {
+    this.authService.signout();
     this.router.navigate(['/']);
   }
 }

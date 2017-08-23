@@ -40,6 +40,10 @@ export class AuthService implements OnDestroy {
     this.authenticated$.next(isAuthenticated);
   }
 
+  getUsername(): string {
+    return JSON.parse(this.localStorageService.get('user')).userName;
+  }
+
   signup(signupData: {}): Observable<{}> {
     return this.httpService.post(EndPoint.getUrl('auth.signup'), signupData)
       .map(response => response.json());

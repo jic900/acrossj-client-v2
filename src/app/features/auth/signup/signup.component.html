@@ -1,0 +1,29 @@
+<form class="auth-form" novalidate [formGroup]="formGroup" (ngSubmit)="onSignUp($event)" #form="ngForm">
+  <aj-message *ngIf="message" [data]="message"></aj-message>
+
+  <aj-input
+    *ngFor="let element of inputElements"
+    [inputData]="element"
+    [type]="element.name==='password' || element.name==='confirmPassword' ? passwordType : 'text'"
+    [formValidatorData]="getFormValidatorData(element.name)"
+    (bindControl)="onBindControl($event)"
+    (clicked)="onClicked($event)">
+  </aj-input>
+  <div class="auth-showpassword">
+    <md-checkbox
+      [disableRipple]="true"
+      [color]="'primary'"
+      (change)="onPasswordTypeChange()">{{formElements.showPassword.display | translate}}
+    </md-checkbox>
+  </div>
+
+  <div class="auth-btn-container">
+    <button
+      class="auth-btn"
+      [disabled]="!isValid()"
+      [ngClass]="{'disabled': !isValid()}"
+      type="submit">
+      {{formElements.submitButton.display | translate}}
+    </button>
+  </div>
+</form>

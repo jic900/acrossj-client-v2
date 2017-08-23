@@ -1,0 +1,17 @@
+md-input-container {
+  width: 100%;
+  margin: 3px 0 3px;
+}
+
+//:host /deep/ input {
+//  font-size: 16px;
+//}
+//
+:host /deep/ input:-webkit-autofill,
+:host /deep/ input:-webkit-autofill:hover,
+:host /deep/ input:-webkit-autofill:focus,
+:host /deep/ input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}
+

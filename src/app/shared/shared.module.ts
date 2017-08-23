@@ -28,6 +28,8 @@ import { HttpService } from './services/http.service';
 import { MenuComponent } from './components/menu/menu.component';
 import { NavListComponent } from './components/navlist/navlist.component';
 import { IconComponent } from './components/icon/icon.component';
+import { InputComponent } from './components/input/input.component';
+import { MessageComponent } from './components/message/message.component';
 
 const FLEX_LAYOUT_MODULES: any[] = [
   FlexLayoutModule,
@@ -81,7 +83,9 @@ export function httpServiceFactory(
     LoaderComponent,
     MenuComponent,
     NavListComponent,
-    IconComponent
+    IconComponent,
+    InputComponent,
+    MessageComponent
   ],
   exports: [
     ANGULAR_MODULES,
@@ -93,7 +97,9 @@ export function httpServiceFactory(
     LoaderComponent,
     MenuComponent,
     NavListComponent,
-    IconComponent
+    IconComponent,
+    InputComponent,
+    MessageComponent
   ],
   providers: [
     LoaderService,

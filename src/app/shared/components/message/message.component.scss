@@ -1,0 +1,62 @@
+.message-container {
+  padding-bottom: 30px;
+}
+
+.message-box {
+  display: flex;
+  /*width: 100%;*/
+  color: rgba(0, 0, 0, .8);
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.message-icon {
+  font-size: 130%;
+  margin-right: 10px;
+}
+.message-icon.success {
+  color: green;
+}
+.message-icon.error {
+  color: darkred;
+}
+.message-icon.warning {
+  color: darkorange;
+}
+.message-icon.info {
+  color: blue;
+}
+
+.message-content {
+  padding-top: 3px;
+ }
+
+.message-content a {
+  color: black;
+  font-size: 15px;
+}
+
+.message-link {
+  margin-top: 30px;
+
+}
+.message-link a {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.message-nav-link {
+  margin-top: 80px;
+}
+.message-nav-link a {
+  color: black;
+  text-decoration: none;
+  margin-top: 80px;
+}
+.message-nav-link a:hover {
+  text-decoration: none;
+}
+.message-nav-link a .fa {
+  width: 1.25em;
+  font-size: 120%;
+}

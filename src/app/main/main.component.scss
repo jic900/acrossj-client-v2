@@ -1,31 +1,24 @@
-/* :host /deep/ lets shadowdom style child elements */
 :host /deep/ {
-  /**
-  * CSS Overrides for bug fixes
-  */
-
-  /**
-  * END CSS Overrides for bug fixes
-  */
-
-  /* Manage list custom styles */
-  .md-sort-item {
-    /deep/ {
-      .md-list-item-content {
-        padding: 0;
-      }
-    }
-  }
-  .md-sort-icon {
+  td-navigation-drawer md-toolbar .md-body-1 {
+    margin-top: 10px;
     font-size: 15px;
-    margin-right: 10px;
+    font-weight: 500 !important;
   }
-  .md-sort-header {
-    padding: 10px;
-    &:hover {
-      background-color: #EEEEEE;
-      cursor: pointer;
-    }
+
+  md-toolbar .mat-icon.md-icon-logo {
+    padding-top: 7px;
+    width: 140px;
+    height: auto
+  }
+
+  td-navigation-drawer md-toolbar .mat-icon.md-icon-logo {
+    width: 160px;
+    height: auto
+  }
+
+  md-icon.flag-icon-jp {
+    height: 18px !important;
+    border: solid 1px rgba(0,0,0,.2);
   }
 }
 
@@ -61,3 +54,6 @@
   line-height: 31px !important;
 }
 
+td-layout-footer > div {
+  height: 20px;
+}
