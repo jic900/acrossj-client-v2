@@ -22,16 +22,16 @@ const appRoutes: Routes = [
         loadChildren: 'app/features/auth/auth.module#AuthModule',
         data: {preload: true}
       },
-      // {
-      //   path: 'user',
-      //   loadChildren: 'common/features/user/user.module#UserModule',
-      //   data: {preload: true}
-      // },
-      // {
-      //   path: 'event',
-      //   loadChildren: 'common/features/event/event.module#EventModule',
-      //   data: {preload: true}
-      // },
+      {
+        path: 'user',
+        loadChildren: 'app/features/user/user.module#UserModule',
+        data: {preload: true}
+      },
+      {
+        path: 'event',
+        loadChildren: 'app/features/event/event.module#EventModule',
+        data: {preload: true}
+      },
       // {
       //   path: 'admin',
       //   loadChildren: 'common/admin/admin.module#AdminModule',

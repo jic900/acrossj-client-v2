@@ -16,3 +16,14 @@ td-expansion-panel {
 :host /deep/ .td-expansion-content .mat-list-item-content {
   padding-left: 40px !important;
 }
+
+:host /deep/ .mat-list-item-focus {
+  background-color: inherit !important;
+}
+
+@media (min-width: 600px) {
+  .item-selected {
+    //background-color: rgba(0,0,0,.15);
+    background-color: #e0e0e0 !important;
+  }
+}

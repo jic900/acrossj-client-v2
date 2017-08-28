@@ -1,4 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ViewChild
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
@@ -16,7 +20,7 @@ import { IMessageElement } from 'app/config/interfaces/message-element';
   styleUrls: ['../auth.component.scss']
 })
 
-export class SignInComponent {
+export class SignInComponent implements AfterViewInit {
 
   formData: IForm;
   formElements: ISignIn;
@@ -24,6 +28,7 @@ export class SignInComponent {
   messages: ISignInMessage;
   @ViewChild('form') form;
   formGroup: FormGroup;
+  initializing: boolean;
   passwordType: string;
   processing: boolean;
   message: IMessageElement;
@@ -35,14 +40,19 @@ export class SignInComponent {
       return element.type === 'input';
     });
     this.messages = _.mapKeys(this.formData.messages, 'name');
+    this.initializing = true;
     this.passwordType = 'password';
     this.processing = false;
     this.message = null;
     this.formGroup = new FormGroup({});
   }
 
+  ngAfterViewInit(): void {
+    this.initializing = false;
+  }
+
   isValid(): boolean {
-    return this.formGroup.valid && !this.processing;
+    return !this.initializing && this.formGroup.valid && !this.processing;
   }
 
   onClicked(event): void {

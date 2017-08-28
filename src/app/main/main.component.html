@@ -19,7 +19,10 @@
     </aj-navlist>
 
     <div td-navigation-drawer-menu>
-      <aj-navlist [navListData]="sideNavData.userMenu" (clicked)="layout.close()"></aj-navlist>
+      <aj-navlist
+        [navListData]="sideNavData.userMenu"
+        (clicked)="layout.close()">
+      </aj-navlist>
     </div>
   </td-navigation-drawer>
 
@@ -37,13 +40,13 @@
       <button md-icon-button (click)="sidenav.toggle()">
         <aj-icon [data]="headerData.searchLink.icon" [cssClass]="'search-icon'"></aj-icon>
       </button>
-      <div *ngIf="!isDeviceWidth()">
+      <div *ngIf="widthIsMedium()">
         <aj-menu [menuData]="headerData.languageMenu"></aj-menu>
       </div>
-      <div *ngIf="!isDeviceWidth() && !authenticated">
+      <div *ngIf="widthIsMedium() && !authenticated">
         <aj-menu [menuData]="headerData.userMenu"></aj-menu>
       </div>
-      <div *ngIf="!isDeviceWidth() && authenticated">
+      <div *ngIf="widthIsMedium() && authenticated">
         <aj-menu [menuData]="headerData.userMenuAuthed"></aj-menu>
       </div>
     </div>

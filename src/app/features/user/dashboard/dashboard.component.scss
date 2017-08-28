@@ -1,0 +1,28 @@
+.mat-ink-bar {
+  background-color: #fff;
+}
+
+.mat-tab-label.mat-tab-label-active {
+  background-color: #3f51b5;
+}
+
+/*.mat-tab-labels {*/
+  /*user-select: none;*/
+  /*position: relative;*/
+  /*&:after {*/
+   /*width: 100%;*/
+   /*height: 100%;*/
+   /*content: "";*/
+   /*top: 0;*/
+   /*left: 0;*/
+   /*position: absolute;*/
+ /*}*/
+/*}*/
+
+/*<div ng-if="data.name == 'SecondTab' ng-disabled="data.disabled" ">*/
+
+/*[attr.disabled]*/
+
+/*[attr.disabled]="valid == true ? true : null"*/
+/*You have to use null to remove attr from html element.*/
+/*attr. is only required when the element doesn't have a disabled property*/

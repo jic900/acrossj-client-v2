@@ -1,6 +1,6 @@
 <form novalidate [formGroup]="formGroup" (ngSubmit)="onSendVerifyEmail($event)" #form="ngForm">
   <aj-message *ngIf="message" [data]="message"></aj-message>
-  <div [hidden]="!showInput" class="auth-input-group-no-border">
+  <div [hidden]="!showInput">
     <aj-input
       [inputData]="formElements.username"
       (bindControl)="onBindControl($event)"

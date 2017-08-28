@@ -1,0 +1,61 @@
+:host {
+  flex: 1;
+}
+
+.profile-sidenav-container {
+  height: 100%;
+}
+
+@media (max-width: 599px) {
+  .profile-sidenav {
+    padding-left: 0;
+    width: 100%;
+  }
+}
+
+@media (min-width: 960px) {
+  .profile-sidenav {
+    padding-left: 80px;
+    width: 400px;
+  }
+  .profile-sidenav.eventrelated-selected {
+    padding-left: 0;
+    width: 320px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .profile-sidenav {
+    padding-left: 120px;
+    width: 440px;
+  }
+}
+
+:host /deep/ .mat-checkbox-inner-container {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+}
+
+:host /deep/ .mat-checkbox-label {
+  font-size: 13px !important;
+  font-weight: normal;
+}
+
+:host /deep/ .profile-btn-container {
+  width: 100%;
+  padding: 30px 0 20px;
+}
+:host /deep/ .profile-btn {
+  display: block;
+  width: 100%;
+  height: 50px;
+  margin: 0 auto;
+  color: white;
+  background-color: #616161;
+  border: none;
+  font-size: 16px;
+}
+:host /deep/ .profile-btn.disabled {
+  background-color: rgba(0, 0, 0, .25);
+}

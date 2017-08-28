@@ -7,12 +7,14 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 
+import { AppConstant, MediaQueryBreakPoint } from '../config/common/app.config';
+import { Util } from '../shared/util/util';
 import { AuthService } from 'app/features/auth/services/auth.service';
 import {
   MainConfig, IMainConfig, ISideNavConfig, IHeaderConfig, IFooterConfig,
   IMain, ISideNav, IHeader, IFooter
 } from '../config/main/main.config';
-import { AppConstant } from '../config/common/app.config';
+
 
 @Component({
   selector: 'aj-main',
@@ -59,8 +61,8 @@ export class MainComponent implements OnInit, OnDestroy {
     return this.authenticated ? `Hello, ${this.authService.getUsername()}` : '';
   }
 
-  isDeviceWidth(): boolean {
-    return window.innerWidth < AppConstant.APP_TOGGLE_BREAKPOINT;
+  widthIsMedium(): boolean {
+    return Util.isBreakPointOf(window.innerWidth, MediaQueryBreakPoint.MEDIUM);
   }
 
   signout(): void {

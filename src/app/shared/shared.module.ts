@@ -30,6 +30,7 @@ import { NavListComponent } from './components/navlist/navlist.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputComponent } from './components/input/input.component';
 import { MessageComponent } from './components/message/message.component';
+import { SelectComponent } from './components/select/select.component';
 
 const FLEX_LAYOUT_MODULES: any[] = [
   FlexLayoutModule,
@@ -85,7 +86,8 @@ export function httpServiceFactory(
     NavListComponent,
     IconComponent,
     InputComponent,
-    MessageComponent
+    MessageComponent,
+    SelectComponent
   ],
   exports: [
     ANGULAR_MODULES,
@@ -99,7 +101,8 @@ export function httpServiceFactory(
     NavListComponent,
     IconComponent,
     InputComponent,
-    MessageComponent
+    MessageComponent,
+    SelectComponent
   ],
   providers: [
     LoaderService,

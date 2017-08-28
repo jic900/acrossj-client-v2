@@ -1,0 +1,18 @@
+<!--<div>-->
+  <!--<router-outlet></router-outlet>-->
+<!--</div>-->
+
+<!--<aj-eventrelatedmenu></aj-eventrelatedmenu>-->
+
+
+
+<md-sidenav-container class="eventrelated-sidenav-container">
+  <md-sidenav
+    #sidenav
+    [mode]="menuMode"
+    class="eventrelated-sidenav"
+    [opened]="menuOpened">
+    <aj-eventrelatedmenu></aj-eventrelatedmenu>
+  </md-sidenav>
+  <router-outlet></router-outlet>
+</md-sidenav-container>

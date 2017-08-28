@@ -10,6 +10,14 @@ export const AppConfig = {
 };
 
 export const AppConstant = {
-  APP_TOGGLE_BREAKPOINT: 769,
-  IPHONE6_WIDTH: 375
+  PHONE_TOGGLE_BREAKPOINT: 600,
+  TABLET_TOGGLE_BREAKPOINT: 960
 };
+
+export enum MediaQueryBreakPoint {
+  EXTRA_SMALL,
+  GREATER_THAN_EXTRA_SMALL,
+  SMALL,
+  MEDIUM,
+  LESS_THAN_MEDIUM
+}

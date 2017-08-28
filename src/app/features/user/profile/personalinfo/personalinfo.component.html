@@ -1,0 +1,53 @@
+<aj-profiledetail [title]="formData.title">
+  <form novalidate [formGroup]="formGroup">
+    <aj-message *ngIf="message" [data]="message"></aj-message>
+    <aj-input
+      [inputData]="formElements.username"
+      [type]="'text'"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <aj-input
+      [inputData]="formElements.fullname"
+      [type]="'text'"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <aj-select
+      [inputData]="formElements.gender"
+      [required]="true"
+      (bindControl)="onBindControl($event)"
+      (selected)="onSelected($event)">
+    </aj-select>
+
+    <aj-input
+      [inputData]="formElements.birthday"
+      [type]="'text'"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <aj-input
+      [inputData]="formElements.address"
+      [type]="'text'"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <aj-input
+      [inputData]="formElements.postcode"
+      [type]="'text'"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <aj-input
+      [inputData]="formElements.phonenumber"
+      [type]="'text'"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <div class="profile-btn-container">
+      <button
+        class="profile-btn"
+        type="submit"
+        [disabled]="!isValid()"
+        [ngClass]="{'disabled': !isValid()}">
+        {{ formElements.saveButton.display | translate }}
+      </button>
+    </div>
+  </form>
+</aj-profiledetail>
+

@@ -45,64 +45,70 @@ export class AuthComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.subscription = this.route.params.subscribe(params => {
-      this.authState = params['id'];
-      switch (this.authState) {
-        case 'signin': {
-          this.selectedIndex = 0;
-          this.signInComponent.reset();
-          break;
-        }
-        case 'signup': {
-          this.selectedIndex = 1;
-          this.signUpComponent.reset();
-          break;
-        }
-        case 'signout': {
-          this.authService.signout();
-          this.router.navigateByUrl('/');
-          break;
-        }
-        case 'verifyemail': {
-          const token = this.route.snapshot.queryParams['token'];
-          if (!token || this.authService.authenticated) {
-            this.router.navigateByUrl('/');
-          } else {
-            this.router.navigateByUrl(`/auth/${this.route.snapshot.url.join('/')}`);
-            this.verifyEmailComponent.verifyEmail(this.route.snapshot.queryParams['token']);
-          }
-          break;
-        }
-        case 'sendverifyemail': {
-          this.sendVerifyEmailComponent.reset();
-          break;
-        }
-        case 'forgotpassword': {
-          this.forgotPasswordComponent.reset();
-          break;
-        }
-        case 'resetpassword': {
-          if (this.authService.authenticated) {
-            this.router.navigateByUrl('/');
-            // this.router.navigateByUrl('/profile/changepassword');
-          } else {
-            const token = this.route.snapshot.queryParams['token'];
-            if (!token) {
-              this.router.navigateByUrl('/');
-            } else {
-              this.router.navigateByUrl(`/auth/${this.route.snapshot.url.join('/')}`);
-              setTimeout(() => {
-                if (token) {
-                  this.resetPasswordComponent.setToken(token);
-                }
-              }, 500);
-            }
-          }
-          break;
-        }
-      }
+      setTimeout(() => {
+        this.onRouteChange(params['id']);
+      });
     });
   }
 
+  onRouteChange(newRoute: string): void {
+    this.authState = newRoute;
+    switch (this.authState) {
+      case 'signin': {
+        this.selectedIndex = 0;
+        this.signInComponent.reset();
+        break;
+      }
+      case 'signup': {
+        this.selectedIndex = 1;
+        this.signUpComponent.reset();
+        break;
+      }
+      case 'signout': {
+        this.authService.signout();
+        this.router.navigateByUrl('/');
+        break;
+      }
+      case 'verifyemail': {
+        const token = this.route.snapshot.queryParams['token'];
+        if (!token || this.authService.authenticated) {
+          this.router.navigateByUrl('/');
+        } else {
+          this.router.navigateByUrl(`/auth/${this.route.snapshot.url.join('/')}`);
+          this.verifyEmailComponent.verifyEmail(this.route.snapshot.queryParams['token']);
+        }
+        break;
+      }
+      case 'sendverifyemail': {
+        this.sendVerifyEmailComponent.reset();
+        break;
+      }
+      case 'forgotpassword': {
+        this.forgotPasswordComponent.reset();
+        break;
+      }
+      case 'resetpassword': {
+        if (this.authService.authenticated) {
+          this.router.navigateByUrl('/');
+          // this.router.navigateByUrl('/profile/changepassword');
+        } else {
+          const token = this.route.snapshot.queryParams['token'];
+          if (!token) {
+            this.router.navigateByUrl('/');
+          } else {
+            this.router.navigateByUrl(`/auth/${this.route.snapshot.url.join('/')}`);
+            // setTimeout(() => {
+            //   if (token) {
+            //     this.resetPasswordComponent.setToken(token);
+            //   }
+            // }, 500);
+            this.resetPasswordComponent.setToken(token);
+          }
+        }
+        break;
+      }
+    }
+  }
   onSelectedTabIndexChange(): void {
     // this.selectedIndex === 0 ? this.signUpForm.reset() : this.signInForm.reset();
     this.selectedIndex === 0 ? this.router.navigateByUrl('/auth/signin') : this.router.navigateByUrl('/auth/signup');

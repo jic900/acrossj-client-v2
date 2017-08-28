@@ -99,6 +99,72 @@
       "BACK_SIGNIN": "Back to Sign In"
     }
   },
+  "USER": {
+    "DASHBOARD": {
+      "LABEL": "Dashboard"
+    },
+    "PROFILE": {
+      "LABEL": "Profile",
+      "PERSONAL_INFO": {
+        "LABEL": "Personal Information",
+        "FULLNAME": "Full Name",
+        "USERNAME": "User Name",
+        "GENDER_LABEL": "Gender",
+        "GENDER_MALE": "Male",
+        "GENDER_FEMALE": "Female",
+        "BIRTHDAY_LABEL": "Birth Date",
+        "ADDRESS": "Address",
+        "POSTCODE": "Post Code",
+        "PHONENUMBER": "Phone Number",
+        "SAVEBTN_LABEL": "Save"
+      },
+      "CHANGE_PASSWORD": {
+        "LABEL": "Change Password",
+        "OLD_PASSWORD": "Current Password",
+        "PASSWORD": "New Password",
+        "CONFIRM_PASSWORD": "Confirm New Password",
+        "SHOW_PASSWORD": "Show Password",
+        "BTN_LABEL": "Change Password"
+      },
+      "EVENT_RELATED": {
+        "LABEL": "Event Related Information",
+        "MENU_LABEL": "Categories",
+        "GENERAL": {
+          "LABEL": "General"
+        },
+        "RUNNING": {
+          "LABEL": "Running"
+        },
+        "SKII": {
+          "LABEL": "Skii"
+        },
+        "HIKING": {
+          "LABEL": "Hiking"
+        },
+        "CAMPING": {
+          "LABEL": "Camping"
+        },
+        "BICYCLING": {
+          "LABEL": "Bicycling"
+        },
+        "OTHERS": {
+          "LABEL": "Other"
+        }
+      },
+      "GROUP_INFO": {
+        "LABEL": "Group Information"
+      }
+    },
+    "EVENTS": {
+      "LABEL": "My Events"
+    },
+    "MESSAGES": {
+      "LABEL": "Messages"
+    },
+    "UPLOADS": {
+      "LABEL": "My Uploads"
+    }
+  },
   "MESSAGES": {
     "AUTH": {
       "SIGNIN": {

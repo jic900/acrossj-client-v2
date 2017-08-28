@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { JwtHelper } from 'angular2-jwt';
 import * as _ from 'lodash';
@@ -17,13 +17,14 @@ import { IFormValidatorData } from 'app/shared/components/input/input.component'
   styleUrls: ['../auth.component.scss']
 })
 
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements AfterViewInit {
 
   formData: IForm;
   formElements: IResetPassword;
   inputElements: IInputElement[];
   messages: IResetPasswordMessage;
   formGroup: FormGroup;
+  initializing: boolean;
   passwordType: string;
   processing: boolean;
   message: IMessageElement;
@@ -38,6 +39,7 @@ export class ResetPasswordComponent {
       return element.type === 'input';
     });
     this.messages = _.mapKeys(this.formData.messages, 'name');
+    this.initializing = true;
     this.passwordType = 'password';
     this.message = null;
     this.processing = false;
@@ -46,8 +48,12 @@ export class ResetPasswordComponent {
     this.jwtHelper = new JwtHelper();
   }
 
+  ngAfterViewInit(): void {
+    this.initializing = false;
+  }
+
   isValid(): boolean {
-    return this.formGroup.valid && !this.processing;
+    return !this.initializing && this.formGroup.valid && !this.processing;
   }
 
   setToken(token: string): void {

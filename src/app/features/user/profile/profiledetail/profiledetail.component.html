@@ -1,0 +1,13 @@
+<md-card>
+  <md-card-header>
+    <div *ngIf="widthLessThanMedium()" class="back-link-icon">
+      <a [routerLink]="backLinkIcon.link.param ? [backLinkIcon.link.path, backLinkIcon.link.param] : [backLinkIcon.link.path]">
+        <aj-icon [data]="backLinkIcon.icon" [cssClass]="'cursor-pointer'"></aj-icon>
+      </a>
+    </div>
+    <span>{{title | translate}}</span>
+  </md-card-header>
+  <md-card-content>
+    <ng-content></ng-content>
+  </md-card-content>
+</md-card>

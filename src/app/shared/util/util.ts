@@ -3,6 +3,7 @@
  */
 
 import { IMessageElement } from 'app/config/interfaces/message-element';
+import { AppConstant, MediaQueryBreakPoint } from 'app/config/common/app.config';
 
 export class Util {
 
@@ -39,6 +40,37 @@ export class Util {
         window.navigator.appVersion.match(this.APPVERSION_IOS_PATTERN) ||
         window.navigator.appVersion.match(this.APPVERSION_ANDROID_PATTERN)) {
       return true;
+    }
+  }
+
+  public static currentMediaQueryBreakPoint(): MediaQueryBreakPoint {
+    const width = window.innerWidth;
+    if (width < AppConstant.PHONE_TOGGLE_BREAKPOINT) {
+      return MediaQueryBreakPoint.EXTRA_SMALL;
+    } else if (width >= AppConstant.PHONE_TOGGLE_BREAKPOINT && width < AppConstant.TABLET_TOGGLE_BREAKPOINT) {
+      return MediaQueryBreakPoint.SMALL;
+    } else {
+      return MediaQueryBreakPoint.MEDIUM;
+    }
+  }
+
+  public static isBreakPointOf(winSize: number, expectedBreakPoint: MediaQueryBreakPoint): boolean {
+    switch (expectedBreakPoint) {
+      case MediaQueryBreakPoint.EXTRA_SMALL: {
+        return winSize < AppConstant.PHONE_TOGGLE_BREAKPOINT;
+      }
+      case MediaQueryBreakPoint.GREATER_THAN_EXTRA_SMALL: {
+        return winSize >= AppConstant.PHONE_TOGGLE_BREAKPOINT;
+      }
+      case MediaQueryBreakPoint.SMALL: {
+        return winSize >= AppConstant.PHONE_TOGGLE_BREAKPOINT && winSize < AppConstant.TABLET_TOGGLE_BREAKPOINT;
+      }
+      case MediaQueryBreakPoint.MEDIUM: {
+        return winSize >= AppConstant.TABLET_TOGGLE_BREAKPOINT;
+      }
+      case MediaQueryBreakPoint.LESS_THAN_MEDIUM: {
+        return winSize < AppConstant.TABLET_TOGGLE_BREAKPOINT;
+      }
     }
   }
 
