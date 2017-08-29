@@ -3,19 +3,16 @@
  */
 
 import { IComponent } from 'app/config/interfaces/component.interface';
-import { ILinkElement } from 'app/config/interfaces/link-element.interface';
+import { IElement } from 'app/config/interfaces/element.interface';
 
 export class ProfileDetailConfig implements IComponent {
-  elements: [ILinkElement] = [
+  elements: [IElement] = [
     {
       name: 'backLink',
       type: 'icon',
       icon: {
         class: 'arrow_back',
         type: 'md'
-      },
-      link: {
-        path: '/user/profile/menu'
       }
     }
   ];

@@ -5,14 +5,16 @@
 import { IComponent } from 'app/config/interfaces/component.interface';
 import { IListElement } from 'app/config/interfaces/list-element.interface';
 import { IElement } from 'app/config/interfaces/element.interface';
+import { ILinkElement } from 'app/config/interfaces/link-element.interface';
 
 export interface IEventRelatedMenu {
   title: IElement;
   menuList: IListElement;
+  backLink: ILinkElement;
 }
 
 export class EventRelatedMenuConfig implements IComponent {
-  elements: [IElement, IListElement] = [
+  elements: [IElement, IListElement, ILinkElement] = [
     {
       name: 'title',
       type: 'label',
@@ -114,6 +116,17 @@ export class EventRelatedMenuConfig implements IComponent {
           navIconClass: 'fa-angle-right'
         }
       ]
+    },
+    {
+      name: 'backLink',
+      type: 'icon',
+      icon: {
+        class: 'arrow_back',
+        type: 'md'
+      },
+      link: {
+        path: '/user/profile/menu'
+      }
     }
   ];
 }

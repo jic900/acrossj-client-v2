@@ -41,6 +41,10 @@
   }
   .back-link-icon {
     position: absolute;
+  }
+  .back-link-icon > a {
     text-decoration: none;
+    color: inherit;
+    outline: none;
   }
 }

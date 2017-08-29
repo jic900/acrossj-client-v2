@@ -52,7 +52,9 @@ export class ProfileMenuComponent implements OnDestroy {
 
   onMenuSelected(selectedUrl: string): void {
     this.menuElements.menuList.list.forEach((item, index) => {
-      if (selectedUrl.indexOf((<ILinkElement>item).link.path) !== -1) {
+      const menuName = (<ILinkElement>item).link.path.split('/')[3];
+      const selectedMenuName = selectedUrl.split('/')[3];
+      if (menuName === selectedMenuName) {
         this.selectedIndex = index;
       }
     });

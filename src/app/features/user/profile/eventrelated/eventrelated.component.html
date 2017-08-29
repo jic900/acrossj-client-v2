@@ -1,18 +1,19 @@
-<!--<div>-->
-  <!--<router-outlet></router-outlet>-->
-<!--</div>-->
-
-<!--<aj-eventrelatedmenu></aj-eventrelatedmenu>-->
-
-
-
-<md-sidenav-container class="eventrelated-sidenav-container">
-  <md-sidenav
-    #sidenav
-    [mode]="menuMode"
-    class="eventrelated-sidenav"
-    [opened]="menuOpened">
-    <aj-eventrelatedmenu></aj-eventrelatedmenu>
-  </md-sidenav>
-  <router-outlet></router-outlet>
-</md-sidenav-container>
+<md-card>
+  <md-card-header *ngIf="widthIsMedium()">
+    <span>{{title | translate}}</span>
+  </md-card-header>
+  <md-card-content>
+    <md-sidenav-container class="eventrelated-sidenav-container">
+      <md-sidenav
+        #sidenav
+        [mode]="menuMode"
+        class="eventrelated-sidenav"
+        [opened]="menuOpenedDefault">
+        <aj-eventrelatedmenu></aj-eventrelatedmenu>
+      </md-sidenav>
+      <div style="height: 100%">
+        <router-outlet></router-outlet>
+      </div>
+    </md-sidenav-container>
+  </md-card-content>
+</md-card>

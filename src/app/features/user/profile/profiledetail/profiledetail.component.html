@@ -1,7 +1,7 @@
 <md-card>
   <md-card-header>
     <div *ngIf="widthLessThanMedium()" class="back-link-icon">
-      <a [routerLink]="backLinkIcon.link.param ? [backLinkIcon.link.path, backLinkIcon.link.param] : [backLinkIcon.link.path]">
+      <a (click)="onClicked($event)">
         <aj-icon [data]="backLinkIcon.icon" [cssClass]="'cursor-pointer'"></aj-icon>
       </a>
     </div>

@@ -1,58 +1,21 @@
-@media (max-width: 599px) {
-  md-card {
-    height: calc(100% - 60px);
-    width: calc(100% - 60px);
-    margin: 10px;
-    padding: 20px 20px;
-  }
+md-card {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-shadow: none !important;
 }
 
-@media (min-width: 600px) {
-  md-card {
-    height: 100%;
-    margin: 0;
-    box-shadow: none !important;
+@media (max-width: 959px) {
+  md-card-header {
+    background-color: whitesmoke;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+    padding: 22px 20px 12px;
+    font-size: 20px !important;
+    font-weight: bold;
+    opacity: 0.7;
   }
+  //md-card-header .mat-card-header-text {
+  //  margin: 0 !important;
+  //}
 }
-
-
-//
-//.menu-container {
-//  width: 100%;
-//  min-height: calc(100vh - 260px);
-//}
-//
-//.menu-card {
-//  width: 100%;
-//  min-height: inherit;
-//}
-//
-//@media (min-width: 769px) {
-//  :host >>> .menu-container > md-card {
-//    box-shadow: none !important;
-//    background-color: inherit;
-//    padding: 36px 0;
-//  }
-//  /*:host >>> .menu-container md-list-item {*/
-//    /*height: 36px !important;*/
-//  /*}*/
-//}
-//
-//@media (max-width: 768px) {
-//  :host >>> .menu-card md-card-header {
-//    padding: 20px 10px 5px;
-//    border-bottom: 1px solid rgba(0,0,0,.10);
-//  }
-//  :host >>> .menu-card .mat-card-title {
-//    font-size: 20px !important;
-//    font-weight: bold;
-//    opacity: 0.7;
-//    margin-bottom: 0;
-//  }
-//  :host >>> md-list {
-//    padding: 10px;
-//  }
-//  /*:host >>> md-list-item .mat-list-item-content {*/
-//    /*height: 50px !important;*/
-//  /*}*/
-//}

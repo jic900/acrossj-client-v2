@@ -128,7 +128,7 @@
       },
       "EVENT_RELATED": {
         "LABEL": "Event Related Information",
-        "MENU_LABEL": "Categories",
+        "MENU_LABEL": "Event Related Information",
         "GENERAL": {
           "LABEL": "General"
         },

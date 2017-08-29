@@ -21,7 +21,8 @@ export enum ProfileObserver {
   ALL,
   PROFILE,
   PROFILE_MENU,
-  EVENT_RELATED
+  EVENT_RELATED,
+  EVENT_RELATED_MENU
 }
 
 export enum ProfileEventType {
@@ -34,11 +35,10 @@ export interface IProfileEvent {
   target: ProfileObserver;
   type: ProfileEventType;
   value: string;
-  delay?: boolean;
 }
 
 const PROFILE_MENU_URL = '/user/profile/menu';
-const EVENT_MENU_URL = '/user/profile/eventrelated/menu';
+const EVENT_RELATED_MENU_URL = '/user/profile/eventrelated/menu';
 
 @Injectable()
 export class ProfileService implements OnDestroy {
@@ -63,7 +63,6 @@ export class ProfileService implements OnDestroy {
         this.activeUrl = event.urlAfterRedirects ? event.urlAfterRedirects : event.url;
         this.onRouteEvents();
       });
-
     window.addEventListener('resize', event => this.onWindowResize(event));
   }
 
@@ -77,16 +76,18 @@ export class ProfileService implements OnDestroy {
       this.updateMenuMode();
       this.updateMenuOpened();
       this.redirectFromMenu();
+      if (this.selectedProfileMenuUrl) {
+        this.onMenuSelected(this.selectedProfileMenuUrl);
+      }
       this.previousBreakPoint = currentBreakPoint;
     }
   }
 
   onRouteEvents(): void {
-    console.log('onRouteEvents  ' + this.activeUrl);
-
+    // console.log('onRouteEvents  ' + this.activeUrl);
     this.updateMenuOpened();
     this.redirectFromMenu();
-    if (this.activeUrl === PROFILE_MENU_URL) {
+    if (this.activeUrl === PROFILE_MENU_URL || this.activeUrl === EVENT_RELATED_MENU_URL) {
       this.selectedProfileMenuUrl = null;
     } else {
       this.selectedProfileMenuUrl = this.activeUrl;
@@ -114,39 +115,65 @@ export class ProfileService implements OnDestroy {
     return this.widthIsMedium() ? 'true' : 'false';
   }
 
-  updateMenuOpened(target?: ProfileObserver, value?: string): void {
-    let menuOpenedValue = this.getDefaultMenuOpened();
-    let delay = false;
+  updateMenuOpened(): void {
+
     if (this.widthIsExtraSmall()) {
       if (this.activeUrl === PROFILE_MENU_URL) {
-        menuOpenedValue = 'true';
+        this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'false');
+        this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true');
+        return;
+      } else if (this.activeUrl === EVENT_RELATED_MENU_URL) {
+        this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'false');
+        this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true');
+        return;
       }
     } else if (this.widthIsSmall()) {
       if (this.menuRedirect) {
-        menuOpenedValue = 'true';
+        if (this.activeUrl.includes('eventrelated')) {
+          this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'false');
+          this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true');
+        } else {
+          this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true');
+        }
         this.menuRedirect = false;
-        delay = true;
+        return;
       }
     }
+    if (this.activeUrl !== PROFILE_MENU_URL && this.activeUrl !== EVENT_RELATED_MENU_URL) {
+      if (!this.activeUrl.includes('eventrelated')) {
+        this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, this.getDefaultMenuOpened());
+        this.onMenuOpenedChanged(ProfileObserver.PROFILE, this.getDefaultMenuOpened());
+      } else {
+        this.onMenuOpenedChanged(ProfileObserver.PROFILE, this.getDefaultMenuOpened());
+        this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, this.getDefaultMenuOpened());
+      }
+    }
+  }
+
+  onMenuOpenedChanged(target: ProfileObserver, value: string) {
     this.profileEvent$.next({
-      target: target ? target : ProfileObserver.ALL,
+      target: target,
       type: ProfileEventType.MENU_OPENED_CHANGE,
-      value: menuOpenedValue,
-      delay: delay
+      value: value
     });
   }
 
   redirectFromMenu() {
-    if (this.activeUrl === PROFILE_MENU_URL) {
-      if (! this.widthIsExtraSmall()) {
-        this.menuRedirect = true;
-        this.router.navigateByUrl(
-          this.selectedProfileMenuUrl ? this.selectedProfileMenuUrl : '/user/profile/personalinfo');
+    if (! this.widthIsExtraSmall()) {
+      if (this.activeUrl === PROFILE_MENU_URL || this.activeUrl === EVENT_RELATED_MENU_URL) {
+        if (this.widthIsSmall()) {
+          this.menuRedirect = true;
+        }
+        let redirectUrl;
+        if (this.activeUrl === PROFILE_MENU_URL) {
+          redirectUrl = this.selectedProfileMenuUrl && !this.selectedProfileMenuUrl.includes('eventrelated') ?
+            this.selectedProfileMenuUrl : '/user/profile/personalinfo';
+        } else {
+          redirectUrl = this.selectedProfileMenuUrl && this.selectedProfileMenuUrl.includes('eventrelated') ?
+            this.selectedProfileMenuUrl : '/user/profile/eventrelated/general';
+        }
+        this.router.navigateByUrl(redirectUrl);
       }
-    } else if (this.activeUrl === EVENT_MENU_URL) {
-      this.menuRedirect = true;
-      this.router.navigateByUrl(
-        this.selectedProfileMenuUrl ? this.selectedProfileMenuUrl : '/user/profile/eventrelated/general');
     }
   }
 

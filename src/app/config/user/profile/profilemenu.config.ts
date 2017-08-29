@@ -63,7 +63,7 @@ export class ProfileMenuConfig implements IComponent {
             type: 'fa'
           },
           link: {
-            path: '/user/profile/eventrelated'
+            path: '/user/profile/eventrelated/menu'
           },
           navIcon: {
             class: 'fa-angle-right',

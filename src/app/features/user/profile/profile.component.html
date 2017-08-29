@@ -1,9 +1,10 @@
 <md-sidenav-container class="profile-sidenav-container">
   <md-sidenav
+    #sidenav
     [mode]="menuMode"
     class="profile-sidenav"
     [ngClass]="{'eventrelated-selected': eventRelatedSelected}"
-    [opened]="menuOpened">
+    [opened]="menuOpenedDefault">
     <aj-profilemenu></aj-profilemenu>
   </md-sidenav>
   <router-outlet></router-outlet>

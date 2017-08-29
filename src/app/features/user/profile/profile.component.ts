@@ -4,9 +4,12 @@
 
 import {
   Component,
-  OnDestroy
+  AfterViewInit,
+  OnDestroy,
+  ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { MdSidenav } from '@angular/material';
 
 import {
   ProfileService,
@@ -15,6 +18,7 @@ import {
   ProfileObserver
 } from '../services/profile.service';
 
+
 @Component({
   selector: 'aj-profile',
   templateUrl: './profile.component.html',
@@ -22,23 +26,34 @@ import {
   //   animations: [fadeAnimation],
 })
 
-export class ProfileComponent implements OnDestroy {
+export class ProfileComponent implements AfterViewInit, OnDestroy {
 
+  @ViewChild('sidenav') sideNav: MdSidenav;
   menuMode: string;
-  menuOpened: string;
+  menuOpenedDefault: string;
   eventRelatedSelected: boolean;
+  initializing: boolean;
   subscription: Subscription;
 
-  constructor(private profileService: ProfileService) {
+  constructor(public profileService: ProfileService) {
     this.menuMode = this.profileService.getMenuMode();
-    this.menuOpened = this.profileService.getDefaultMenuOpened();
+    this.menuOpenedDefault = this.profileService.getDefaultMenuOpened();
     this.eventRelatedSelected = false;
+    this.initializing = true;
 
     this.subscription = this.profileService.profileEvent$
-      .filter((event: IProfileEvent) => {
-        return event.target === ProfileObserver.ALL || event.target === ProfileObserver.PROFILE;
-      })
-      .subscribe((event: IProfileEvent) => this.onProfileEvent(event));
+      .filter((event: IProfileEvent) => event.target === ProfileObserver.ALL || event.target === ProfileObserver.PROFILE)
+      .subscribe((event: IProfileEvent) => {
+        if (this.initializing) {
+          setTimeout(() => this.onProfileEvent(event));
+        } else {
+          this.onProfileEvent(event);
+        }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.initializing = false;
   }
 
   ngOnDestroy() {
@@ -50,14 +65,14 @@ export class ProfileComponent implements OnDestroy {
     if (event.type === ProfileEventType.MENU_MODE_CHANGE) {
       this.menuMode = event.value;
     } else if (event.type === ProfileEventType.MENU_OPENED_CHANGE) {
-      console.log('MENU_OPENED_CHANGE: ' + event.value);
-      if (event.delay) {
-        setTimeout(() => this.menuOpened = event.value);
+      // console.log('Profile MENU_OPENED_CHANGE: ' + event.value);
+      if (event.value === 'true') {
+        this.sideNav.open();
       } else {
-        this.menuOpened = event.value;
+        this.sideNav.close();
       }
     } else if (event.type === ProfileEventType.MENU_SELECTED) {
-      this.eventRelatedSelected = event.value.includes('eventrelated') ? true : false;
+      this.eventRelatedSelected = event.value && event.value.includes('eventrelated') ? true : false;
     }
   }
 }
