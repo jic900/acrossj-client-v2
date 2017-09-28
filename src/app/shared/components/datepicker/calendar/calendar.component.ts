@@ -319,8 +319,8 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     if (calMonth.disabled) {
       return;
     }
-    this.setActiveDate(OffsetType.MONTH, calMonth.nbr - this.activeDate.month);
     this.selectorMode = SelectorMode.CALENDAR;
+    this.setActiveDate(OffsetType.MONTH, calMonth.nbr - this.activeDate.month);
     event.stopPropagation();
   }
 
@@ -328,6 +328,7 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     if (calYear.disabled) {
       return;
     }
+    this.selectorMode = SelectorMode.CALENDAR;
     this.setActiveDate(OffsetType.YEAR, calYear.year - this.activeDate.year);
     event.stopPropagation();
   }
