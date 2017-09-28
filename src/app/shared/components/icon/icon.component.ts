@@ -2,11 +2,10 @@ import {
   Component,
   OnInit,
   Input,
-  ElementRef,
-  ViewEncapsulation
+  ElementRef
 } from '@angular/core';
-import { IIcon } from 'app/config/interfaces/icon.interface';
-import { ILink } from 'app/config/interfaces/link.interface';
+
+import { IIcon, ILink } from 'app/config/interfaces';
 
 @Component({
   selector: 'aj-icon',

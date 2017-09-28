@@ -6,13 +6,19 @@ import {
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 
-import { SignUpConfig, ISignUp, ISignUpMessage } from 'app/config/auth/signup.config';
-import { AuthService } from '../services/auth.service';
+import {
+  SignUpConfig,
+  ISignUp,
+  ISignUpMessage
+} from 'app/config/auth/signup.config';
+import {
+  IForm,
+  IInputElement,
+  IMessageElement,
+  IFormValidatorData
+} from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IInputElement } from 'app/config/interfaces/input-element.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
-import { IFormValidatorData } from 'app/shared/components/input/input.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'aj-signup',

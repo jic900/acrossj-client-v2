@@ -18,7 +18,6 @@ import {
   ProfileObserver
 } from '../services/profile.service';
 
-
 @Component({
   selector: 'aj-profile',
   templateUrl: './profile.component.html',

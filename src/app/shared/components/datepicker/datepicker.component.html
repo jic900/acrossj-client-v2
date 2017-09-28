@@ -1,0 +1,32 @@
+<md-input-container>
+  <input
+    mdInput
+    validateonblur
+    [formControl]="formControl"
+    placeholder="{{placeHolder}}"
+    [(ngModel)]="inputValue"
+    (ngModelChange)="onInputChange($event)">
+  <button
+    *ngIf="this.selected"
+    md-icon-button
+    mdSuffix
+    type="button"
+    class="datepicker-input-button"
+    (click)="clearInput($event)">
+    <aj-icon [data]="configData.clearButton.icon"></aj-icon>
+  </button>
+  <button
+    md-icon-button
+    mdSuffix
+    type="button"
+    class="datepicker-input-button"
+    (click)="open($event)">
+    <aj-icon [data]="configData.calButton.icon"></aj-icon>
+  </button>
+  <md-error *ngIf="validateFailed()">
+    {{getValidatorError() | translate}}
+  </md-error>
+  <md-hint>
+    {{data.hint | translate}}
+  </md-hint>
+</md-input-container>

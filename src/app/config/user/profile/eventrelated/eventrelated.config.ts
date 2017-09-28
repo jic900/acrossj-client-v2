@@ -1,5 +1,4 @@
-import { IComponent } from 'app/config/interfaces/component.interface';
-import { IElement } from 'app/config/interfaces/element.interface';
+import { IComponent, IElement } from 'app/config/interfaces';
 
 export class EventRelatedConfig implements IComponent {
   elements: [IElement] = [

@@ -2,8 +2,7 @@
  * Created by LAE84266 on 10/08/2017.
  */
 
-import { IComponent } from 'app/config/interfaces/component.interface';
-import { ILinkElement } from 'app/config/interfaces/link-element.interface';
+import { IComponent, ILinkElement } from 'app/config/interfaces';
 
 export interface IUser {
   dashboard: ILinkElement;

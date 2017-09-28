@@ -2,8 +2,7 @@
  * Created by LAE84266 on 11/08/2017.
  */
 
-import { IComponent } from 'app/config/interfaces/component.interface';
-import { IElement } from 'app/config/interfaces/element.interface';
+import { IComponent, IElement } from 'app/config/interfaces';
 
 export interface IAuth {
   signin: IElement;

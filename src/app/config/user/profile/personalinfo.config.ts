@@ -2,18 +2,22 @@
  * Created by LAE84266 on 11/08/2017.
  */
 
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IElement } from 'app/config/interfaces/element.interface';
-import { IInputElement } from 'app/config/interfaces/input-element.interface';
-import { IListElement } from 'app/config/interfaces/list-element.interface';
-import { ILinkElement } from 'app/config/interfaces/link-element.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import {
+  IForm,
+  IElement,
+  IInputElement,
+  IDatePickerElement,
+  ILinkElement,
+  IListElement,
+  IMessageElement
+} from 'app/config/interfaces';
 
 export interface IPersonalInfo {
   fullname: IInputElement;
   username: IInputElement;
+  email: IInputElement;
   gender: IListElement;
-  birthday: IInputElement;
+  birthday: IDatePickerElement;
   address: IInputElement;
   postcode: IInputElement;
   phonenumber: IInputElement;
@@ -28,7 +32,7 @@ export interface IPersonalInfoMessage {
 export class PersonalInfoConfig implements IForm {
 
   title = 'USER.PROFILE.PERSONAL_INFO.LABEL';
-  elements: [IInputElement, IInputElement, IListElement, IInputElement, IInputElement,
+  elements: [IInputElement, IInputElement, IInputElement, IListElement, IDatePickerElement, IInputElement,
     IInputElement, IInputElement, IElement, ILinkElement] = [
     {
       name: 'fullname',
@@ -41,24 +45,30 @@ export class PersonalInfoConfig implements IForm {
       placeHolder: 'USER.PROFILE.PERSONAL_INFO.USERNAME'
     },
     {
+      name: 'email',
+      type: 'input',
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.EMAIL'
+    },
+    {
       name: 'gender',
       type: 'select',
-      placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER_LABEL',
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
       list: [
         {
           name: 'male',
-          display: 'USER.PROFILE.PERSONAL_INFO.GENDER_MALE'
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE'
         },
         {
           name: 'female',
-          display: 'USER.PROFILE.PERSONAL_INFO.GENDER_FEMALE'
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE'
         }
       ]
     },
     {
       name: 'birthday',
-      type: 'input',
-      placeHolder: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY_LABEL'
+      type: 'datepicker',
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY.LABEL',
+      hint: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY.DATE_FORMAT_HINT'
     },
     {
       name: 'address',
@@ -73,7 +83,7 @@ export class PersonalInfoConfig implements IForm {
     {
       name: 'phonenumber',
       type: 'input',
-      placeHolder: 'USER.PROFILE.PERSONAL_INFO.PHONENUMBER'
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.PHONE_NUMBER'
     },
     {
       name: 'saveButton',

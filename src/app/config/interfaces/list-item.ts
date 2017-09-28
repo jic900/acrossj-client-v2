@@ -7,4 +7,3 @@ import { ILinkElement } from './link-element.interface';
 import { IListElement } from './list-element.interface';
 
 export type IListItem = IElement | ILinkElement | IListElement;
-

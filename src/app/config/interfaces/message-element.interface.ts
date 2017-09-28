@@ -3,7 +3,7 @@
  */
 
 import { ILinkElement } from './link-element.interface';
-import { IMessage } from './message';
+import { IMessage } from './message.interface';
 
 export interface IMessageElement {
   name: string;

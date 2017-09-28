@@ -2,11 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 
-import { SendVerifyEmailConfig, ISendVerifyEmail, ISendVerifyEmailMessage } from 'app/config/auth/sendverifyemail.config';
-import { AuthService } from '../services/auth.service';
+import {
+  SendVerifyEmailConfig,
+  ISendVerifyEmail,
+  ISendVerifyEmailMessage
+} from 'app/config/auth/sendverifyemail.config';
+import { IForm, IMessageElement } from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'aj-sendverifyemail',

@@ -1,0 +1,27 @@
+md-input-container {
+  width: 100%;
+}
+
+:host /deep/ input:-webkit-autofill,
+:host /deep/ input:-webkit-autofill:hover,
+:host /deep/ input:-webkit-autofill:focus,
+:host /deep/ input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}
+
+.datepicker-input-button {
+  width: 30px;
+  height: 30px;
+  color: rgba(0, 0, 0, .7);
+}
+
+:host /deep/ .datepicker-input-button md-icon {
+  font-size: 20px !important;
+  width: 24px;
+  height: 24px;
+}
+
+md-hint {
+  opacity: 0.7;
+}

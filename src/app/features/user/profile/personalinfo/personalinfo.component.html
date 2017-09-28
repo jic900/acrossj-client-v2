@@ -12,6 +12,11 @@
       [type]="'text'"
       (bindControl)="onBindControl($event)">
     </aj-input>
+    <aj-input
+      [inputData]="formElements.email"
+      [type]="'text'"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
     <aj-select
       [inputData]="formElements.gender"
       [required]="true"
@@ -19,11 +24,15 @@
       (selected)="onSelected($event)">
     </aj-select>
 
-    <aj-input
-      [inputData]="formElements.birthday"
-      [type]="'text'"
+    <aj-datepicker
+      [data]="formElements.birthday"
       (bindControl)="onBindControl($event)">
-    </aj-input>
+    </aj-datepicker>
+    <!--<aj-input-->
+      <!--[inputData]="formElements.birthday"-->
+      <!--[type]="'text'"-->
+      <!--(bindControl)="onBindControl($event)">-->
+    <!--</aj-input>-->
     <aj-input
       [inputData]="formElements.address"
       [type]="'text'"

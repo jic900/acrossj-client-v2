@@ -2,11 +2,13 @@
  * Created by LAE84266 on 11/08/2017.
  */
 
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IElement } from 'app/config/interfaces/element.interface';
-import { IInputElement } from 'app/config/interfaces/input-element.interface';
-import { IValidator } from 'app/config/interfaces/validator.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import {
+  IForm,
+  IElement,
+  IInputElement,
+  IValidator,
+  IMessageElement
+} from 'app/config/interfaces';
 
 export interface IResetPassword {
   username: IInputElement;

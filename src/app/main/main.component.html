@@ -2,7 +2,7 @@
   <td-navigation-drawer [logo]="sideNavData.logo.icon.class" [name]="getName()">
     <aj-navlist
       [navListData]="sideNavData.appMenu"
-      (clicked)="layout.close() && sidenav.close()">
+      (clicked)="($event) !== 'language' ? layout.close() && sidenav.close() && onClicked($event) : null">
     </aj-navlist>
 
     <md-divider></md-divider>
@@ -41,7 +41,7 @@
         <aj-icon [data]="headerData.searchLink.icon" [cssClass]="'search-icon'"></aj-icon>
       </button>
       <div *ngIf="widthIsMedium()">
-        <aj-menu [menuData]="headerData.languageMenu"></aj-menu>
+        <aj-menu [menuData]="headerData.languageMenu" (clicked)="onClicked($event)"></aj-menu>
       </div>
       <div *ngIf="widthIsMedium() && !authenticated">
         <aj-menu [menuData]="headerData.userMenu"></aj-menu>

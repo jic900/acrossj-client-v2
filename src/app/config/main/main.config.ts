@@ -1,7 +1,9 @@
-import { IComponent } from '../interfaces/component.interface';
-import { IElement } from '../interfaces/element.interface';
-import { IListElement } from '../interfaces/list-element.interface';
-import { ILinkElement } from '../interfaces/link-element.interface';
+import {
+  IComponent,
+  IElement,
+  IListElement,
+  ILinkElement
+} from 'app/config/interfaces';
 
 export type IMainConfig = IComponent;
 export type ISideNavConfig = IComponent;
@@ -83,17 +85,20 @@ class SideNavConfig implements ISideNavConfig {
           icon: {class: 'language', type: 'md'},
           list: [
             {
-              name: 'en',
+              name: 'lang_en',
+              type: 'listItem',
               display: 'MAIN.SIDE_NAV.LANGUAGE.MENU.ENGLISH',
               icon: {class: 'flag-icon-us', type: 'flag-icon'}
             },
             {
-              name: 'ja',
+              name: 'lang_ja',
+              type: 'listItem',
               display: 'MAIN.SIDE_NAV.LANGUAGE.MENU.JAPANESE',
               icon: {class: 'flag-icon-jp', type: 'flag-icon'}
             },
             {
-              name: 'zh',
+              name: 'lang_zh',
+              type: 'listItem',
               display: 'MAIN.SIDE_NAV.LANGUAGE.MENU.CHINESE',
               icon: {class: 'flag-icon-cn', type: 'flag-icon'}
             }
@@ -195,17 +200,17 @@ class HeaderConfig implements IHeaderConfig {
       tooltip: 'MAIN.HEADER.LANGUAGE.TOOLTIP',
       list: [
         {
-          name: 'en',
+          name: 'lang_en',
           display: 'MAIN.HEADER.LANGUAGE.MENU.ENGLISH',
           icon: {class: 'flag-icon-us', type: 'flag-icon'}
         },
         {
-          name: 'ja',
+          name: 'lang_ja',
           display: 'MAIN.HEADER.LANGUAGE.MENU.JAPANESE',
           icon: {class: 'flag-icon-jp', type: 'flag-icon'}
         },
         {
-          name: 'zh',
+          name: 'lang_zh',
           display: 'MAIN.HEADER.LANGUAGE.MENU.CHINESE',
           icon: {class: 'flag-icon-cn', type: 'flag-icon'}
         }

@@ -1,3 +1,269 @@
 {
-
+  "MAIN": {
+    "SIDE_NAV": {
+      "ABOUT_US": "About Us",
+      "CREATE_EVENT": "Create an Event",
+      "HELP": "Help",
+      "LANGUAGE": {
+        "LABEL": "Language",
+        "TOOLTIP": "Select a Language",
+        "MENU": {
+          "ENGLISH": "English",
+          "JAPANESE": "Japanese",
+          "CHINESE": "Chinese"
+        }
+      },
+      "USER": {
+        "MENU": {
+          "PROFILE": "Profile",
+          "EVENTS": "My Events",
+          "MESSAGES": "Messages",
+          "UPLOADS": "My Uploads",
+          "SIGNOUT": "Sign Out"
+        }
+      }
+    },
+    "HEADER": {
+      "LANGUAGE": {
+        "TOOLTIP": "Select a Language",
+        "MENU": {
+          "ENGLISH": "English",
+          "JAPANESE": "Japanese",
+          "CHINESE": "Chinese"
+        }
+      },
+      "USER": {
+        "TOOLTIP": "Please sign in or sign up",
+        "MENU": {
+          "SIGNIN": "Sign In",
+          "SIGNUP": "Sign Up"
+        }
+      },
+      "USER_AUTHED": {
+        "MENU": {
+          "SIGNOUT": "Sign Out"
+        }
+      }
+    },
+    "FOOTER": {
+      "CONTENT": "Copyright &copy; 2017 AcrossJapan K.K. All Rights Reserved."
+    },
+    "SEARCH_MENU": {
+    }
+  },
+  "AUTH": {
+    "SIGNIN": {
+      "LABEL": "Sign In",
+      "USERNAME": "Email or Username",
+      "PASSWORD": "Password",
+      "SHOW_PASSWORD": "Show Password",
+      "FORGOT_PASSWORD": "Forgot Password?",
+      "BTN_LABEL": "Sign In",
+      "SEND_EMAIL": "Send Verification Email"
+    },
+    "SIGNUP": {
+      "LABEL": "Sign Up",
+      "USERNAME": "Username",
+      "EMAIL": "Email",
+      "PASSWORD": "New Password",
+      "CONFIRM_PASSWORD": "Confirm New Password",
+      "SHOW_PASSWORD": "Show Password",
+      "BTN_LABEL": "Sign Up",
+      "SEND_EMAIL": "Resend Verification Email"
+    },
+    "VERIFY_EMAIL": {
+      "LABEL": "Email Verification Status",
+      "SEND_EMAIL": "Resend Verification Email",
+      "BACK_SIGNIN": "Back to Sign In"
+    },
+    "SEND_VERIFY_EMAIL": {
+      "LABEL": "Verification Email",
+      "USERNAME": "Username or Email",
+      "BTN_LABEL": "Send Verification Email",
+      "BACK_SIGNIN": "Back to Sign In"
+    },
+    "FORGOT_PASSWORD": {
+      "LABEL": "Reset Password Email",
+      "USERNAME": "Username or Email",
+      "BTN_LABEL": "Send Reset Password Email",
+      "BACK_SIGNIN": "Back to Sign In"
+    },
+    "RESET_PASSWORD": {
+      "LABEL": "Reset Password",
+      "USERNAME": "Username",
+      "PASSWORD": "New Password",
+      "CONFIRM_PASSWORD": "Confirm New Password",
+      "SHOW_PASSWORD": "Show Password",
+      "BTN_LABEL": "Reset Password",
+      "SEND_EMAIL": "Send Reset Password Email",
+      "BACK_SIGNIN": "Back to Sign In"
+    }
+  },
+  "USER": {
+    "DASHBOARD": {
+      "LABEL": "Dashboard"
+    },
+    "PROFILE": {
+      "LABEL": "Profile",
+      "PERSONAL_INFO": {
+        "LABEL": "Personal Information",
+        "FULLNAME": "Full Name ZH",
+        "USERNAME": "User Name ZH",
+        "EMAIL": "Email",
+        "GENDER": {
+          "LABEL": "Gender",
+          "MALE": "Male",
+          "FEMALE": "Female"
+        },
+        "BIRTHDAY": {
+          "LABEL": "Birth Date",
+          "DATE_FORMAT_HINT": "e.g., Jan 6, 1980"
+        },
+        "BIRTHDAY_LABEL": "Birth Date",
+        "ADDRESS": "Address",
+        "POSTCODE": "Postal Code",
+        "PHONE_NUMBER": "Phone Number",
+        "SAVEBTN_LABEL": "Save"
+      },
+      "CHANGE_PASSWORD": {
+        "LABEL": "Change Password",
+        "OLD_PASSWORD": "Current Password",
+        "PASSWORD": "New Password",
+        "CONFIRM_PASSWORD": "Confirm New Password",
+        "SHOW_PASSWORD": "Show Password",
+        "BTN_LABEL": "Change Password"
+      },
+      "EVENT_RELATED": {
+        "LABEL": "Event Related Information",
+        "MENU_LABEL": "Event Related Information",
+        "GENERAL": {
+          "LABEL": "General"
+        },
+        "RUNNING": {
+          "LABEL": "Running"
+        },
+        "SKII": {
+          "LABEL": "Skii"
+        },
+        "HIKING": {
+          "LABEL": "Hiking"
+        },
+        "CAMPING": {
+          "LABEL": "Camping"
+        },
+        "BICYCLING": {
+          "LABEL": "Bicycling"
+        },
+        "OTHERS": {
+          "LABEL": "Other"
+        }
+      },
+      "GROUP_INFO": {
+        "LABEL": "Group Information"
+      }
+    },
+    "EVENTS": {
+      "LABEL": "My Events"
+    },
+    "MESSAGES": {
+      "LABEL": "Messages"
+    },
+    "UPLOADS": {
+      "LABEL": "My Uploads"
+    }
+  },
+  "SHARED": {
+    "DATE_PICKER": {
+      "TODAY_BUTTON_TXT": "Today",
+      "DATE_FORMAT": "YYYY年M月D日"
+    }
+  },
+  "MESSAGES": {
+    "AUTH": {
+      "SIGNIN": {
+        "SUCCESS": "You are successfully signed in.",
+        "INVALID_USERNAME": "The username or email entered does not exist.",
+        "INVALID_PASSWORD": "The password entered is incorrect.",
+        "NOT_VERIFIED": "Your account is not verified, please verify your account first."
+      },
+      "SIGNUP": {
+        "SUCCESS": "Your account is successfully created and a verification email has been sent."
+      },
+      "VERIFY_EMAIL": {
+        "INPROGRESS": "Verifying account ...",
+        "SUCCESS": "Your account has been successfully verified. Please sign in.",
+        "ALREADY_VERIFIED": "Your account has been previously verified. Please sign in.",
+        "INVALID_TOKEN": "Account verification failed due to invalid or expired email link. Please resend verification email."
+      },
+      "SEND_VERIFY_EMAIL": {
+        "HINT": "Please enter your username or email below. An email will be sent to verify your account.",
+        "SUCCESS": "An email has been successfully sent. Please follow instruction in the email to activate your account.",
+        "INVALID_USERNAME": "The username or email entered does not exist."
+      },
+      "FORGOT_PASSWORD": {
+        "HINT": "Please enter your username or email below. An email will be sent to reset your password.",
+        "SUCCESS": "An email has been successfully sent. Please follow instruction in the email to reset your password.",
+        "INVALID_USERNAME": "The username or email entered does not exist."
+      },
+      "RESET_PASSWORD": {
+        "SUCCESS": "New password has been successfully reset. Please sign in.",
+        "INVALID_TOKEN": "Reset password failed due to invalid or expired email link. Please resend reset password email."
+      }
+    },
+    "USER": {
+      "PROFILE": {
+        "PERSONAL_INFO": {
+        },
+        "CHANGE_PASSWORD": {
+          "SUCCESS": "Your password has been successfully changed.",
+          "INVALID_USERNAME": "The username does not exist.",
+          "INVALID_PASSWORD": "The current password entered is incorrect.",
+          "SAME_PASSWORD": "Your new password cannot be the same as the current password."
+        }
+      }
+    }
+  },
+  "ERRORS": {
+    "GENERIC": {
+      "SYSTEM_UNAVAILABLE": "System is currently unavailable, please try again later.",
+      "GATEWAY_TIMEOUT": "Request is timed out, please try again later.",
+      "OTHERS": "Something went wrong, please try again later."
+    },
+    "VALIDATION": {
+      "USER": {
+        "USERNAME": {
+          "UNIQUE": "Username entered already exists, please choose another username.",
+          "REQUIRED": "Username is required",
+          "MINLENGTH": "Invalid Username: minimum 2 characters",
+          "MAXLENGTH": "Invalid Username: maximum 20 characters",
+          "PATTERN": "Invalid Username: special characters not allowed"
+        },
+        "EMAIL": {
+          "UNIQUE": "Email entered already exists, please choose another email.",
+          "REQUIRED": "Email is required",
+          "PATTERN": "Invalid Email"
+        },
+        "OLD_PASSWORD": {
+          "REQUIRED": "Old Password is required",
+          "MINLENGTH": "Invalid Old Password: minimum 4 characters"
+        },
+        "PASSWORD": {
+          "REQUIRED": "Password is required",
+          "MINLENGTH": "Invalid Password: minimum 4 characters"
+        },
+        "CONFIRM_PASSWORD": {
+          "REQUIRED": "Confirm Password is required",
+          "MINLENGTH": "Invalid Confirm Password: minimum 4 characters"
+        },
+        "ROLE": {
+          "MATCH": ""
+        },
+        "PASSWORD_MATCH": "Password does not match"
+      },
+      "DATE_PICKER": {
+        "DATE_NOT_WITHIN_RANGE": "Invalid date: outside allowed date range",
+        "INVALID_DATE_FORMAT": "Invalid date format"
+      }
+    }
+  }
 }

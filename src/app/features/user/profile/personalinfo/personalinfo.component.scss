@@ -1,0 +1,9 @@
+:host /deep/ {
+  md-select {
+    margin: 15px 0 20px;
+    width: 75%;
+  }
+  md-select .mat-select-trigger {
+    min-width: 100px;
+  }
+}

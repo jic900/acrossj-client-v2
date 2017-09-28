@@ -2,7 +2,6 @@
   <ng-template let-item let-i="index" ngFor [ngForOf]="navListData.list">
     <a *ngIf="item.type === 'link'"
        md-list-item
-       [routerLink]="item.link ? item.link.param ? [item.link.path, item.link.param] : [item.link.path] : []"
        [ngClass]="{'item-selected': selectable && selectedIndex === i}"
        (click)="onClicked(i, item)">
       <aj-icon *ngIf="item.icon" [data]="item.icon"></aj-icon>
@@ -24,8 +23,7 @@
       <md-list>
         <a *ngFor="let subItem of item.list"
            md-list-item
-           [routerLink]="subItem.link ? subItem.link.param ? [subItem.link.path, subItem.link.param] : [subItem.link.path] : []"
-           (click)="onClicked($event)">
+           (click)="onClicked(-1, subItem)">
           <aj-icon *ngIf="subItem.icon" [data]="subItem.icon"></aj-icon>
           <span>{{subItem.display | translate}}</span>
         </a>

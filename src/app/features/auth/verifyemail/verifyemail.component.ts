@@ -3,8 +3,8 @@ import { AuthService } from '../services/auth.service';
 import * as _ from 'lodash';
 
 import { VerifyEmailConfig, IVerifyEmailMessage } from 'app/config/auth/verifyemail.config';
+import { IMessageElement } from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
-import { IMessageElement } from 'app/config/interfaces/message-element';
 
 @Component({
   selector: 'aj-verifyemail',

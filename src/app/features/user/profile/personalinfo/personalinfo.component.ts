@@ -11,9 +11,9 @@ import {
   IPersonalInfo,
   IPersonalInfoMessage
 } from 'app/config/user/profile/personalinfo.config';
+import { IForm, IMessageElement, IDateRange, IDate } from 'app/config/interfaces';
 import { ProfileService } from 'app/features/user/services/profile.service';
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import { MomentService } from 'app/shared/services/moment.service';
 
 @Component({
   selector: 'aj-personalinfo',
@@ -31,9 +31,10 @@ export class PersonalInfoComponent implements AfterViewInit {
   initializing: boolean;
   processing: boolean;
 
-  constructor(private profileService: ProfileService) {
+  constructor(private profileService: ProfileService, private momentService: MomentService) {
     this.formData = new PersonalInfoConfig();
     this.formElements = _.mapKeys(this.formData.elements, 'name');
+    this.formElements.birthday.enabledDateRange = this.enabledDOBDateRange();
     this.messages = _.mapKeys(this.formData.messages, 'name');
     this.formGroup = new FormGroup({});
     this.initializing = true;
@@ -43,6 +44,14 @@ export class PersonalInfoComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initializing = false;
+  }
+
+  enabledDOBDateRange(): IDateRange {
+    const endDate: IDate = this.momentService.getToday();
+    return {
+      start: this.momentService.addCalendarYears(endDate, -100),
+      end: endDate
+    };
   }
 
   isValid(): boolean {

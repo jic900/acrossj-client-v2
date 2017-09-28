@@ -2,9 +2,11 @@
  * Created by LAE84266 on 12/08/2017.
  */
 
-import { IComponent } from 'app/config/interfaces/component.interface';
-import { IListElement } from 'app/config/interfaces/list-element.interface';
-import { IElement } from 'app/config/interfaces/element.interface';
+import {
+  IComponent,
+  IListElement,
+  IElement
+} from 'app/config/interfaces';
 
 export interface IProfileMenu {
   title: IElement;

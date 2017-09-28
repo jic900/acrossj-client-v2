@@ -4,19 +4,18 @@ import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 
 import { MediaQueryBreakPoint } from 'app/config/common/app.config';
-import { Util } from 'app/shared/util/util';
+import { IComponent, ILinkElement } from 'app/config/interfaces';
 import {
   EventRelatedMenuConfig,
   IEventRelatedMenu
 } from 'app/config/user/profile/eventrelated/eventrelatedmenu.config';
+import { Util } from 'app/shared/util/util';
 import {
   ProfileService,
   IProfileEvent,
   ProfileEventType,
   ProfileObserver
 } from 'app/features/user/services/profile.service';
-import { IComponent } from 'app/config/interfaces/component.interface';
-import { ILinkElement } from 'app/config/interfaces/link-element.interface';
 
 @Component({
   selector: 'aj-eventrelatedmenu',

@@ -2,8 +2,25 @@
  * Created by qiz264 on 2017-04-20.
  */
 
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import { IMessageElement } from 'app/config/interfaces';
 import { AppConstant, MediaQueryBreakPoint } from 'app/config/common/app.config';
+
+export enum KeyCode {
+  BACKSPACE = 8,
+  TAB = 9,
+  ENTER = 13,
+  ESC = 27,
+  SPACE = 32,
+  PAGE_UP = 33,
+  PAGE_DOWN = 34,
+  END = 35,
+  HOME = 36,
+  LEFT_ARROW = 37,
+  UP_ARROW = 38,
+  RIGHT_ARROW = 39,
+  DOWN_ARROW = 40,
+  DELETE = 46
+}
 
 export class Util {
 

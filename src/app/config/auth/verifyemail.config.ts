@@ -2,8 +2,7 @@
  * Created by LAE84266 on 11/08/2017.
  */
 
-import { IComponent } from 'app/config/interfaces/component.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import { IComponent, IMessageElement } from 'app/config/interfaces';
 
 export interface IVerifyEmailMessage {
   inProgress: IMessageElement;

@@ -8,7 +8,7 @@ import { MediaQueryBreakPoint } from 'app/config/common/app.config';
 import { Util } from 'app/shared/util/util';
 import { ProfileDetailConfig } from 'app/config/user/profile/profiledetail.config';
 import { ProfileService } from 'app/features/user/services/profile.service';
-import { IElement } from 'app/config/interfaces/element.interface';
+import { IElement } from 'app/config/interfaces';
 
 @Component({
   selector: 'aj-profiledetail',

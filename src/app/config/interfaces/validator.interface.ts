@@ -7,4 +7,5 @@ export interface IValidator {
   type: string;
   value?: any;
   error: string;
+  validateFunc?: Function;
 }

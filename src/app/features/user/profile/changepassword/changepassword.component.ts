@@ -11,11 +11,13 @@ import {
   IChangePassword,
   IChangePasswordMessage
 } from 'app/config/user/profile/changepassword.config';
-import { ProfileService } from 'app/features/user/services/profile.service';
+import {
+  IForm,
+  IInputElement,
+  IMessageElement
+} from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IInputElement } from 'app/config/interfaces/input-element.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import { ProfileService } from 'app/features/user/services/profile.service';
 
 @Component({
   selector: 'aj-changepassword',

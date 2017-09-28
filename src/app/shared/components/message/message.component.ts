@@ -2,7 +2,7 @@ import {
   Component,
   Input,
 } from '@angular/core';
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import { IMessageElement } from 'app/config/interfaces';
 
 @Component({
   selector: 'aj-message',

@@ -7,8 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
-import { IListElement } from 'app/config/interfaces/list-element.interface';
-import { IListItem } from 'app/config/interfaces/list-item';
+import { IListElement, IListItem } from 'app/config/interfaces';
 
 @Component({
   selector: 'aj-select',

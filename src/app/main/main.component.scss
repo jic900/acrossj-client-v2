@@ -1,6 +1,11 @@
 :host /deep/ {
+  td-navigation-drawer md-toolbar {
+    padding-bottom: 10px !important;
+  }
+
   td-navigation-drawer md-toolbar .md-body-1 {
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-left: 20px;
     font-size: 15px;
     font-weight: 500 !important;
   }
@@ -14,6 +19,11 @@
   td-navigation-drawer md-toolbar .mat-icon.md-icon-logo {
     width: 160px;
     height: auto
+  }
+
+  md-divider {
+    margin: 0 15px !important;
+    border-top-color: rgba(0, 0, 0, .15);
   }
 }
 

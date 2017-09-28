@@ -109,13 +109,20 @@
         "LABEL": "Personal Information",
         "FULLNAME": "Full Name",
         "USERNAME": "User Name",
-        "GENDER_LABEL": "Gender",
-        "GENDER_MALE": "Male",
-        "GENDER_FEMALE": "Female",
+        "EMAIL": "Email",
+        "GENDER": {
+          "LABEL": "Gender",
+          "MALE": "Male",
+          "FEMALE": "Female"
+        },
+        "BIRTHDAY": {
+          "LABEL": "Birth Date",
+          "DATE_FORMAT_HINT": "e.g., Jan 6, 1980"
+        },
         "BIRTHDAY_LABEL": "Birth Date",
         "ADDRESS": "Address",
-        "POSTCODE": "Post Code",
-        "PHONENUMBER": "Phone Number",
+        "POSTCODE": "Postal Code",
+        "PHONE_NUMBER": "Phone Number",
         "SAVEBTN_LABEL": "Save"
       },
       "CHANGE_PASSWORD": {
@@ -163,6 +170,12 @@
     },
     "UPLOADS": {
       "LABEL": "My Uploads"
+    }
+  },
+  "SHARED": {
+    "DATE_PICKER": {
+      "TODAY_BUTTON_TXT": "Today",
+      "DATE_FORMAT": "MMM D, YYYY"
     }
   },
   "MESSAGES": {
@@ -246,6 +259,10 @@
           "MATCH": ""
         },
         "PASSWORD_MATCH": "Password does not match"
+      },
+      "DATE_PICKER": {
+        "DATE_NOT_WITHIN_RANGE": "Invalid date: outside allowed date range",
+        "INVALID_DATE_FORMAT": "Invalid date format"
       }
     }
   }

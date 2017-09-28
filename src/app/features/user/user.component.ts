@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
 import { AppConfig, MediaQueryBreakPoint } from 'app/config/common/app.config';
+import { IComponent, ILinkElement } from 'app/config/interfaces';
+import { UserConfig, IUser } from 'app/config/user/user.config';
 import { Util } from 'app/shared/util/util';
 import { ProfileService } from 'app/features/user/services/profile.service';
-import { UserConfig, IUser } from 'app/config/user/user.config';
-import { IComponent } from 'app/config/interfaces/component.interface';
-import { ILinkElement } from 'app/config/interfaces/link-element.interface';
 
 @Component({
   selector: 'aj-user',
@@ -22,7 +20,7 @@ export class UserComponent {
   tabLinks: ILinkElement[];
   backgroundImage: string;
 
-  constructor(private profileService: ProfileService, private router: Router) {
+  constructor(private profileService: ProfileService) {
     this.userData = new UserConfig();
     this.userElements = _.mapKeys(this.userData.elements, 'name');
     this.tabLinks = this.userData.elements.filter((element) => {

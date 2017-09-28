@@ -18,8 +18,7 @@ import {
   ProfileEventType
 } from 'app/features/user/services/profile.service';
 import { ProfileMenuConfig, IProfileMenu } from 'app/config/user/profile/profilemenu.config';
-import { IComponent } from 'app/config/interfaces/component.interface';
-import { ILinkElement } from 'app/config/interfaces/link-element.interface';
+import { IComponent, ILinkElement } from 'app/config/interfaces';
 
 @Component({
   selector: 'aj-profilemenu',

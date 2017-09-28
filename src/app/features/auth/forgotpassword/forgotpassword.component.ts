@@ -3,10 +3,9 @@ import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 
 import { ForgotPasswordConfig, IForgotPassword, IForgotPasswordMessage } from 'app/config/auth/forgotpassword.config';
+import { IForm, IMessageElement } from 'app/config/interfaces';
 import { AuthService } from '../services/auth.service';
 import { Util } from 'app/shared/util/util';
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
 
 @Component({
   selector: 'aj-forgotpassword',

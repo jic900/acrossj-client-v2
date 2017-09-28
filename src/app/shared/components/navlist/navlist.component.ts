@@ -6,9 +6,10 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { IListElement } from 'app/config/interfaces/list-element.interface';
-import { IListItem } from 'app/config/interfaces/list-item';
+import { IListElement, IListItem } from 'app/config/interfaces';
+import { ILinkElement } from '../../../config/interfaces/link-element.interface';
 
 @Component({
   selector: 'aj-navlist',
@@ -23,12 +24,12 @@ export class NavListComponent implements OnChanges {
   @Input() multiLine: boolean;
   @Input() showDivider: boolean;
   @Input() showNavIcon: boolean;
-  @Output() clicked: EventEmitter<void>;
+  @Output() clicked: EventEmitter<string>;
   @Output() selectedIndexChange: EventEmitter<number>;
   selectable: boolean;
 
-  constructor() {
-    this.clicked = new EventEmitter<void>();
+  constructor(private router: Router) {
+    this.clicked = new EventEmitter<string>();
     this.selectedIndexChange = new EventEmitter<number>();
   }
 
@@ -47,11 +48,18 @@ export class NavListComponent implements OnChanges {
     }
   }
 
-  onClicked(selectedIndex: number, selectedItem: IListItem): void {
-    if (selectedIndex !== this.selectedIndex) {
+  onClicked(selectedIndex: number, clickedItem: IListItem): void {
+    if (selectedIndex !== -1 && selectedIndex !== this.selectedIndex) {
       this.selectedIndexChange.emit(selectedIndex);
+      this.selectedIndex = selectedIndex;
     }
-    this.selectedIndex = selectedIndex;
-    this.clicked.emit();
+    if (clickedItem.type !== 'list') {
+      if (clickedItem.type === 'link') {
+        const linkItem = <ILinkElement> clickedItem;
+        const navUrl = linkItem.link.param ? `${linkItem.link.path}/${linkItem.link.param}` : linkItem.link.path;
+        this.router.navigateByUrl(navUrl);
+      }
+      this.clicked.emit(clickedItem.name);
+    }
   }
 }

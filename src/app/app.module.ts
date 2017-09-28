@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouteReuseStrategy } from '@angular/router';
 import { CovalentHighlightModule } from '@covalent/highlight';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -10,6 +9,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MdIconRegistry } from '@angular/material';
 
+import { LOCALE, DEFAULT_LOCALE } from './config/common/app.config';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './features/auth/services/auth.service';
@@ -18,6 +18,7 @@ import { MainComponent } from './main/main.component';
 import { HomeComponent } from './main/home/home.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SearchMenuComponent } from './main/searchmenu/searchmenu.component';
+
 
 export function translateLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -59,8 +60,8 @@ export function translateLoaderFactory(httpClient: HttpClient) {
 export class AppModule {
 
   constructor(private translate: TranslateService, mdIconRegistry: MdIconRegistry, private domSanitizer: DomSanitizer) {
-    translate.addLangs(['en', 'ja', 'zh']);
-    translate.setDefaultLang('en');
+    translate.addLangs([LOCALE.CHINESE, LOCALE.JAPANESE, LOCALE.ENGLISH]);
+    translate.setDefaultLang(DEFAULT_LOCALE);
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|ja|zh/) ? browserLang : 'en');
     // translate.use('zh');

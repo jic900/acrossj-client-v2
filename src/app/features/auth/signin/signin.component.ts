@@ -7,12 +7,19 @@ import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 
-import { SignInConfig, ISignIn, ISignInMessage } from 'app/config/auth/signin.config';
-import { AuthService } from '../services/auth.service';
+import {
+  SignInConfig,
+  ISignIn,
+  ISignInMessage
+} from 'app/config/auth/signin.config';
+import {
+  IForm,
+  IInputElement,
+  IMessageElement
+} from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IInputElement } from 'app/config/interfaces/input-element.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'aj-signin',

@@ -5,16 +5,16 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
-import { AppConstant, MediaQueryBreakPoint } from '../config/common/app.config';
+import { MediaQueryBreakPoint } from '../config/common/app.config';
 import { Util } from '../shared/util/util';
 import { AuthService } from 'app/features/auth/services/auth.service';
 import {
   MainConfig, IMainConfig, ISideNavConfig, IHeaderConfig, IFooterConfig,
   IMain, ISideNav, IHeader, IFooter
 } from '../config/main/main.config';
-
 
 @Component({
   selector: 'aj-main',
@@ -36,7 +36,7 @@ export class MainComponent implements OnInit, OnDestroy {
   authenticated: boolean;
   subscription: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private translateService: TranslateService) {
     this.mainConfig = new MainConfig();
     this.mainData = _.mapKeys(this.mainConfig.elements, 'title');
     this.sideNavConfig = this.mainData.sideNav;
@@ -63,6 +63,16 @@ export class MainComponent implements OnInit, OnDestroy {
 
   widthIsMedium(): boolean {
     return Util.isBreakPointOf(window.innerWidth, MediaQueryBreakPoint.MEDIUM);
+  }
+
+  onClicked(itemName: string): void {
+    if (itemName.startsWith('lang')) {
+      const selectedLang = itemName.substring(5);
+      const curLang = this.translateService.currentLang;
+      if (selectedLang !== curLang) {
+        this.translateService.use(selectedLang);
+      }
+    }
   }
 
   signout(): void {

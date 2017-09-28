@@ -3,13 +3,19 @@ import { FormGroup } from '@angular/forms';
 import { JwtHelper } from 'angular2-jwt';
 import * as _ from 'lodash';
 
-import { ResetPasswordConfig, IResetPassword, IResetPasswordMessage } from 'app/config/auth/resetpassword.config';
-import { AuthService } from '../services/auth.service';
+import {
+  ResetPasswordConfig,
+  IResetPassword,
+  IResetPasswordMessage
+} from 'app/config/auth/resetpassword.config';
+import {
+  IForm,
+  IInputElement,
+  IMessageElement,
+  IFormValidatorData
+} from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
-import { IForm } from 'app/config/interfaces/form.interface';
-import { IInputElement } from 'app/config/interfaces/input-element.interface';
-import { IMessageElement } from 'app/config/interfaces/message-element';
-import { IFormValidatorData } from 'app/shared/components/input/input.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'aj-resetpassword',

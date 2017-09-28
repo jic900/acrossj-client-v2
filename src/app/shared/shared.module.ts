@@ -8,7 +8,8 @@ import {
   MdListModule, MdMenuModule, MdTooltipModule,
   MdSlideToggleModule, MdInputModule, MdCheckboxModule,
   MdToolbarModule, MdSnackBarModule, MdSidenavModule,
-  MdTabsModule, MdSelectModule, MdProgressBarModule
+  MdTabsModule, MdSelectModule, MdProgressBarModule, OverlayModule,
+  PortalModule, StyleModule, A11yModule
 } from '@angular/material';
 import {
   CovalentDataTableModule, CovalentMediaModule, CovalentLoadingModule,
@@ -24,6 +25,7 @@ import { ValidateOnBlurDirective } from './directives/validate-onblur.directive'
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderService } from './components/loader/loader.service';
 import { LocalStorageService } from './services/localstorage.service';
+import { MomentService } from './services/moment.service';
 import { HttpService } from './services/http.service';
 import { MenuComponent } from './components/menu/menu.component';
 import { NavListComponent } from './components/navlist/navlist.component';
@@ -31,6 +33,8 @@ import { IconComponent } from './components/icon/icon.component';
 import { InputComponent } from './components/input/input.component';
 import { MessageComponent } from './components/message/message.component';
 import { SelectComponent } from './components/select/select.component';
+import { DatePickerComponent, DatePickerContentComponent } from './components/datepicker/datepicker.component';
+import { CalendarComponent } from './components/datepicker/calendar/calendar.component';
 
 const FLEX_LAYOUT_MODULES: any[] = [
   FlexLayoutModule,
@@ -45,7 +49,8 @@ const MATERIAL_MODULES: any[] = [
   MdListModule, MdMenuModule, MdTooltipModule,
   MdSlideToggleModule, MdInputModule, MdCheckboxModule,
   MdToolbarModule, MdSnackBarModule, MdSidenavModule,
-  MdTabsModule, MdSelectModule, MdProgressBarModule
+  MdTabsModule, MdSelectModule, MdProgressBarModule, OverlayModule,
+  PortalModule, StyleModule, A11yModule
 ];
 
 const COVALENT_MODULES: any[] = [
@@ -77,6 +82,7 @@ export function httpServiceFactory(
     MATERIAL_MODULES,
     COVALENT_MODULES,
     FLEX_LAYOUT_MODULES,
+    OverlayModule,
     TranslateModule.forChild({}),
   ],
   declarations: [
@@ -87,7 +93,10 @@ export function httpServiceFactory(
     IconComponent,
     InputComponent,
     MessageComponent,
-    SelectComponent
+    SelectComponent,
+    DatePickerComponent,
+    DatePickerContentComponent,
+    CalendarComponent
   ],
   exports: [
     ANGULAR_MODULES,
@@ -102,16 +111,21 @@ export function httpServiceFactory(
     IconComponent,
     InputComponent,
     MessageComponent,
-    SelectComponent
+    SelectComponent,
+    DatePickerComponent
   ],
   providers: [
     LoaderService,
     LocalStorageService,
+    MomentService,
     {
       provide: HttpService,
       useFactory: httpServiceFactory,
       deps: [Http, RequestOptions, LoaderService, LocalStorageService]
     }
+  ],
+  entryComponents: [
+    DatePickerContentComponent
   ]
 })
 

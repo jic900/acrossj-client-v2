@@ -120,20 +120,24 @@ export class ProfileService implements OnDestroy {
     if (this.widthIsExtraSmall()) {
       if (this.activeUrl === PROFILE_MENU_URL) {
         this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'false');
-        this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true');
+        setTimeout(() => this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true'), 200);
+        // this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true');
         return;
       } else if (this.activeUrl === EVENT_RELATED_MENU_URL) {
         this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'false');
-        this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true');
+        setTimeout(() => this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true'), 200);
+        // this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true');
         return;
       }
     } else if (this.widthIsSmall()) {
       if (this.menuRedirect) {
         if (this.activeUrl.includes('eventrelated')) {
           this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'false');
-          this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true');
+          setTimeout(() => this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true'), 200);
+          // this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true');
         } else {
-          this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true');
+          setTimeout(() => this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true'), 100);
+          // this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true');
         }
         this.menuRedirect = false;
         return;

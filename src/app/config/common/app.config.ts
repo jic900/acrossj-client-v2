@@ -14,6 +14,21 @@ export const AppConstant = {
   TABLET_TOGGLE_BREAKPOINT: 960
 };
 
+export const LOCALE = {
+  CHINESE: 'zh',
+  JAPANESE: 'ja',
+  ENGLISH: 'en'
+}
+
+export const MOMENT_LOCALE = {
+  CHINESE: 'zh-cn',
+  JAPANESE: 'ja',
+  ENGLISH: 'en'
+}
+
+export const DEFAULT_LOCALE = LOCALE.ENGLISH;
+export const DEFAULT_MOMENT_LOCALE = MOMENT_LOCALE.ENGLISH;
+
 export enum MediaQueryBreakPoint {
   EXTRA_SMALL,
   GREATER_THAN_EXTRA_SMALL,
