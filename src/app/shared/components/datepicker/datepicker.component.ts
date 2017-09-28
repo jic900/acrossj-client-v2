@@ -90,6 +90,9 @@ export class DatePickerComponent implements OnChanges, OnInit {
 
     translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this.setPlaceHolder();
+      if (this.inputValue && this.inputValue.trim().length > 0) {
+        this.inputValue = this.momentService.formatDate(this.selected, this.dateFormat);
+      }
     });
   }
 

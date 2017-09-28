@@ -240,38 +240,43 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   onPrevMonth(): void {
+    if (this.selectorMode === SelectorMode.YEAR) {
+      this.selectorMode = SelectorMode.MONTH;
+      this.generateMonths();
+    }
     this.setActiveDate(OffsetType.MONTH, -1);
   }
 
   onNextMonth(): void {
+    if (this.selectorMode === SelectorMode.YEAR) {
+      this.selectorMode = SelectorMode.MONTH;
+      this.generateMonths();
+    }
     this.setActiveDate(OffsetType.MONTH, 1);
   }
 
   onPrevYear(): void {
+    if (this.selectorMode === SelectorMode.MONTH) {
+      this.selectorMode = SelectorMode.YEAR;
+      this.generateYears();
+    }
     this.setActiveDate(OffsetType.YEAR, -1);
   }
 
   onNextYear(): void {
+    if (this.selectorMode === SelectorMode.MONTH) {
+      this.selectorMode = SelectorMode.YEAR;
+      this.generateYears();
+    }
     this.setActiveDate(OffsetType.YEAR, 1);
   }
 
   onSelectMonthClicked(event): void {
     this.selectorMode = this.selectorMode !== SelectorMode.MONTH ? SelectorMode.MONTH : SelectorMode.CALENDAR;
     if (this.selectorMode === SelectorMode.MONTH) {
-      const today: IDate = this.momentService.getToday();
-      this.monthTable = [];
-      for (let i = 1; i <= 12; i += 3) {
-        const monthRow: ICalendarMonth[] = [];
-        for (let j = i; j < i + 3; j++) {
-          monthRow.push({
-            nbr: j,
-            name: this.momentService.monthLabels[j - 1],
-            curMonth: j === today.month && this.visibleMonth.year === today.year,
-            disabled: this.isDisabledMonth(j, this.visibleMonth.year)
-          });
-        }
-        this.monthTable.push(monthRow);
-      }
+      this.generateMonths();
+    } else {
+      this.generateCalendar(this.activeDate.month, this.activeDate.year);
     }
     event.stopPropagation();
   }
@@ -280,6 +285,8 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     this.selectorMode = this.selectorMode !== SelectorMode.YEAR ? SelectorMode.YEAR : SelectorMode.CALENDAR;
     if (this.selectorMode === SelectorMode.YEAR) {
       this.generateYears();
+    } else {
+      this.generateCalendar(this.activeDate.month, this.activeDate.year);
     }
     event.stopPropagation();
   }
@@ -466,6 +473,23 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
         }
       }
       this.dateTable.push({week: week, weekNbr: 0});
+    }
+  }
+
+  generateMonths(): void {
+    const today: IDate = this.momentService.getToday();
+    this.monthTable = [];
+    for (let i = 1; i <= 12; i += 3) {
+      const monthRow: ICalendarMonth[] = [];
+      for (let j = i; j < i + 3; j++) {
+        monthRow.push({
+          nbr: j,
+          name: this.momentService.monthLabels[j - 1],
+          curMonth: j === today.month && this.visibleMonth.year === today.year,
+          disabled: this.isDisabledMonth(j, this.visibleMonth.year)
+        });
+      }
+      this.monthTable.push(monthRow);
     }
   }
 
