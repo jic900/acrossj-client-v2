@@ -56,8 +56,10 @@ export class NavListComponent implements OnChanges {
     if (clickedItem.type !== 'list') {
       if (clickedItem.type === 'link') {
         const linkItem = <ILinkElement> clickedItem;
-        const navUrl = linkItem.link.param ? `${linkItem.link.path}/${linkItem.link.param}` : linkItem.link.path;
-        this.router.navigateByUrl(navUrl);
+        if (linkItem.link) {
+          const navUrl = linkItem.link.param ? `${linkItem.link.path}/${linkItem.link.param}` : linkItem.link.path;
+          this.router.navigateByUrl(navUrl);
+        }
       }
       this.clicked.emit(clickedItem);
     }
