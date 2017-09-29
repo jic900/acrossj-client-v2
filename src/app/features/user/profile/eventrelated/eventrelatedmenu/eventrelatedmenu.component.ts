@@ -4,7 +4,11 @@ import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 
 import { MediaQueryBreakPoint } from 'app/config/common/app.config';
-import { IComponent, ILinkElement } from 'app/config/interfaces';
+import {
+  IComponent,
+  IListItem,
+  ILinkElement
+} from 'app/config/interfaces';
 import {
   EventRelatedMenuConfig,
   IEventRelatedMenu
@@ -52,9 +56,15 @@ export class EventRelatedMenuComponent implements OnDestroy {
       }
     });
   }
-  // onClicked(event): void {
-  //   this.router.navigateByUrl('/user/profile/menu');
-  // }
+
+  onClicked(item: IListItem): void {
+    if (item.type === 'link') {
+      const linkItem = <ILinkElement> item;
+      if (linkItem.link.path === this.profileService.selectedProfileMenuUrl) {
+        this.profileService.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'false');
+      }
+    }
+  }
 
   widthLessThanMedium(): boolean {
     return Util.isBreakPointOf(window.innerWidth, MediaQueryBreakPoint.LESS_THAN_MEDIUM);

@@ -12,6 +12,7 @@
     <aj-navlist
       [navListData]="menuElements.menuList"
       [(selectedIndex)]="selectedIndex"
+      (clicked)="onClicked($event)"
       [showDivider]="widthLessThanMedium()"
       [showNavIcon]="widthLessThanMedium()">
     </aj-navlist>

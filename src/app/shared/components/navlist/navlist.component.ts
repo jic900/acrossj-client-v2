@@ -24,12 +24,12 @@ export class NavListComponent implements OnChanges {
   @Input() multiLine: boolean;
   @Input() showDivider: boolean;
   @Input() showNavIcon: boolean;
-  @Output() clicked: EventEmitter<string>;
+  @Output() clicked: EventEmitter<IListItem>;
   @Output() selectedIndexChange: EventEmitter<number>;
   selectable: boolean;
 
   constructor(private router: Router) {
-    this.clicked = new EventEmitter<string>();
+    this.clicked = new EventEmitter<IListItem>();
     this.selectedIndexChange = new EventEmitter<number>();
   }
 
@@ -59,7 +59,7 @@ export class NavListComponent implements OnChanges {
         const navUrl = linkItem.link.param ? `${linkItem.link.path}/${linkItem.link.param}` : linkItem.link.path;
         this.router.navigateByUrl(navUrl);
       }
-      this.clicked.emit(clickedItem.name);
+      this.clicked.emit(clickedItem);
     }
   }
 }

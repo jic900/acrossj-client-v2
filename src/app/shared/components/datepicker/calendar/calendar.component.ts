@@ -87,25 +87,36 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     this.visibleMonth = {monthTxt: this.momentService.monthLabels[date.month - 1], monthNbr: date.month, year: date.year};
   }
 
-  setActiveDate(offsetType: OffsetType, offset: number): void {
+  setActiveDate(offsetType: OffsetType, offset: number, targetMode?: SelectorMode): void {
     const oldActiveDate = this.activeDate;
-    if (offsetType === OffsetType.DAY) {
-      this.activeDate = this.momentService.addCalendarDays(this.activeDate, offset);
-    } else if (offsetType === OffsetType.MONTH) {
-      this.activeDate = this.momentService.addCalendarMonths(this.activeDate, offset);
-    } else {
-      this.activeDate = this.momentService.addCalendarYears(this.activeDate, offset);
+    if (offset !== 0) {
+      if (offsetType === OffsetType.DAY) {
+        this.activeDate = this.momentService.addCalendarDays(this.activeDate, offset);
+      } else if (offsetType === OffsetType.MONTH) {
+        this.activeDate = this.momentService.addCalendarMonths(this.activeDate, offset);
+      } else {
+        this.activeDate = this.momentService.addCalendarYears(this.activeDate, offset);
+      }
     }
-    if (!this.momentService.isSameMonth(this.activeDate, oldActiveDate)) {
-      this.setVisibleMonth(this.activeDate);
-      if (this.selectorMode === SelectorMode.CALENDAR) {
+    this.setVisibleMonth(this.activeDate);
+    if (targetMode === SelectorMode.CALENDAR) {
+      if (this.selectorMode !== SelectorMode.CALENDAR || !this.momentService.isSameMonth(this.activeDate, oldActiveDate)) {
+        this.selectorMode = targetMode;
         this.generateCalendar(this.activeDate.month, this.activeDate.year);
         if (this.momentService.isLaterMonth(oldActiveDate, this.activeDate)) {
           this.viewState = 'right';
         } else {
           this.viewState = 'left';
         }
-      } else if (this.selectorMode === SelectorMode.YEAR && this.yearNotDisplayed(this.activeDate.year) ) {
+      }
+    } else if (targetMode === SelectorMode.MONTH) {
+      if (this.selectorMode !== SelectorMode.MONTH) {
+        this.selectorMode = targetMode;
+        this.generateMonths();
+      }
+    } else if (targetMode === SelectorMode.YEAR) {
+      this.selectorMode = targetMode;
+      if (this.yearNotDisplayed(this.activeDate.year)) {
         this.generateYears();
         if (oldActiveDate.year > this.activeDate.year) {
           this.viewState = 'top';
@@ -129,31 +140,32 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   onKeyDownInCalendar(event: KeyboardEvent): void {
+    const targetMode = SelectorMode.CALENDAR;
     switch (event.keyCode) {
       case KeyCode.LEFT_ARROW:
-        this.setActiveDate(OffsetType.DAY, -1);
+        this.setActiveDate(OffsetType.DAY, -1, targetMode);
         break;
       case KeyCode.RIGHT_ARROW:
-        this.setActiveDate(OffsetType.DAY, 1);
+        this.setActiveDate(OffsetType.DAY, 1, targetMode);
         break;
       case KeyCode.UP_ARROW:
-        this.setActiveDate(OffsetType.DAY, -7);
+        this.setActiveDate(OffsetType.DAY, -7, targetMode);
         break;
       case KeyCode.DOWN_ARROW:
-        this.setActiveDate(OffsetType.DAY, 7);
+        this.setActiveDate(OffsetType.DAY, 7, targetMode);
         break;
       case KeyCode.HOME:
-        this.setActiveDate(OffsetType.DAY, 1 - this.activeDate.day);
+        this.setActiveDate(OffsetType.DAY, 1 - this.activeDate.day, targetMode);
         break;
       case KeyCode.END:
         const daysInThisMonth = this.momentService.daysInMonth(this.activeDate.month, this.activeDate.year);
-        this.setActiveDate(OffsetType.DAY, daysInThisMonth - this.activeDate.day);
+        this.setActiveDate(OffsetType.DAY, daysInThisMonth - this.activeDate.day, targetMode);
         break;
       case KeyCode.PAGE_UP:
-        this.setActiveDate(OffsetType.MONTH, -1);
+        this.setActiveDate(OffsetType.MONTH, -1, targetMode);
         break;
       case KeyCode.PAGE_DOWN:
-        this.setActiveDate(OffsetType.MONTH, 1);
+        this.setActiveDate(OffsetType.MONTH, 1, targetMode);
         break;
       case KeyCode.ENTER:
         this.selectDate(this.activeDate);
@@ -196,8 +208,7 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
         }
         break;
       case KeyCode.ENTER:
-        this.selectorMode = SelectorMode.CALENDAR;
-        this.generateCalendar(this.activeDate.month, this.activeDate.year);
+        this.setActiveDate(null, 0, SelectorMode.CALENDAR);
         break;
       default:
         return;
@@ -205,34 +216,34 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   onKeyDownInYear(event: KeyboardEvent): void {
+    const targetMode = SelectorMode.YEAR;
     switch (event.keyCode) {
       case KeyCode.LEFT_ARROW:
-        this.setActiveDate(OffsetType.YEAR, -1);
+        this.setActiveDate(OffsetType.YEAR, -1, targetMode);
         break;
       case KeyCode.RIGHT_ARROW:
-        this.setActiveDate(OffsetType.YEAR, 1);
+        this.setActiveDate(OffsetType.YEAR, 1, targetMode);
         break;
       case KeyCode.UP_ARROW:
-        this.setActiveDate(OffsetType.YEAR, -5);
+        this.setActiveDate(OffsetType.YEAR, -5, targetMode);
         break;
       case KeyCode.DOWN_ARROW:
-        this.setActiveDate(OffsetType.YEAR, 5);
+        this.setActiveDate(OffsetType.YEAR, 5, targetMode);
         break;
       case KeyCode.HOME:
-        this.setActiveDate(OffsetType.YEAR, this.yearTable[0][0].year - this.activeDate.year);
+        this.setActiveDate(OffsetType.YEAR, this.yearTable[0][0].year - this.activeDate.year, targetMode);
         break;
       case KeyCode.END:
-        this.setActiveDate(OffsetType.YEAR, this.yearTable[4][4].year - this.activeDate.year);
+        this.setActiveDate(OffsetType.YEAR, this.yearTable[4][4].year - this.activeDate.year, targetMode);
         break;
       case KeyCode.PAGE_UP:
-        this.setActiveDate(OffsetType.YEAR, -25);
+        this.setActiveDate(OffsetType.YEAR, -25, targetMode);
         break;
       case KeyCode.PAGE_DOWN:
-        this.setActiveDate(OffsetType.YEAR, 25);
+        this.setActiveDate(OffsetType.YEAR, 25, targetMode);
         break;
       case KeyCode.ENTER:
-        this.selectorMode = SelectorMode.CALENDAR;
-        this.generateCalendar(this.activeDate.month, this.activeDate.year);
+        this.setActiveDate(null, 0, SelectorMode.CALENDAR);
         break;
       default:
         return;
@@ -240,74 +251,52 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   onPrevMonth(): void {
-    if (this.selectorMode === SelectorMode.YEAR) {
-      this.selectorMode = SelectorMode.MONTH;
-      this.generateMonths();
-    }
-    this.setActiveDate(OffsetType.MONTH, -1);
+    const targetMode = this.selectorMode === SelectorMode.YEAR ? SelectorMode.MONTH : this.selectorMode;
+    this.setActiveDate(OffsetType.MONTH, -1, targetMode);
   }
 
   onNextMonth(): void {
-    if (this.selectorMode === SelectorMode.YEAR) {
-      this.selectorMode = SelectorMode.MONTH;
-      this.generateMonths();
-    }
-    this.setActiveDate(OffsetType.MONTH, 1);
+    const targetMode = this.selectorMode === SelectorMode.YEAR ? SelectorMode.MONTH : this.selectorMode;
+    this.setActiveDate(OffsetType.MONTH, 1, targetMode);
   }
 
   onPrevYear(): void {
-    if (this.selectorMode === SelectorMode.MONTH) {
-      this.selectorMode = SelectorMode.YEAR;
-      this.generateYears();
-    }
-    this.setActiveDate(OffsetType.YEAR, -1);
+    const targetMode = this.selectorMode === SelectorMode.MONTH ? SelectorMode.YEAR : this.selectorMode;
+    this.setActiveDate(OffsetType.YEAR, -1, targetMode);
   }
 
   onNextYear(): void {
-    if (this.selectorMode === SelectorMode.MONTH) {
-      this.selectorMode = SelectorMode.YEAR;
-      this.generateYears();
-    }
-    this.setActiveDate(OffsetType.YEAR, 1);
+    const targetMode = this.selectorMode === SelectorMode.MONTH ? SelectorMode.YEAR : this.selectorMode;
+    this.setActiveDate(OffsetType.YEAR, 1, targetMode);
   }
 
   onSelectMonthClicked(event): void {
-    this.selectorMode = this.selectorMode !== SelectorMode.MONTH ? SelectorMode.MONTH : SelectorMode.CALENDAR;
-    if (this.selectorMode === SelectorMode.MONTH) {
-      this.generateMonths();
-    } else {
-      this.generateCalendar(this.activeDate.month, this.activeDate.year);
-    }
+    const targetMode = this.selectorMode !== SelectorMode.MONTH ? SelectorMode.MONTH : SelectorMode.CALENDAR;
+    this.setActiveDate(null, 0, targetMode);
     event.stopPropagation();
   }
 
   onSelectYearClicked(event: any): void {
-    this.selectorMode = this.selectorMode !== SelectorMode.YEAR ? SelectorMode.YEAR : SelectorMode.CALENDAR;
-    if (this.selectorMode === SelectorMode.YEAR) {
-      this.generateYears();
-    } else {
-      this.generateCalendar(this.activeDate.month, this.activeDate.year);
-    }
+    const targetMode = this.selectorMode !== SelectorMode.YEAR ? SelectorMode.YEAR : SelectorMode.CALENDAR;
+    this.setActiveDate(null, 0, targetMode);
     event.stopPropagation();
   }
 
   onPrevYears(event: any, year: number): void {
+    this.setActiveDate(OffsetType.YEAR, -25, SelectorMode.YEAR);
     event.stopPropagation();
-    this.setActiveDate(OffsetType.YEAR, -25);
-    // this.generateYears(year - 25);
   }
 
   onNextYears(event: any, year: number): void {
+    this.setActiveDate(OffsetType.YEAR, 25, SelectorMode.YEAR);
     event.stopPropagation();
-    this.setActiveDate(OffsetType.YEAR, 25);
-    // this.generateYears(year + 25);
   }
 
   onTodayClicked(): void {
     this.selectDate(this.momentService.getToday());
   }
 
-  onCellClicked(cell: ICalendarDay, event?: any): void {
+  onCalCellClicked(cell: ICalendarDay, event?: any): void {
     if (!cell || cell.disabled) {
       return;
     }
@@ -316,18 +305,14 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     } else {
       this.selectDate(cell.dateObj);
     }
-    this.selectorMode = SelectorMode.CALENDAR;
-    if (event) {
-      event.stopPropagation();
-    }
+    event.stopPropagation();
   }
 
   onMonthCellClicked(calMonth: ICalendarMonth, event?: any): void {
     if (calMonth.disabled) {
       return;
     }
-    this.selectorMode = SelectorMode.CALENDAR;
-    this.setActiveDate(OffsetType.MONTH, calMonth.nbr - this.activeDate.month);
+    this.setActiveDate(OffsetType.MONTH, calMonth.nbr - this.activeDate.month, SelectorMode.CALENDAR);
     event.stopPropagation();
   }
 
@@ -335,14 +320,13 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     if (calYear.disabled) {
       return;
     }
-    this.selectorMode = SelectorMode.CALENDAR;
-    this.setActiveDate(OffsetType.YEAR, calYear.year - this.activeDate.year);
+    this.setActiveDate(OffsetType.YEAR, calYear.year - this.activeDate.year, SelectorMode.CALENDAR);
     event.stopPropagation();
   }
 
   selectDate(date: IDate): void {
-    if (this.momentService.dateWithinRange(date, this.calendarData.enabledDateRange)) {
-      // this.dateSelected.emit(this.getDateModel(date));
+    if (! this.isDisabledDate(date)) {
+      this.activeDate = date;
       this.dateSelected.emit(date);
     }
   }
@@ -416,7 +400,7 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   yearNotDisplayed(year: number) {
-    return year < this.yearTable[0][0].year || year > this.yearTable[4][4].year;
+    return !this.yearTable || (year < this.yearTable[0][0].year || year > this.yearTable[4][4].year);
   }
 
   resetViewState(): void {

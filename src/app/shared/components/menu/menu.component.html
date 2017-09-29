@@ -8,7 +8,7 @@
     <button
       md-menu-item
       [routerLink]="item.link ? item.link.param ? [item.link.path, item.link.param] : [item.link.path] : []"
-      (click)="onClicked(item.name)">
+      (click)="onClicked(item)">
       <aj-icon *ngIf="item.icon" [data]="item.icon"></aj-icon>
       <span *ngIf="item.display">{{item.display | translate}}</span>
     </button>

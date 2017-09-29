@@ -61,7 +61,7 @@
         <td *ngFor="let dateCell of dateRow.week"
             class="cal-body-cell"
             [ngStyle]="{'cursor': dateCell ? 'pointer' : ''}"
-            (click)="onCellClicked(dateCell, $event)">
+            (click)="onCalCellClicked(dateCell, $event)">
           <div *ngIf="dateCell" class="cal-body-cell-content"
                [ngClass]="{'selected': isSelectedDate(dateCell),
                            'active': isActiveDate(dateCell),

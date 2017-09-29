@@ -116,17 +116,14 @@ export class ProfileService implements OnDestroy {
   }
 
   updateMenuOpened(): void {
-
     if (this.widthIsExtraSmall()) {
       if (this.activeUrl === PROFILE_MENU_URL) {
         this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'false');
         setTimeout(() => this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true'), 200);
-        // this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true');
         return;
       } else if (this.activeUrl === EVENT_RELATED_MENU_URL) {
         this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'false');
         setTimeout(() => this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true'), 200);
-        // this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true');
         return;
       }
     } else if (this.widthIsSmall()) {
@@ -134,10 +131,8 @@ export class ProfileService implements OnDestroy {
         if (this.activeUrl.includes('eventrelated')) {
           this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'false');
           setTimeout(() => this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true'), 200);
-          // this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'true');
         } else {
           setTimeout(() => this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true'), 100);
-          // this.onMenuOpenedChanged(ProfileObserver.PROFILE, 'true');
         }
         this.menuRedirect = false;
         return;

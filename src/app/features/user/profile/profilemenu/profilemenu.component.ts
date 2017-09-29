@@ -19,6 +19,7 @@ import {
 } from 'app/features/user/services/profile.service';
 import { ProfileMenuConfig, IProfileMenu } from 'app/config/user/profile/profilemenu.config';
 import { IComponent, ILinkElement } from 'app/config/interfaces';
+import { IListItem } from '../../../../config/interfaces/list-item';
 
 @Component({
   selector: 'aj-profilemenu',
@@ -57,6 +58,15 @@ export class ProfileMenuComponent implements OnDestroy {
         this.selectedIndex = index;
       }
     });
+  }
+
+  onClicked(item: IListItem): void {
+    if (item.type === 'link') {
+      const linkItem = <ILinkElement> item;
+      if (linkItem.link.path === this.profileService.selectedProfileMenuUrl) {
+        this.profileService.onMenuOpenedChanged(ProfileObserver.PROFILE, 'false');
+      }
+    }
   }
 
   widthLessThanMedium(): boolean {

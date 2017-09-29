@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { IListElement } from 'app/config/interfaces';
+import { IListItem } from '../../../config/interfaces/list-item';
 
 @Component({
   selector: 'aj-menu',
@@ -11,13 +12,13 @@ import { IListElement } from 'app/config/interfaces';
 export class MenuComponent {
 
   @Input() menuData: IListElement;
-  @Output() clicked: EventEmitter<string>;
+  @Output() clicked: EventEmitter<IListItem>;
 
   constructor() {
-    this.clicked = new EventEmitter<string>();
+    this.clicked = new EventEmitter<IListItem>();
   }
 
-  onClicked(itemName: string): void {
-    this.clicked.emit(itemName);
+  onClicked(item: IListItem): void {
+    this.clicked.emit(item);
   }
 }

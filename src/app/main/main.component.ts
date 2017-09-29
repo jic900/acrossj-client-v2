@@ -15,6 +15,7 @@ import {
   MainConfig, IMainConfig, ISideNavConfig, IHeaderConfig, IFooterConfig,
   IMain, ISideNav, IHeader, IFooter
 } from '../config/main/main.config';
+import { IListItem } from '../config/interfaces/list-item';
 
 @Component({
   selector: 'aj-main',
@@ -65,9 +66,9 @@ export class MainComponent implements OnInit, OnDestroy {
     return Util.isBreakPointOf(window.innerWidth, MediaQueryBreakPoint.MEDIUM);
   }
 
-  onClicked(itemName: string): void {
-    if (itemName.startsWith('lang')) {
-      const selectedLang = itemName.substring(5);
+  onClicked(item: IListItem): void {
+    if (item.name.startsWith('lang')) {
+      const selectedLang = item.name.substring(5);
       const curLang = this.translateService.currentLang;
       if (selectedLang !== curLang) {
         this.translateService.use(selectedLang);
