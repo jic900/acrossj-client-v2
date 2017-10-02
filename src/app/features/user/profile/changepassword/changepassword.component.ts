@@ -1,6 +1,7 @@
 import {
   Component,
   AfterViewInit,
+  HostBinding,
   ViewChild
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -17,16 +18,19 @@ import {
   IMessageElement
 } from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
+import { slideInDownAnimation } from 'app/shared/util/animations';
 import { ProfileService } from 'app/features/user/services/profile.service';
 
 @Component({
   selector: 'aj-changepassword',
   templateUrl: './changepassword.component.html',
-  styleUrls: ['./changepassword.component.scss']
-  // animations: [ slideInDownAnimation ]
+  styleUrls: ['./changepassword.component.scss'],
+  animations: [ slideInDownAnimation ]
 })
 
 export class ChangePasswordComponent implements AfterViewInit {
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   formData: IForm;
   formElements: IChangePassword;
@@ -50,7 +54,7 @@ export class ChangePasswordComponent implements AfterViewInit {
     this.passwordType = 'password';
     this.message = null;
     this.processing = false;
-    this.formGroup = new FormGroup({}, this.passwordMatch);
+    this.formGroup = new FormGroup({}, this.formData.validator.validateFunc('password', 'confirmPassword'));
   }
 
   ngAfterViewInit(): void {
@@ -63,14 +67,6 @@ export class ChangePasswordComponent implements AfterViewInit {
 
   onClicked(event): void {
     this.message = null;
-  }
-
-  passwordMatch(formGroup: FormGroup): {} {
-    const passwordControl = formGroup.get('password');
-    const confirmPasswordControl = formGroup.get('confirmPassword');
-    if (passwordControl && confirmPasswordControl) {
-      return passwordControl.value === confirmPasswordControl.value ? null : {'passwordMatch': true};
-    }
   }
 
   getFormValidatorData(controlName: string) {

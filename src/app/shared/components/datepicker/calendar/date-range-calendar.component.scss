@@ -1,67 +1,63 @@
 .cal-card {
-  //width: 350px;
-  //height: 400px;
   width: 280px;
-  height: 335px;
-  //max-width: 420px;
+  height: 355px;
   margin: 0;
-  padding: 5px 15px;
+  //padding: 5px 15px;
   box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
 }
 
 @media (max-width: 599px) {
   .cal-card {
     width: 280px;
-    height: 335px;
+    height: 355px;
   }
+}
+
+.cal-title {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background-color: whitesmoke;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: solid 1px rgba(0, 0, 0, .12);
+}
+
+.cal-content {
+  padding: 0 15px;
 }
 
 table {
   width: 100%;
   table-layout: fixed;
+  border-spacing: 0;
 }
 table th, table td {
   text-align: center;
 }
 
-table td.showToday {
+table .header-cell {
   width: 45%;
 }
 
-.header-side-cell {
+.header-cell-content {
   display: flex;
   flex-direction: row;
 }
-.header-side-cell .mat-icon-button {
+.header-cell-content .mat-icon-button {
   width: 35px;
   height: 35px;
   line-height: 35px;
 }
-.header-side-cell md-icon {
+.header-cell-content md-icon {
   font-size: 24px !important;
   line-height: 24px !important;
 }
 
-.header-side-cell-label {
+.header-cell-label {
   flex: 1;
   min-width: 30px;
   padding: 0;
-}
-
-.header-today-btn {
-  min-width: 40px;
-  height: 24px;
-  line-height: 20px;
-  padding: 2px 4px;
-  font-size: 12px;
-  border: solid 1px rgba(0, 0, 0, .25);
-  border-radius: 4px;
-}
-.header-today-btn md-icon {
-  width: 20px;
-  height: 20px;
-  line-height: 20px !important;
-  font-size: 14px !important;
 }
 
 .cal-header-cell {
@@ -86,31 +82,54 @@ table td.showToday {
 
 .cal-body-cell-content {
   position: absolute;
-  top: 5%;
-  left: 5%;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   color: rgba(0, 0, 0, .87);
   border: solid 1px transparent;
   border-radius: 50%;
 }
 
-.cal-body-cell-content:hover:not(.selected):not(.disabled) {
-    background-color: rgba(0,0,0,.12);
-}
-
-.cal-body-cell-content.selected {
+.cal-body-cell-content.selected-circle {
   background-color: #616161;
   color: white;
 }
-.cal-body-cell-content.active:not(.selected) {
+.cal-body-cell-content.selected-half-circle-left {
+  background-color: #616161;
+  color: white;
+  border-radius: 50% 0% 0% 50%;
+}
+.cal-body-cell-content.selected-half-circle-right {
+  background-color: #616161;
+  color: white;
+  border-radius: 0% 50% 50% 0%;
+}
+.cal-body-cell-content.selected-square {
+  background-color: #616161;
+  color: white;
+  border-radius: 0;
+}
+
+.cal-body-cell-content.hovered-circle {
   background-color: rgba(0,0,0,.12);
 }
-.cal-body-cell-content.marked:not(.selected):not(.disabled) {
+.cal-body-cell-content.hovered-square {
+  background-color: rgba(0,0,0,.12);
+  border-radius: 0;
+}
+.cal-body-cell-content.hovered-half-circle-right {
+  background-color: rgba(0,0,0,.12);
+  border-radius: 0% 50% 50% 0%;
+}
+.cal-body-cell-content.active:not(.selected-circle):not(.selected-half-circle-left):not(.selected-half-circle-right):not(.selected-square) {
+  background-color: rgba(0,0,0,.12);
+}
+.cal-body-cell-content.marked:not(.selected-circle):not(.selected-half-circle-left):not(.selected-half-circle-right):not(.selected-square):not(.disabled) {
   background-color: lightblue;
   border-color: #616161;
 }
@@ -143,14 +162,10 @@ table td.showToday {
   border: solid 1px transparent;
   border-radius: 50%;
 }
-.month-body-cell-content:hover:not(.selected):not(.disabled) {
+.month-body-cell-content:hover:not(.disabled) {
   background-color: rgba(0,0,0,.12);
 }
-.month-body-cell-content.selected {
-  background-color: #616161;
-  color: white;
-}
-.month-body-cell-content.active:not(.selected) {
+.month-body-cell-content.active {
   background-color: rgba(0,0,0,.12);
 }
 .month-body-cell-content.thismonth {
@@ -187,14 +202,10 @@ table td.showToday {
   border: solid 1px transparent;
   border-radius: 50%;
 }
-.year-body-cell-content:hover:not(.selected):not(.disabled) {
+.year-body-cell-content:hover:not(.disabled) {
   background-color: rgba(0,0,0,.12);
 }
-.year-body-cell-content.selected {
-  background-color: #616161;
-  color: white;
-}
-.year-body-cell-content.active:not(.selected) {
+.year-body-cell-content.active {
   background-color: rgba(0,0,0,.12);
 }
 .year-body-cell-content.thisyear {

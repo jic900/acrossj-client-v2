@@ -50,7 +50,7 @@ export class SignUpComponent implements AfterViewInit {
     this.passwordType = 'password';
     this.processing = false;
     this.message = null;
-    this.formGroup = new FormGroup({}, this.passwordMatch);
+    this.formGroup = new FormGroup({}, this.formData.validator.validateFunc('password', 'confirmPassword'));
   }
 
   ngAfterViewInit(): void {
@@ -71,14 +71,6 @@ export class SignUpComponent implements AfterViewInit {
 
   onPasswordTypeChange(): void {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
-  }
-
-  passwordMatch(formGroup: FormGroup): {} {
-    const passwordControl = formGroup.get('password');
-    const confirmPasswordControl = formGroup.get('confirmPassword');
-    if (passwordControl && confirmPasswordControl) {
-      return passwordControl.value === confirmPasswordControl.value ? null : {'passwordMatch': true};
-    }
   }
 
   getFormValidatorData(controlName: string): IFormValidatorData {
@@ -125,11 +117,4 @@ export class SignUpComponent implements AfterViewInit {
     this.form.resetForm();
     // this.formGroup.reset();
   }
-
-  // errorStateMatcher(control: FormControl, form: FormGroupDirective | NgForm): boolean {
-  //   // Error when invalid control is dirty, touched, or submitted
-  //   const isSubmitted = form && form.submitted;
-  //   return !!(control.invalid && isSubmitted);
-  //   // return !!(control.invalid && (control.dirty || control.touched || isSubmitted));
-  // }
 }

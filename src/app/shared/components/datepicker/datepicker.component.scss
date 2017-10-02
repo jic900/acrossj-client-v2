@@ -2,6 +2,24 @@ md-input-container {
   width: 100%;
 }
 
+.datepicker-input-clicker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+:host /deep/ .mat-input-element:disabled {
+  color: currentColor;
+}
+:host /deep/ .mat-input-underline.mat-disabled {
+  background-image: none;
+  background-size: auto;
+  background-repeat: inherit;
+  background-position: 0;
+  background-color: rgba(0, 0, 0, .12);
+}
+
 :host /deep/ input:-webkit-autofill,
 :host /deep/ input:-webkit-autofill:hover,
 :host /deep/ input:-webkit-autofill:focus,

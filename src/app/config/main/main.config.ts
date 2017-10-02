@@ -46,7 +46,7 @@ export class MainConfig implements IMainConfig {
 }
 
 class SideNavConfig implements ISideNavConfig {
-  title = 'sideNav';
+  name: string = 'sideNav';
   elements: [IElement, IListElement, IListElement, IListElement, IListElement] = [
     {
       name: 'logo',
@@ -175,7 +175,7 @@ class SideNavConfig implements ISideNavConfig {
 }
 
 class HeaderConfig implements IHeaderConfig {
-  title = 'header';
+  name: string = 'header';
   elements: [IElement, ILinkElement, IElement, IListElement, IListElement] = [
     {
       name: 'toggleButton',
@@ -252,7 +252,7 @@ class HeaderConfig implements IHeaderConfig {
 }
 
 class FooterConfig implements IFooterConfig {
-  title = 'footer';
+  name: string = 'footer';
   elements: [IElement] = [
     {
       name: 'content',

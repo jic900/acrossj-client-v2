@@ -14,6 +14,7 @@ import {
 import { IForm, IMessageElement, IDateRange, IDate } from 'app/config/interfaces';
 import { ProfileService } from 'app/features/user/services/profile.service';
 import { MomentService } from 'app/shared/services/moment.service';
+import { DatePickerMode } from 'app/shared/components/datepicker/datepicker.component';
 
 @Component({
   selector: 'aj-personalinfo',
@@ -30,6 +31,8 @@ export class PersonalInfoComponent implements AfterViewInit {
   message: IMessageElement;
   initializing: boolean;
   processing: boolean;
+
+  datePickerMode: DatePickerMode = DatePickerMode.RANGE;
 
   constructor(private profileService: ProfileService, private momentService: MomentService) {
     this.formData = new PersonalInfoConfig();

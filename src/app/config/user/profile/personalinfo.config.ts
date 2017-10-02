@@ -18,6 +18,7 @@ export interface IPersonalInfo {
   email: IInputElement;
   gender: IListElement;
   birthday: IDatePickerElement;
+  dateRangePicker: IDatePickerElement;
   address: IInputElement;
   postcode: IInputElement;
   phonenumber: IInputElement;
@@ -32,8 +33,8 @@ export interface IPersonalInfoMessage {
 export class PersonalInfoConfig implements IForm {
 
   title = 'USER.PROFILE.PERSONAL_INFO.LABEL';
-  elements: [IInputElement, IInputElement, IInputElement, IListElement, IDatePickerElement, IInputElement,
-    IInputElement, IInputElement, IElement, ILinkElement] = [
+  elements: [IInputElement, IInputElement, IInputElement, IListElement, IDatePickerElement, IDatePickerElement,
+    IInputElement, IInputElement, IInputElement, IElement, ILinkElement] = [
     {
       name: 'fullname',
       type: 'input',
@@ -68,7 +69,13 @@ export class PersonalInfoConfig implements IForm {
       name: 'birthday',
       type: 'datepicker',
       placeHolder: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY.LABEL',
-      hint: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY.DATE_FORMAT_HINT'
+      hint: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY.DATE_FORMAT_HINT',
+    },
+    {
+      name: 'dateRangePicker',
+      type: 'datepicker',
+      placeHolder: 'MAIN.SEARCH_MENU.DATE_RANGE_PICKER.LABEL',
+      readOnly: true
     },
     {
       name: 'address',

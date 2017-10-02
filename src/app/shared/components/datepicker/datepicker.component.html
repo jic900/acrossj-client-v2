@@ -1,4 +1,5 @@
 <md-input-container>
+  <div *ngIf="data.readOnly" class="datepicker-input-clicker" (click)="onClick($event)"></div>
   <input
     mdInput
     validateonblur
@@ -7,13 +8,13 @@
     [(ngModel)]="inputValue"
     (ngModelChange)="onInputChange($event)">
   <button
-    *ngIf="this.selected"
+    *ngIf="inputValue && inputValue.trim() !== ''"
     md-icon-button
     mdSuffix
     type="button"
     class="datepicker-input-button"
     (click)="clearInput($event)">
-    <aj-icon [data]="configData.clearButton.icon"></aj-icon>
+    <aj-icon [data]="elements.clearButton.icon"></aj-icon>
   </button>
   <button
     md-icon-button
@@ -21,7 +22,7 @@
     type="button"
     class="datepicker-input-button"
     (click)="open($event)">
-    <aj-icon [data]="configData.calButton.icon"></aj-icon>
+    <aj-icon [data]="elements.calButton.icon"></aj-icon>
   </button>
   <md-error *ngIf="validateFailed()">
     {{getValidatorError() | translate}}

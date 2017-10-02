@@ -1,6 +1,15 @@
-<aj-calendar
+<aj-date-calendar
+  *ngIf="!datepicker.isRangeMode()"
   cdkTrapFocus
-  [calendarData]="datepicker.configData.calendar"
+  [options]="datepicker.calOptions"
   [selectedDate]="datepicker.selected"
-  (dateSelected)="datepicker.onDateSelected($event)">
-</aj-calendar>
+  (selected)="datepicker.onSelected($event)">
+</aj-date-calendar>
+<aj-date-range-calendar
+  *ngIf="datepicker.isRangeMode()"
+  cdkTrapFocus
+  [data]="datepicker.dateRangeCalendarData"
+  [options]="datepicker.calOptions"
+  [selectedRange]="datepicker.selected"
+  (selected)="datepicker.onSelected($event)">
+</aj-date-range-calendar>

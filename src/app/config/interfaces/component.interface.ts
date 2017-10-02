@@ -5,7 +5,7 @@
 import { IMessageElement } from './message-element.interface';
 
 export interface IComponent {
-  title?: string;
+  name?: string;
   elements: any[];
   messages?: IMessageElement[];
 }

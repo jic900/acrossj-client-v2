@@ -3,6 +3,7 @@ import {
   OnChanges,
   SimpleChanges,
   OnInit,
+  OnDestroy,
   Input,
   Output,
   EventEmitter,
@@ -20,6 +21,7 @@ import {
 } from '@angular/material';
 import { ComponentPortal } from '@angular/cdk';
 import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
@@ -27,9 +29,14 @@ import { MediaQueryBreakPoint } from 'app/config/common/app.config';
 import {
   IDatePickerElement,
   IValidator,
-  IDate
+  IDate,
+  ICalendarOptions
 } from 'app/config/interfaces';
-import { DatePickerConfig, IDatePicker } from 'app/config/shared/datepicker.config';
+import {
+  DatePickerConfig,
+  IDatePicker,
+  IDateRangeCalendar
+} from 'app/config/shared/datepicker.config';
 import { Util, KeyCode } from 'app/shared/util/util';
 import { MomentService } from 'app/shared/services/moment.service';
 
@@ -53,24 +60,30 @@ export class DatePickerContentComponent {
   }
 }
 
+export enum DatePickerMode {DEFAULT, RANGE}
+
 @Component({
   selector: 'aj-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })
 
-export class DatePickerComponent implements OnChanges, OnInit {
+export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
 
   @Input() data: IDatePickerElement;
+  @Input() mode: DatePickerMode;
   @Output() bindControl: EventEmitter<{}>;
 
-  configData: IDatePicker;
+  elements: IDatePicker;
+  calOptions: ICalendarOptions;
+  dateFormat: string;
+  dateRangeCalendarData: IDateRangeCalendar;
   formControl: FormControl;
   placeHolder: string;
-  selected: IDate;
+  selected: IDate[];
   inputValue: string;
-  dateFormat: string;
   opened: boolean;
+  translateSub: Subscription;
 
   private popupRef: OverlayRef;
   private calendarPortal: ComponentPortal<DatePickerContentComponent>;
@@ -81,36 +94,66 @@ export class DatePickerComponent implements OnChanges, OnInit {
               private viewContainerRef: ViewContainerRef,
               private momentService: MomentService,
               private translateService: TranslateService) {
-    this.configData = _.mapKeys(new DatePickerConfig().elements, 'name');
+    const datePickerConfig = new DatePickerConfig();
+    this.elements = _.mapKeys(datePickerConfig.elements, 'name');
+    this.calOptions = datePickerConfig.calendarOptions;
+    this.dateFormat = this.calOptions.dateFormat;
+    this.dateRangeCalendarData = _.mapKeys(this.elements.dateRangeCalendar.elements, 'name');
     this.selected = null;
     this.inputValue = '';
-    this.dateFormat = this.configData.calendar.dateFormat;
     this.opened = false;
     this.bindControl = new EventEmitter<{}>();
 
-    translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.translateSub = translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this.setPlaceHolder();
-      if (this.selected) {
-        this.inputValue = this.momentService.formatDate(this.selected, this.dateFormat);
-      }
+      this.setInputValue();
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.data.enabledDateRange) {
-      this.configData.calendar.enabledDateRange = this.data.enabledDateRange;
+      this.calOptions.enabledDateRange = this.data.enabledDateRange;
+    }
+    if (! this.mode) {
+      this.mode = DatePickerMode.DEFAULT;
     }
     this.setPlaceHolder();
   }
 
-  ngOnInit() {
-    this.generateFormControl(this.configData.dateInput.validators);
+  ngOnInit(): void {
+    this.generateFormControl(this.elements.dateInput.validators);
+  }
+
+  ngOnDestroy(): void {
+    this.translateSub.unsubscribe();
+  }
+
+  isRangeMode(): boolean {
+    return this.mode === DatePickerMode.RANGE;
+  }
+
+  setInputValue() {
+    if (! this.selected) {
+      return;
+    }
+    if (this.selected[0]) {
+      this.inputValue = this.momentService.formatDate(this.selected[0], this.dateFormat);
+    }
+    if (this.mode === DatePickerMode.RANGE) {
+      if (this.selected[1]) {
+        this.inputValue = `${this.inputValue} - ${this.momentService.formatDate(this.selected[1], this.dateFormat)}`;
+      } else {
+        this.inputValue = `${this.inputValue} - ${this.translateService.instant(this.dateRangeCalendarData.endDate.display)}`;
+      }
+    }
   }
 
   setPlaceHolder() {
-    const placeHolderText = this.translateService.instant(this.data.placeHolder);
-    const placeHolderFormat = this.translateService.instant(this.dateFormat).toLowerCase();
-    this.placeHolder = `${placeHolderText} (${placeHolderFormat})`;
+    this.placeHolder = this.translateService.instant(this.data.placeHolder);
+    if (this.mode === DatePickerMode.DEFAULT) {
+      const placeHolderFormat = this.translateService.instant(this.dateFormat).toLowerCase();
+      this.placeHolder = `${this.placeHolder} (${placeHolderFormat})`;
+    }
   }
 
   generateFormControl(controlValidators: IValidator[]): void {
@@ -122,8 +165,14 @@ export class DatePickerComponent implements OnChanges, OnInit {
         validators.push(validator.validateFunc(this.dateFormat, this.momentService));
       }
     });
-    this.formControl = new FormControl('', validators, []);
+    this.formControl = ! this.data.readOnly ?
+      new FormControl('', validators, []) : new FormControl({value: '', disabled: true}, validators, []);
     this.bindControl.emit({'name': this.data.name, 'control': this.formControl});
+  }
+
+  onClick(event: any): void {
+    this.open(event);
+    event.stopPropagation();
   }
 
   open(event: any): void {
@@ -158,15 +207,21 @@ export class DatePickerComponent implements OnChanges, OnInit {
   }
 
   onInputChange(value: string): void {
-    this.selected = this.momentService.isValidDate(value, this.dateFormat) ?
-      this.momentService.parseDate(value, this.dateFormat) : null;
+    if (this.mode === DatePickerMode.DEFAULT) {
+      this.selected = value && value.trim() !== '' && this.momentService.isValidDate(value, this.dateFormat) ?
+        [this.momentService.parseDate(value, this.dateFormat)] : null;
+    } else {
+      // TODO
+    }
   }
 
-  onDateSelected(value: IDate): void {
+  onSelected(value: IDate[]): void {
     this.selected = value;
-    if (value) {
-      this.inputValue = this.momentService.formatDate(value, this.dateFormat);
-      this.close();
+    if ( value && value.length > 0) {
+      this.setInputValue();
+      if (! (value.length === 2 && value[1] === null)) {
+        this.close();
+      }
     } else {
       this.inputValue = '';
     }
@@ -177,7 +232,7 @@ export class DatePickerComponent implements OnChanges, OnInit {
   }
 
   getValidatorError(): string {
-    for (const validator of this.configData.dateInput.validators) {
+    for (const validator of this.elements.dateInput.validators) {
       if (this.formControl.hasError(validator.name)) {
         return validator.error;
       }

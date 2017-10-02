@@ -14,30 +14,29 @@ import {
   IDate,
   IWeek,
   IMonth,
-  ICalendar,
+  ICalendarOptions,
   ICalendarDay,
   ICalendarMonth,
   ICalendarYear
 } from 'app/config/interfaces';
-import { MomentService } from 'app/shared/services/moment.service';
+import { MomentService, DateField } from 'app/shared/services/moment.service';
 import { KeyCode } from 'app/shared/util/util';
-import { slideCalendar } from '../datepicker-animations';
+import { slideCalendar } from 'app/shared/util/animations';
 
 enum SelectorMode {CALENDAR, MONTH, YEAR}
-enum OffsetType {YEAR, MONTH, DAY}
 
 @Component({
-  selector: 'aj-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
+  selector: 'aj-date-calendar',
+  templateUrl: './date-calendar.component.html',
+  styleUrls: ['./date-calendar.component.scss'],
   animations: [slideCalendar]
 })
 
-export class CalendarComponent implements OnChanges, AfterContentInit {
+export class DateCalendarComponent implements OnChanges, AfterContentInit {
 
-  @Input() calendarData: ICalendar;
-  @Input() selectedDate: IDate;
-  @Output() dateSelected: EventEmitter<IDate>;
+  @Input() options: ICalendarOptions;
+  @Input() selectedDate: IDate[];
+  @Output() selected: EventEmitter<IDate[]>;
   SelectorMode: typeof SelectorMode;
   selectorMode: SelectorMode;
   dateTable: IWeek[];
@@ -50,24 +49,18 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   constructor(private elementRef: ElementRef, public momentService: MomentService) {
     this.SelectorMode = SelectorMode;
     this.selectorMode = SelectorMode.CALENDAR;
-    this.dateSelected = new EventEmitter<IDate>();
+    this.selected = new EventEmitter<IDate[]>();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.calendarData.weekendHighlight) {
-      this.calendarData.weekendHighlight = true;
+    if (!this.options.weekendHighlight) {
+      this.options.weekendHighlight = true;
     }
-    if (!this.calendarData.markDates) {
-      this.calendarData.markDates = [];
+    if (!this.options.markDates) {
+      this.options.markDates = [];
     }
-    if (!this.calendarData.highlightDates) {
-      this.calendarData.highlightDates = [];
-    }
-    if (!this.calendarData.showTodayBtn) {
-      this.calendarData.showTodayBtn = false;
-    }
-    if (!this.calendarData.todayBtnTxt) {
-      this.calendarData.todayBtnTxt = 'Today';
+    if (!this.options.highlightDates) {
+      this.options.highlightDates = [];
     }
   }
 
@@ -77,9 +70,9 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   init(): void {
-    const date: IDate = this.selectedDate ? this.selectedDate : this.momentService.getToday();
+    const date: IDate = this.selectedDate ? this.selectedDate[0] : this.momentService.getToday();
     this.setVisibleMonth(date);
-    this.activeDate = this.selectedDate ? this.selectedDate : this.momentService.getToday();
+    this.activeDate = this.selectedDate ? this.selectedDate[0] : this.momentService.getToday();
     this.generateCalendar(date.month, date.year);
   }
 
@@ -87,12 +80,12 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     this.visibleMonth = {monthTxt: this.momentService.monthLabels[date.month - 1], monthNbr: date.month, year: date.year};
   }
 
-  setActiveDate(offsetType: OffsetType, offset: number, targetMode?: SelectorMode): void {
+  setActiveDate(offsetType: DateField, offset: number, targetMode?: SelectorMode): void {
     const oldActiveDate = this.activeDate;
     if (offset !== 0) {
-      if (offsetType === OffsetType.DAY) {
+      if (offsetType === DateField.DAY) {
         this.activeDate = this.momentService.addCalendarDays(this.activeDate, offset);
-      } else if (offsetType === OffsetType.MONTH) {
+      } else if (offsetType === DateField.MONTH) {
         this.activeDate = this.momentService.addCalendarMonths(this.activeDate, offset);
       } else {
         this.activeDate = this.momentService.addCalendarYears(this.activeDate, offset);
@@ -100,13 +93,13 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     }
     this.setVisibleMonth(this.activeDate);
     if (targetMode === SelectorMode.CALENDAR) {
-      if (this.selectorMode !== SelectorMode.CALENDAR || !this.momentService.isSameMonth(this.activeDate, oldActiveDate)) {
+      if (this.selectorMode !== SelectorMode.CALENDAR || ! this.momentService.isSame(DateField.MONTH, this.activeDate, oldActiveDate)) {
         this.selectorMode = targetMode;
         this.generateCalendar(this.activeDate.month, this.activeDate.year);
-        if (this.momentService.isLaterMonth(oldActiveDate, this.activeDate)) {
-          this.viewState = 'right';
-        } else {
+        if (this.momentService.isAfter(DateField.MONTH, oldActiveDate, this.activeDate)) {
           this.viewState = 'left';
+        } else {
+          this.viewState = 'right';
         }
       }
     } else if (targetMode === SelectorMode.MONTH) {
@@ -143,29 +136,29 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     const targetMode = SelectorMode.CALENDAR;
     switch (event.keyCode) {
       case KeyCode.LEFT_ARROW:
-        this.setActiveDate(OffsetType.DAY, -1, targetMode);
+        this.setActiveDate(DateField.DAY, -1, targetMode);
         break;
       case KeyCode.RIGHT_ARROW:
-        this.setActiveDate(OffsetType.DAY, 1, targetMode);
+        this.setActiveDate(DateField.DAY, 1, targetMode);
         break;
       case KeyCode.UP_ARROW:
-        this.setActiveDate(OffsetType.DAY, -7, targetMode);
+        this.setActiveDate(DateField.DAY, -7, targetMode);
         break;
       case KeyCode.DOWN_ARROW:
-        this.setActiveDate(OffsetType.DAY, 7, targetMode);
+        this.setActiveDate(DateField.DAY, 7, targetMode);
         break;
       case KeyCode.HOME:
-        this.setActiveDate(OffsetType.DAY, 1 - this.activeDate.day, targetMode);
+        this.setActiveDate(DateField.DAY, 1 - this.activeDate.day, targetMode);
         break;
       case KeyCode.END:
         const daysInThisMonth = this.momentService.daysInMonth(this.activeDate.month, this.activeDate.year);
-        this.setActiveDate(OffsetType.DAY, daysInThisMonth - this.activeDate.day, targetMode);
+        this.setActiveDate(DateField.DAY, daysInThisMonth - this.activeDate.day, targetMode);
         break;
       case KeyCode.PAGE_UP:
-        this.setActiveDate(OffsetType.MONTH, -1, targetMode);
+        this.setActiveDate(DateField.MONTH, -1, targetMode);
         break;
       case KeyCode.PAGE_DOWN:
-        this.setActiveDate(OffsetType.MONTH, 1, targetMode);
+        this.setActiveDate(DateField.MONTH, 1, targetMode);
         break;
       case KeyCode.ENTER:
         this.selectDate(this.activeDate);
@@ -179,32 +172,32 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     switch (event.keyCode) {
       case KeyCode.LEFT_ARROW:
         if (this.activeDate.month > 1) {
-          this.setActiveDate(OffsetType.MONTH, -1);
+          this.setActiveDate(DateField.MONTH, -1);
         }
         break;
       case KeyCode.RIGHT_ARROW:
         if (this.activeDate.month < 12) {
-          this.setActiveDate(OffsetType.MONTH, 1);
+          this.setActiveDate(DateField.MONTH, 1);
         }
         break;
       case KeyCode.UP_ARROW:
         if (this.activeDate.month > 3) {
-          this.setActiveDate(OffsetType.MONTH, -3);
+          this.setActiveDate(DateField.MONTH, -3);
         }
         break;
       case KeyCode.DOWN_ARROW:
         if (this.activeDate.month < 10) {
-          this.setActiveDate(OffsetType.MONTH, 3);
+          this.setActiveDate(DateField.MONTH, 3);
         }
         break;
       case KeyCode.HOME:
         if (this.activeDate.month !== 1) {
-          this.setActiveDate(OffsetType.MONTH, 1 - this.activeDate.month);
+          this.setActiveDate(DateField.MONTH, 1 - this.activeDate.month);
         }
         break;
       case KeyCode.END:
         if (this.activeDate.month !== 12) {
-          this.setActiveDate(OffsetType.MONTH, 12 - this.activeDate.month);
+          this.setActiveDate(DateField.MONTH, 12 - this.activeDate.month);
         }
         break;
       case KeyCode.ENTER:
@@ -219,28 +212,28 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     const targetMode = SelectorMode.YEAR;
     switch (event.keyCode) {
       case KeyCode.LEFT_ARROW:
-        this.setActiveDate(OffsetType.YEAR, -1, targetMode);
+        this.setActiveDate(DateField.YEAR, -1, targetMode);
         break;
       case KeyCode.RIGHT_ARROW:
-        this.setActiveDate(OffsetType.YEAR, 1, targetMode);
+        this.setActiveDate(DateField.YEAR, 1, targetMode);
         break;
       case KeyCode.UP_ARROW:
-        this.setActiveDate(OffsetType.YEAR, -5, targetMode);
+        this.setActiveDate(DateField.YEAR, -5, targetMode);
         break;
       case KeyCode.DOWN_ARROW:
-        this.setActiveDate(OffsetType.YEAR, 5, targetMode);
+        this.setActiveDate(DateField.YEAR, 5, targetMode);
         break;
       case KeyCode.HOME:
-        this.setActiveDate(OffsetType.YEAR, this.yearTable[0][0].year - this.activeDate.year, targetMode);
+        this.setActiveDate(DateField.YEAR, this.yearTable[0][0].year - this.activeDate.year, targetMode);
         break;
       case KeyCode.END:
-        this.setActiveDate(OffsetType.YEAR, this.yearTable[4][4].year - this.activeDate.year, targetMode);
+        this.setActiveDate(DateField.YEAR, this.yearTable[4][4].year - this.activeDate.year, targetMode);
         break;
       case KeyCode.PAGE_UP:
-        this.setActiveDate(OffsetType.YEAR, -25, targetMode);
+        this.setActiveDate(DateField.YEAR, -25, targetMode);
         break;
       case KeyCode.PAGE_DOWN:
-        this.setActiveDate(OffsetType.YEAR, 25, targetMode);
+        this.setActiveDate(DateField.YEAR, 25, targetMode);
         break;
       case KeyCode.ENTER:
         this.setActiveDate(null, 0, SelectorMode.CALENDAR);
@@ -252,22 +245,22 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
 
   onPrevMonth(): void {
     const targetMode = this.selectorMode === SelectorMode.YEAR ? SelectorMode.MONTH : this.selectorMode;
-    this.setActiveDate(OffsetType.MONTH, -1, targetMode);
+    this.setActiveDate(DateField.MONTH, -1, targetMode);
   }
 
   onNextMonth(): void {
     const targetMode = this.selectorMode === SelectorMode.YEAR ? SelectorMode.MONTH : this.selectorMode;
-    this.setActiveDate(OffsetType.MONTH, 1, targetMode);
+    this.setActiveDate(DateField.MONTH, 1, targetMode);
   }
 
   onPrevYear(): void {
     const targetMode = this.selectorMode === SelectorMode.MONTH ? SelectorMode.YEAR : this.selectorMode;
-    this.setActiveDate(OffsetType.YEAR, -1, targetMode);
+    this.setActiveDate(DateField.YEAR, -1, targetMode);
   }
 
   onNextYear(): void {
     const targetMode = this.selectorMode === SelectorMode.MONTH ? SelectorMode.YEAR : this.selectorMode;
-    this.setActiveDate(OffsetType.YEAR, 1, targetMode);
+    this.setActiveDate(DateField.YEAR, 1, targetMode);
   }
 
   onSelectMonthClicked(event): void {
@@ -282,25 +275,21 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     event.stopPropagation();
   }
 
-  onPrevYears(event: any, year: number): void {
-    this.setActiveDate(OffsetType.YEAR, -25, SelectorMode.YEAR);
+  onPrevYears(event: any): void {
+    this.setActiveDate(DateField.YEAR, -25, SelectorMode.YEAR);
     event.stopPropagation();
   }
 
-  onNextYears(event: any, year: number): void {
-    this.setActiveDate(OffsetType.YEAR, 25, SelectorMode.YEAR);
+  onNextYears(event: any): void {
+    this.setActiveDate(DateField.YEAR, 25, SelectorMode.YEAR);
     event.stopPropagation();
-  }
-
-  onTodayClicked(): void {
-    this.selectDate(this.momentService.getToday());
   }
 
   onCalCellClicked(cell: ICalendarDay, event?: any): void {
     if (!cell || cell.disabled) {
       return;
     }
-    if (this.selectedDate && this.momentService.isSameDate(cell.dateObj, this.selectedDate)) {
+    if (this.selectedDate && this.momentService.isSame(DateField.DAY, cell.dateObj, this.selectedDate[0])) {
       this.clearDate();
     } else {
       this.selectDate(cell.dateObj);
@@ -312,7 +301,7 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     if (calMonth.disabled) {
       return;
     }
-    this.setActiveDate(OffsetType.MONTH, calMonth.nbr - this.activeDate.month, SelectorMode.CALENDAR);
+    this.setActiveDate(DateField.MONTH, calMonth.nbr - this.activeDate.month, SelectorMode.CALENDAR);
     event.stopPropagation();
   }
 
@@ -320,24 +309,24 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
     if (calYear.disabled) {
       return;
     }
-    this.setActiveDate(OffsetType.YEAR, calYear.year - this.activeDate.year, SelectorMode.CALENDAR);
+    this.setActiveDate(DateField.YEAR, calYear.year - this.activeDate.year, SelectorMode.CALENDAR);
     event.stopPropagation();
   }
 
   selectDate(date: IDate): void {
     if (! this.isDisabledDate(date)) {
       this.activeDate = date;
-      this.dateSelected.emit(date);
+      this.selected.emit([date]);
     }
   }
 
   clearDate(): void {
-    this.dateSelected.emit(null);
+    this.selected.emit(null);
   }
 
   isSelectedDate(calDay: ICalendarDay): boolean {
-    return !this.selectedDate || calDay.disabled ? false : this.selectedDate.day === calDay.dateObj.day &&
-      this.selectedDate.month === calDay.dateObj.month && this.selectedDate.year === calDay.dateObj.year;
+    return !this.selectedDate || calDay.disabled ? false : this.selectedDate[0].day === calDay.dateObj.day &&
+      this.selectedDate[0].month === calDay.dateObj.month && this.selectedDate[0].year === calDay.dateObj.year;
   }
 
   isActiveDate(calDay: ICalendarDay): boolean {
@@ -368,7 +357,7 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   isDisabledDate(date: IDate): boolean {
-    return !this.momentService.dateWithinRange(date, this.calendarData.enabledDateRange);
+    return !this.momentService.dateWithinRange(date, this.options.enabledDateRange);
   }
 
   isActiveMonth(calMonth: ICalendarMonth): boolean {
@@ -376,7 +365,7 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   isSelectedMonth(calMonth: ICalendarMonth): boolean {
-    return !this.selectedDate || calMonth.disabled ? false : this.selectedDate.month === calMonth.nbr;
+    return !this.selectedDate || calMonth.disabled ? false : this.selectedDate[0].month === calMonth.nbr;
   }
 
   isDisabledMonth(month: number, year: number): boolean {
@@ -390,7 +379,7 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
   }
 
   isSelectedYear(calYear: ICalendarYear): boolean {
-    return !this.selectedDate || calYear.disabled ? false : this.selectedDate.year === calYear.year;
+    return !this.selectedDate || calYear.disabled ? false : this.selectedDate[0].year === calYear.year;
   }
 
   isDisabledYear(year: number): boolean {
@@ -430,9 +419,9 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
           week.push({
             dateObj: date,
             isToday: this.momentService.isToday(dayNbr, m, y, today),
-            marked: this.isMarkedDate(date, this.calendarData.markDates),
+            marked: this.isMarkedDate(date, this.options.markDates),
             highlighted: this.isHighlightedDate(
-              date, this.calendarData.weekendHighlight, this.calendarData.highlightDates),
+              date, this.options.weekendHighlight, this.options.highlightDates),
             disabled: this.isDisabledDate(date)
           });
           dayNbr++;
@@ -447,9 +436,9 @@ export class CalendarComponent implements OnChanges, AfterContentInit {
             week.push({
               dateObj: date,
               isToday: this.momentService.isToday(dayNbr, m, y, today),
-              marked: this.isMarkedDate(date, this.calendarData.markDates),
+              marked: this.isMarkedDate(date, this.options.markDates),
               highlighted: this.isHighlightedDate(
-                date, this.calendarData.weekendHighlight, this.calendarData.highlightDates),
+                date, this.options.weekendHighlight, this.options.highlightDates),
               disabled: this.isDisabledDate(date)
             });
           }

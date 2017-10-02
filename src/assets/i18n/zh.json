@@ -45,10 +45,13 @@
         }
       }
     },
+    "SEARCH_MENU": {
+      "DATE_RANGE_PICKER": {
+        "LABEL": "Select Date Range"
+      }
+    },
     "FOOTER": {
       "CONTENT": "Copyright &copy; 2017 AcrossJapan K.K. All Rights Reserved."
-    },
-    "SEARCH_MENU": {
     }
   },
   "AUTH": {
@@ -107,8 +110,8 @@
       "LABEL": "Profile",
       "PERSONAL_INFO": {
         "LABEL": "Personal Information",
-        "FULLNAME": "Full Name ZH",
-        "USERNAME": "User Name ZH",
+        "FULLNAME": "Full Name",
+        "USERNAME": "User Name",
         "EMAIL": "Email",
         "GENDER": {
           "LABEL": "Gender",
@@ -119,7 +122,6 @@
           "LABEL": "Birth Date",
           "DATE_FORMAT_HINT": "e.g., Jan 6, 1980"
         },
-        "BIRTHDAY_LABEL": "Birth Date",
         "ADDRESS": "Address",
         "POSTCODE": "Postal Code",
         "PHONE_NUMBER": "Phone Number",
@@ -174,8 +176,11 @@
   },
   "SHARED": {
     "DATE_PICKER": {
-      "TODAY_BUTTON_TXT": "Today",
-      "DATE_FORMAT": "YYYY年M月D日"
+      "DATE_FORMAT": "YYYY年M月D日",
+      "DATE_RANGE_CALENDAR": {
+        "START_DATE_LABEL": "Select Start Date ZH",
+        "END_DATE_LABEL": "Select End Date ZH"
+      }
     }
   },
   "MESSAGES": {

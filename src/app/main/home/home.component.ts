@@ -24,7 +24,7 @@ export class HomeComponent {
     }
     this.osType = JSON.stringify(_navigator, undefined, 2);
     // console.log(window.navigator);
-    this.deviceType += Util.deviceType();
+    // this.deviceType += Util.deviceType();
     // window.navigator.platform.match(/(iPhone|iPod|iPad)/i)?true:false;
   }
 }

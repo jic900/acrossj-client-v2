@@ -1,9 +1,11 @@
 /**
  * Created by qiz264 on 2017-04-20.
  */
+import { FormGroup } from '@angular/forms';
 
 import { IMessageElement } from 'app/config/interfaces';
 import { AppConstant, MediaQueryBreakPoint } from 'app/config/common/app.config';
+
 
 export enum KeyCode {
   BACKSPACE = 8,
@@ -30,35 +32,35 @@ export class Util {
   private static APPVERSION_ANDROID_PATTERN = /(Android)/i;
   private static USERAGENT_ANDROID_PATTERN = /(Android)/i;
 
-  public static deviceType() {
-    if (window.navigator.platform.match(this.PLATFORM_IOS_PATTERN)) {
-      return 'ios';
-    } else if (window.navigator.platform.match(this.PLATFORM_ANDROID_PATTERN) ||
-      window.navigator.userAgent.match(this.USERAGENT_ANDROID_PATTERN)) {
-      return 'android';
-    } else {
-      return 'desktop';
-    }
-  }
-
-  public static isDeviceSimulator() {
-    const appVersion = window.navigator.appVersion;
-    const platform = window.navigator.platform;
-    if ((appVersion.match(this.APPVERSION_IOS_PATTERN) && !platform.match(this.PLATFORM_IOS_PATTERN)) ||
-          (appVersion.match(this.APPVERSION_ANDROID_PATTERN) && !platform.match(this.PLATFORM_ANDROID_PATTERN))) {
-      return true;
-    }
-  }
-
-  public static isPhoneOrTablet(): boolean {
-    if (window.navigator.platform.match(this.PLATFORM_IOS_PATTERN) ||
-        window.navigator.platform.match(this.PLATFORM_ANDROID_PATTERN) ||
-        window.navigator.userAgent.match(this.USERAGENT_ANDROID_PATTERN) ||
-        window.navigator.appVersion.match(this.APPVERSION_IOS_PATTERN) ||
-        window.navigator.appVersion.match(this.APPVERSION_ANDROID_PATTERN)) {
-      return true;
-    }
-  }
+  // public static deviceType() {
+  //   if (window.navigator.platform.match(this.PLATFORM_IOS_PATTERN)) {
+  //     return 'ios';
+  //   } else if (window.navigator.platform.match(this.PLATFORM_ANDROID_PATTERN) ||
+  //     window.navigator.userAgent.match(this.USERAGENT_ANDROID_PATTERN)) {
+  //     return 'android';
+  //   } else {
+  //     return 'desktop';
+  //   }
+  // }
+  //
+  // public static isDeviceSimulator() {
+  //   const appVersion = window.navigator.appVersion;
+  //   const platform = window.navigator.platform;
+  //   if ((appVersion.match(this.APPVERSION_IOS_PATTERN) && !platform.match(this.PLATFORM_IOS_PATTERN)) ||
+  //         (appVersion.match(this.APPVERSION_ANDROID_PATTERN) && !platform.match(this.PLATFORM_ANDROID_PATTERN))) {
+  //     return true;
+  //   }
+  // }
+  //
+  // public static isPhoneOrTablet(): boolean {
+  //   if (window.navigator.platform.match(this.PLATFORM_IOS_PATTERN) ||
+  //       window.navigator.platform.match(this.PLATFORM_ANDROID_PATTERN) ||
+  //       window.navigator.userAgent.match(this.USERAGENT_ANDROID_PATTERN) ||
+  //       window.navigator.appVersion.match(this.APPVERSION_IOS_PATTERN) ||
+  //       window.navigator.appVersion.match(this.APPVERSION_ANDROID_PATTERN)) {
+  //     return true;
+  //   }
+  // }
 
   public static currentMediaQueryBreakPoint(): MediaQueryBreakPoint {
     const width = window.innerWidth;

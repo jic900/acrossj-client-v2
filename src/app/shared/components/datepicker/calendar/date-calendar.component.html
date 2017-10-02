@@ -1,13 +1,13 @@
 <md-card class="cal-card">
   <table class="header-table">
     <tr>
-      <td [ngClass]="{'showToday': !calendarData.showTodayBtn}">
-        <div class="header-side-cell">
+      <td class="header-cell">
+        <div class="header-cell-content">
           <button md-icon-button (click)="onPrevMonth()">
             <md-icon aria-label="Previous Month">chevron_left</md-icon>
           </button>
           <button md-button
-                  class="header-side-cell-label"
+                  class="header-cell-label"
                   (click)="onSelectMonthClicked($event)"
                   [@slideCalendar]="viewState"
                   (@slideCalendar.done)="resetViewState()">
@@ -18,26 +18,14 @@
           </button>
         </div>
       </td>
-      <td>
-        <button
-          *ngIf="calendarData.showTodayBtn"
-          md-button
-          class="header-today-btn"
-          (click)="onTodayClicked()">
-          <md-icon
-            fontSet="fa"
-            fontIcon="fa-calendar-check-o">
-          </md-icon>
-          <span>{{calendarData.todayBtnTxt | translate}}</span>
-        </button>
-      </td>
-      <td [ngClass]="{'showToday': !calendarData.showTodayBtn}">
-        <div class="header-side-cell">
+      <td></td>
+      <td class="header-cell">
+        <div class="header-cell-content">
           <button md-icon-button (click)="onPrevYear()">
             <md-icon aria-label="Previous Year">chevron_left</md-icon>
           </button>
           <button md-button
-                  class="header-side-cell-label"
+                  class="header-cell-label"
                   (click)="onSelectYearClicked($event)"
                   [@slideCalendar]="viewState"
                   (@slideCalendar.done)="resetViewState()">
@@ -95,7 +83,7 @@
     <tbody [@slideCalendar]="viewState" (@slideCalendar.done)="resetViewState()">
       <tr>
         <td colspan="5">
-          <button md-icon-button class="year-btn-cell" (click)="onPrevYears($event, yearTable[0][0].year)">
+          <button md-icon-button class="year-btn-cell" (click)="onPrevYears($event)">
             <md-icon class="md-24" aria-label="Previous Years">expand_less</md-icon>
           </button>
         </td>
@@ -114,7 +102,7 @@
       </tr>
       <tr>
         <td colspan="5">
-          <button md-icon-button class="year-btn-cell" (click)="onNextYears($event, yearTable[0][0].year)">
+          <button md-icon-button class="year-btn-cell" (click)="onNextYears($event)">
             <md-icon class="md-24" aria-label="Next Years">expand_more</md-icon>
           </button>
         </td>

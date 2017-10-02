@@ -23,9 +23,13 @@
       (bindControl)="onBindControl($event)"
       (selected)="onSelected($event)">
     </aj-select>
-
     <aj-datepicker
       [data]="formElements.birthday"
+      (bindControl)="onBindControl($event)">
+    </aj-datepicker>
+    <aj-datepicker
+      [data]="formElements.dateRangePicker"
+      [mode]="datePickerMode"
       (bindControl)="onBindControl($event)">
     </aj-datepicker>
     <!--<aj-input-->

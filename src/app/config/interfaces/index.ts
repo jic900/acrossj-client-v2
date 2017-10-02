@@ -6,6 +6,7 @@ export * from './icon.interface';
 export * from './image-element.interface';
 export * from './input-element.interface';
 export * from './datepicker-element.interface';
+export * from './calendar-options.interface';
 export * from './link.interface';
 export * from './link-element.interface';
 export * from './list-element.interface';

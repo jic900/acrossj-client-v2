@@ -2,6 +2,7 @@
  * Created by LAE84266 on 11/08/2017.
  */
 
+import { ValidationUtil } from 'app/shared/util/validation-util';
 import {
   IForm,
   IElement,
@@ -109,7 +110,8 @@ export class ChangePasswordConfig implements IForm {
   validator: IValidator = {
     name: 'passwordMatch',
     type: 'custom',
-    error: 'ERRORS.VALIDATION.USER.PASSWORD_MATCH'
+    error: 'ERRORS.VALIDATION.USER.PASSWORD_MATCH',
+    validateFunc: ValidationUtil.passwordMatch
   };
 
   messages: IMessageElement[] = [

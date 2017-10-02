@@ -16,7 +16,6 @@ import { EndPoint } from 'app/config/common/http.config';
 import { HttpService } from 'app/shared/services/http.service';
 import { Util } from 'app/shared/util/util';
 
-
 export enum ProfileObserver {
   ALL,
   PROFILE,

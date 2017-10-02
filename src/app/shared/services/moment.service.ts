@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { IDate, IDateRange } from 'app/config/interfaces';
 import { LOCALE, MOMENT_LOCALE, DEFAULT_MOMENT_LOCALE } from 'app/config/common/app.config';
 
+export enum DateField {YEAR, MONTH, DAY}
+
 @Injectable()
 export class MomentService {
 
@@ -70,16 +72,30 @@ export class MomentService {
     return d === today.day && m === today.month && y === today.year;
   }
 
-  isSameDate(d1: IDate, d2: IDate): boolean {
-    return d1.year === d2.year && d1.month === d2.month && d1.day === d2.day;
+  isSame(dateField: DateField, d1: IDate, d2: IDate): boolean {
+    return this.compare(dateField, d1, d2) === 0;
   }
 
-  isSameMonth(d1: IDate, d2: IDate): boolean {
-    return d1.year === d2.year && d1.month === d2.month;
+  isBefore(dateField: DateField, d1: IDate, d2: IDate): boolean {
+    return this.compare(dateField, d1, d2) < 0;
   }
 
-  isLaterMonth(oldDate: IDate, newDate: IDate): boolean {
-    return newDate.year > oldDate.year || (newDate.year === oldDate.year && newDate.month > oldDate.month);
+  isAfter(dateField: DateField, d1: IDate, d2: IDate): boolean {
+    return this.compare(dateField, d1, d2) > 0;
+  }
+
+  compare(dateField: DateField, d1: IDate, d2: IDate): number {
+    const date1 = {...d1};
+    const date2 = {...d2};
+    if (dateField === DateField.MONTH) {
+      date1.day = 1; date2.day = 1;
+    } else if (dateField === DateField.YEAR) {
+      date1.month = 1; date2.month = 1;
+      date1.day = 1; date2.day = 1;
+    }
+    const jsDate1 = this.getDate(date1.year, date1.month, date1.day);
+    const jsDate2 = this.getDate(date2.year, date2.month, date2.day);
+    return jsDate2 < jsDate1 ? -1 : jsDate2 > jsDate1 ? 1 : 0;
   }
 
   isValidDate(dateText: string, dateFormat: string) {

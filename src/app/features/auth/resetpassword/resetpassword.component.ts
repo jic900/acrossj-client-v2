@@ -50,7 +50,7 @@ export class ResetPasswordComponent implements AfterViewInit {
     this.message = null;
     this.processing = false;
     this.showInput = true;
-    this.formGroup = new FormGroup({}, this.passwordMatch);
+    this.formGroup = new FormGroup({}, this.formData.validator.validateFunc('password', 'confirmPassword'));
     this.jwtHelper = new JwtHelper();
   }
 
@@ -78,14 +78,6 @@ export class ResetPasswordComponent implements AfterViewInit {
 
   onClicked(event): void {
     this.message = null;
-  }
-
-  passwordMatch(formGroup: FormGroup): {} {
-    const passwordControl = formGroup.get('password');
-    const confirmPasswordControl = formGroup.get('confirmPassword');
-    if (passwordControl && confirmPasswordControl) {
-      return passwordControl.value === confirmPasswordControl.value ? null : {'passwordMatch': true};
-    }
   }
 
   getFormValidatorData(controlName: string): IFormValidatorData {

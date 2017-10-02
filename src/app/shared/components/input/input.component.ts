@@ -25,6 +25,7 @@ export class InputComponent implements OnInit {
 
   @Input() inputData: IInputElement;
   @Input() type: string;
+  @Input() disabled: boolean;
   @Input() customValidators: {};
   @Input() formValidatorData: IFormValidatorData;
   @Output() bindControl: EventEmitter<{}>;
@@ -33,6 +34,7 @@ export class InputComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
     this.type = 'text';
+    this.disabled = false;
     this.bindControl = new EventEmitter<{}>();
     this.clicked = new EventEmitter<void>();
   }
@@ -55,19 +57,22 @@ export class InputComponent implements OnInit {
         }
       });
     }
-    this.formControl = new FormControl('', validators, asyncValidators);
+    this.formControl = this.disabled ?
+      new FormControl({value: '', disabled: true}, validators, asyncValidators) :
+      new FormControl('', validators, asyncValidators);
     this.bindControl.emit({'name': this.inputData.name, 'control': this.formControl});
   }
 
   onClick(event): void {
     // workaround to fix angular material bug
-    if (this.inputData.readOnly) {
-      setTimeout(() => {
-        this.renderer.removeClass(this.elementRef.nativeElement.firstElementChild, 'mat-focused');
-      }, 10);
-    } else {
-      this.clicked.emit();
-    }
+    // if (this.inputData.readOnly) {
+    //   setTimeout(() => {
+    //     this.renderer.removeClass(this.elementRef.nativeElement.firstElementChild, 'mat-focused');
+    //   }, 10);
+    // } else {
+    //   this.clicked.emit();
+    // }
+    this.clicked.emit();
   }
 
   getBuiltinValidator(validator: IValidator): Function {

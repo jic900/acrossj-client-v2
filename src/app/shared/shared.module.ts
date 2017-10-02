@@ -34,7 +34,8 @@ import { InputComponent } from './components/input/input.component';
 import { MessageComponent } from './components/message/message.component';
 import { SelectComponent } from './components/select/select.component';
 import { DatePickerComponent, DatePickerContentComponent } from './components/datepicker/datepicker.component';
-import { CalendarComponent } from './components/datepicker/calendar/calendar.component';
+import { DateCalendarComponent } from './components/datepicker/calendar/date-calendar.component';
+import { DateRangeCalendarComponent } from './components/datepicker/calendar/date-range-calendar.component';
 
 const FLEX_LAYOUT_MODULES: any[] = [
   FlexLayoutModule,
@@ -96,7 +97,8 @@ export function httpServiceFactory(
     SelectComponent,
     DatePickerComponent,
     DatePickerContentComponent,
-    CalendarComponent
+    DateCalendarComponent,
+    DateRangeCalendarComponent
   ],
   exports: [
     ANGULAR_MODULES,

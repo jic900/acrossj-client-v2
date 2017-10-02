@@ -39,7 +39,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService, private router: Router, private translateService: TranslateService) {
     this.mainConfig = new MainConfig();
-    this.mainData = _.mapKeys(this.mainConfig.elements, 'title');
+    this.mainData = _.mapKeys(this.mainConfig.elements, 'name');
     this.sideNavConfig = this.mainData.sideNav;
     this.sideNavData = _.mapKeys(this.sideNavConfig.elements, 'name');
     this.headerConfig = this.mainData.header;
