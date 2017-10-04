@@ -384,7 +384,7 @@ export class DateRangeCalendarComponent implements OnChanges, AfterContentInit {
   }
 
   getHoveredType(calDay: ICalendarDay): BorderType {
-    if (! this.hoveredDate) {
+    if (! calDay || ! this.hoveredDate) {
       return BorderType.NONE;
     }
     const compareWithHover = this.momentService.compare(DateField.DAY, this.hoveredDate, calDay.dateObj);
@@ -395,8 +395,13 @@ export class DateRangeCalendarComponent implements OnChanges, AfterContentInit {
       if (this.selectedRange[1] === null) {
         const compareWithStart = this.momentService.compare(DateField.DAY, this.selectedRange[0], calDay.dateObj);
         if (compareHoverWithStart > 0) {
-          return compareWithHover === 0 ? BorderType.HALF_CIRCLE_RIGHT :
-                 compareWithHover < 0 && compareWithStart > 0 ? BorderType.SQUARE : BorderType.NONE;
+          if (compareWithHover === 0) {
+            return BorderType.HALF_CIRCLE_RIGHT;
+          } else if (compareWithHover < 0) {
+            return compareWithStart === 0 ? BorderType.HALF_CIRCLE_LEFT : compareWithStart > 0 ? BorderType.SQUARE : BorderType.NONE;
+          }
+          // return compareWithHover === 0 ? BorderType.HALF_CIRCLE_RIGHT :
+          //        compareWithHover < 0 && compareWithStart > 0 ? BorderType.SQUARE : BorderType.NONE;
         } else if (compareHoverWithStart < 0) {
           return compareWithHover === 0 ? BorderType.CIRCLE : BorderType.NONE;
         } else {

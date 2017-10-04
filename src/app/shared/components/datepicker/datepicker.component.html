@@ -1,4 +1,4 @@
-<md-input-container>
+<md-input-container (mousedown)="onMouseDown($event)">
   <div *ngIf="data.readOnly" class="datepicker-input-clicker" (click)="onClick($event)"></div>
   <input
     mdInput

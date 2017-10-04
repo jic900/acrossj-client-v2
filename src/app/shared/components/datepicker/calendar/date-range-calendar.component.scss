@@ -15,9 +15,10 @@
 
 .cal-title {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
-  background-color: whitesmoke;
+  height: 45px;
+  line-height: 45px;
+  background-color: #616161;
+  color: white;
   text-align: center;
   font-size: 14px;
   border-bottom: solid 1px rgba(0, 0, 0, .12);
@@ -78,6 +79,24 @@ table .header-cell {
   outline: none;
   //cursor: pointer;
   font-size: 13px;
+  //border: solid 1px transparent;
+  //border-radius: 50%;
+}
+.cal-body-cell.hovered-circle {
+  background-color: rgba(0,0,0,.12);
+  border-radius: 50%;
+}
+.cal-body-cell.hovered-square {
+  background-color: rgba(0,0,0,.12);
+  border-radius: 0;
+}
+.cal-body-cell.hovered-half-circle-left {
+  background-color: rgba(0,0,0,.12);
+  border-radius: 50% 0% 0% 50%;
+}
+.cal-body-cell.hovered-half-circle-right {
+  background-color: rgba(0,0,0,.12);
+  border-radius: 0% 50% 50% 0%;
 }
 
 .cal-body-cell-content {
@@ -115,17 +134,17 @@ table .header-cell {
   border-radius: 0;
 }
 
-.cal-body-cell-content.hovered-circle {
-  background-color: rgba(0,0,0,.12);
-}
-.cal-body-cell-content.hovered-square {
-  background-color: rgba(0,0,0,.12);
-  border-radius: 0;
-}
-.cal-body-cell-content.hovered-half-circle-right {
-  background-color: rgba(0,0,0,.12);
-  border-radius: 0% 50% 50% 0%;
-}
+//.cal-body-cell-content.hovered-circle {
+//  background-color: rgba(0,0,0,.12);
+//}
+//.cal-body-cell-content.hovered-square {
+//  background-color: rgba(0,0,0,.12);
+//  border-radius: 0;
+//}
+//.cal-body-cell-content.hovered-half-circle-right {
+//  background-color: rgba(0,0,0,.12);
+//  border-radius: 0% 50% 50% 0%;
+//}
 .cal-body-cell-content.active:not(.selected-circle):not(.selected-half-circle-left):not(.selected-half-circle-right):not(.selected-square) {
   background-color: rgba(0,0,0,.12);
 }

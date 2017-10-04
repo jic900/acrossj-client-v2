@@ -159,10 +159,20 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
   generateFormControl(controlValidators: IValidator[]): void {
     const validators = [];
     controlValidators.forEach(validator => {
-      if (validator.name === 'dateWithinRange') {
-        validators.push(validator.validateFunc(this.data.enabledDateRange, this.dateFormat, this.momentService));
-      } else if (validator.name === 'isValidDate') {
-        validators.push(validator.validateFunc(this.dateFormat, this.momentService));
+      if (this.mode === DatePickerMode.DEFAULT) {
+        if (validator.name === 'dateWithinRange') {
+          validators.push(validator.validateFunc(this.data.enabledDateRange, this.dateFormat, this.momentService));
+        } else if (validator.name === 'isValidDate') {
+          validators.push(validator.validateFunc(this.dateFormat, this.momentService));
+        }
+      } else if (this.data.readOnly) {
+        if (validator.name === 'endDateExists') {
+          validators.push(validator.validateFunc(this.dateFormat, this.momentService));
+        }
+      } else {
+        if (validator.name === 'isValidDateRange') {
+          validators.push(validator.validateFunc(this.dateFormat, this.momentService));
+        }
       }
     });
     this.formControl = ! this.data.readOnly ?
@@ -172,6 +182,13 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
 
   onClick(event: any): void {
     this.open(event);
+    event.stopPropagation();
+  }
+
+  onMouseDown(event: any): void {
+    if (this.data.readOnly) {
+      this.formControl.disable();
+    }
     event.stopPropagation();
   }
 
@@ -198,6 +215,10 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
       this.calendarPortal.detach();
     }
     this.opened = false;
+    if (this.data.readOnly && this.inputValue !== '') {
+      this.formControl.enable();
+      this.formControl.markAsTouched();
+    }
   }
 
   clearInput(event: any): void {

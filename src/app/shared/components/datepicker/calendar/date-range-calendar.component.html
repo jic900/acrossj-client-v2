@@ -51,6 +51,10 @@
         <td *ngFor="let dateCell of dateRow.week"
             class="cal-body-cell"
             [ngStyle]="{'cursor': dateCell ? 'pointer' : ''}"
+            [ngClass]="{'hovered-circle': getHoveredType(dateCell) === BorderType.CIRCLE,
+                        'hovered-square': getHoveredType(dateCell) === BorderType.SQUARE,
+                        'hovered-half-circle-left': getHoveredType(dateCell) === BorderType.HALF_CIRCLE_LEFT,
+                        'hovered-half-circle-right': getHoveredType(dateCell) === BorderType.HALF_CIRCLE_RIGHT}"
             (click)="onCalCellClicked(dateCell, $event)"
             (mouseenter)="onMouseEnter(dateCell, $event)" (mouseleave)="onMouseLeave($event)">
           <div *ngIf="dateCell" class="cal-body-cell-content"
@@ -58,9 +62,6 @@
                            'selected-half-circle-left': getSelectedType(dateCell) === BorderType.HALF_CIRCLE_LEFT,
                            'selected-half-circle-right': getSelectedType(dateCell) === BorderType.HALF_CIRCLE_RIGHT,
                            'selected-square': getSelectedType(dateCell) === BorderType.SQUARE,
-                           'hovered-circle': getHoveredType(dateCell) === BorderType.CIRCLE,
-                           'hovered-square': getHoveredType(dateCell) === BorderType.SQUARE,
-                           'hovered-half-circle-right': getHoveredType(dateCell) === BorderType.HALF_CIRCLE_RIGHT,
                            'active': isActiveDate(dateCell),
                            'today': dateCell.isToday,
                            'marked' : dateCell.marked,

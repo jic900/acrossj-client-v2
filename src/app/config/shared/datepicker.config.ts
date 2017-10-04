@@ -62,6 +62,18 @@ export class DatePickerConfig implements IComponent {
           type: 'custom',
           error: 'ERRORS.VALIDATION.DATE_PICKER.DATE_NOT_WITHIN_RANGE',
           validateFunc: ValidationUtil.dateWithinRange
+        },
+        {
+          name: 'isValidDateRange',
+          type: 'custom',
+          error: 'ERRORS.VALIDATION.DATE_PICKER.INVALID_DATE_RANGE_FORMAT',
+          validateFunc: ValidationUtil.isValidDateRange
+        },
+        {
+          name: 'endDateExists',
+          type: 'custom',
+          error: 'ERRORS.VALIDATION.DATE_PICKER.SELECT_END_DATE',
+          validateFunc: ValidationUtil.endDateExists
         }
       ]
     },

@@ -10,6 +10,10 @@
     font-weight: 500 !important;
   }
 
+  md-toolbar md-icon {
+    margin-right: 0;
+  }
+
   md-toolbar .mat-icon.md-icon-logo {
     padding-top: 7px;
     width: 140px;
