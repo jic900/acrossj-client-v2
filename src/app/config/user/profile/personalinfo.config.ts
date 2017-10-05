@@ -32,7 +32,7 @@ export interface IPersonalInfoMessage {
 
 export class PersonalInfoConfig implements IForm {
 
-  title = 'USER.PROFILE.PERSONAL_INFO.LABEL';
+  name = 'USER.PROFILE.PERSONAL_INFO.LABEL';
   elements: [IInputElement, IInputElement, IInputElement, IListElement, IDatePickerElement, IDatePickerElement,
     IInputElement, IInputElement, IInputElement, IElement, ILinkElement] = [
     {
@@ -69,7 +69,7 @@ export class PersonalInfoConfig implements IForm {
       name: 'birthday',
       type: 'datepicker',
       placeHolder: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY.LABEL',
-      hint: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY.DATE_FORMAT_HINT',
+      hint: 'USER.PROFILE.PERSONAL_INFO.BIRTHDAY.DATE_FORMAT_HINT'
     },
     {
       name: 'dateRangePicker',

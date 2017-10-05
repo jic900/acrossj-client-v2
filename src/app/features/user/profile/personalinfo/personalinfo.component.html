@@ -1,5 +1,5 @@
-<aj-profiledetail [title]="formData.title">
-  <form novalidate [formGroup]="formGroup">
+<aj-profiledetail [title]="formData.name">
+  <form novalidate [formGroup]="formGroup" (ngSubmit)="onSave($event)" #form="ngForm">
     <aj-message *ngIf="message" [data]="message"></aj-message>
     <aj-input
       [inputData]="formElements.username"
@@ -19,24 +19,17 @@
     </aj-input>
     <aj-select
       [inputData]="formElements.gender"
-      [required]="true"
-      (bindControl)="onBindControl($event)"
-      (selected)="onSelected($event)">
+      (bindControl)="onBindControl($event)">
     </aj-select>
     <aj-datepicker
       [data]="formElements.birthday"
       (bindControl)="onBindControl($event)">
     </aj-datepicker>
-    <aj-datepicker
-      [data]="formElements.dateRangePicker"
-      [mode]="datePickerMode"
-      (bindControl)="onBindControl($event)">
-    </aj-datepicker>
-    <!--<aj-input-->
-      <!--[inputData]="formElements.birthday"-->
-      <!--[type]="'text'"-->
+    <!--<aj-datepicker-->
+      <!--[data]="formElements.dateRangePicker"-->
+      <!--[mode]="datePickerMode"-->
       <!--(bindControl)="onBindControl($event)">-->
-    <!--</aj-input>-->
+    <!--</aj-datepicker>-->
     <aj-input
       [inputData]="formElements.address"
       [type]="'text'"

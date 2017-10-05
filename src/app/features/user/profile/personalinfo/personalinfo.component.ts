@@ -2,7 +2,7 @@
  * Created by LAE86643 on 8/6/2017.
  */
 
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 
@@ -14,7 +14,6 @@ import {
 import { IForm, IMessageElement, IDateRange, IDate } from 'app/config/interfaces';
 import { ProfileService } from 'app/features/user/services/profile.service';
 import { MomentService } from 'app/shared/services/moment.service';
-import { DatePickerMode } from 'app/shared/components/datepicker/datepicker.component';
 
 @Component({
   selector: 'aj-personalinfo',
@@ -22,17 +21,14 @@ import { DatePickerMode } from 'app/shared/components/datepicker/datepicker.comp
   styleUrls: ['./personalinfo.component.scss']
 })
 
-export class PersonalInfoComponent implements AfterViewInit {
+export class PersonalInfoComponent {
 
   formData: IForm;
   formElements: IPersonalInfo;
   messages: IPersonalInfoMessage;
   formGroup: FormGroup;
   message: IMessageElement;
-  initializing: boolean;
   processing: boolean;
-
-  datePickerMode: DatePickerMode = DatePickerMode.RANGE;
 
   constructor(private profileService: ProfileService, private momentService: MomentService) {
     this.formData = new PersonalInfoConfig();
@@ -40,13 +36,8 @@ export class PersonalInfoComponent implements AfterViewInit {
     this.formElements.birthday.enabledDateRange = this.enabledDOBDateRange();
     this.messages = _.mapKeys(this.formData.messages, 'name');
     this.formGroup = new FormGroup({});
-    this.initializing = true;
     this.message = null;
     this.processing = false;
-  }
-
-  ngAfterViewInit(): void {
-    this.initializing = false;
   }
 
   enabledDOBDateRange(): IDateRange {
@@ -58,7 +49,7 @@ export class PersonalInfoComponent implements AfterViewInit {
   }
 
   isValid(): boolean {
-    return !this.initializing && this.formGroup.valid && !this.processing;
+    return this.formGroup.valid && !this.processing;
   }
 
   onClicked(event): void {
@@ -69,6 +60,7 @@ export class PersonalInfoComponent implements AfterViewInit {
     this.formGroup.addControl(controlData['name'], controlData['control']);
   }
 
-  onSelected(event): void {
+  onSave(event: any): void {
+    // console.log(this.formGroup.value);
   }
 }

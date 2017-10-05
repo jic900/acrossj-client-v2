@@ -28,7 +28,7 @@ export interface IChangePasswordMessage {
 }
 
 export class ChangePasswordConfig implements IForm {
-  title = 'USER.PROFILE.CHANGE_PASSWORD.LABEL';
+  name = 'USER.PROFILE.CHANGE_PASSWORD.LABEL';
   elements: [IInputElement, IInputElement, IInputElement, IElement, IElement, ILinkElement] = [
     {
       name: 'oldPassword',
