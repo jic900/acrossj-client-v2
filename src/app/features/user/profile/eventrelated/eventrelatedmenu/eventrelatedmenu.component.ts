@@ -58,7 +58,7 @@ export class EventRelatedMenuComponent implements OnDestroy {
   }
 
   onClicked(item: IListItem): void {
-    if (item.type === 'link') {
+    if (this.widthIsSmall() && item.type === 'link') {
       const linkItem = <ILinkElement> item;
       if (linkItem.link.path === this.profileService.selectedProfileMenuUrl) {
         this.profileService.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, 'false');
@@ -68,5 +68,9 @@ export class EventRelatedMenuComponent implements OnDestroy {
 
   widthLessThanMedium(): boolean {
     return Util.isBreakPointOf(window.innerWidth, MediaQueryBreakPoint.LESS_THAN_MEDIUM);
+  }
+
+  widthIsSmall(): boolean {
+    return Util.isBreakPointOf(window.innerWidth, MediaQueryBreakPoint.SMALL);
   }
 }

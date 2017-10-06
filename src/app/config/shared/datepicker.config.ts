@@ -91,7 +91,7 @@ export class DatePickerConfig implements IComponent {
     new DateRangeCalendarConfig()
   ];
   calendarOptions: ICalendarOptions = {
-    'dateFormat': 'SHARED.DATE_PICKER.DATE_FORMAT'
+    // 'dateFormat': 'SHARED.DATE_PICKER.DATE_FORMAT'
     // weekendHighlight: boolean = true;
     // markDates: IDate[] = [{year: 2017, month: 9, day: 5}, {year: 2017, month: 9, day: 28}];
     // markDates: IDate[] = [];

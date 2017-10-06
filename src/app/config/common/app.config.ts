@@ -29,6 +29,8 @@ export const MOMENT_LOCALE = {
 export const DEFAULT_LOCALE = LOCALE.ENGLISH;
 export const DEFAULT_MOMENT_LOCALE = MOMENT_LOCALE.ENGLISH;
 
+export const DATE_FORMAT = 'APP.DATE_FORMAT';
+
 export enum MediaQueryBreakPoint {
   EXTRA_SMALL,
   GREATER_THAN_EXTRA_SMALL,

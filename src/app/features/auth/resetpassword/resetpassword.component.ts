@@ -127,8 +127,8 @@ export class ResetPasswordComponent implements AfterViewInit {
             // const decodedToken = this.jwtHelper.decodeToken(this.token);
             // this.formGroup.get('username').setValue(decodedToken.username);
           }
-          this.processing = false;
-        }
+        },
+        () => this.processing = false
       );
   }
 }

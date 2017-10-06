@@ -20,7 +20,7 @@ import { ProfileDetailComponent } from './profile/profiledetail/profiledetail.co
 import { EventRelatedComponent } from './profile/eventrelated/eventrelated.component';
 import { GroupInfoComponent } from './profile/groupinfo/groupinfo.component';
 import { GeneralInfoComponent } from './profile/eventrelated/generalinfo/generalinfo.component';
-import { SkiiInfoComponent } from './profile/eventrelated/skiiinfo/skiiinfo.component';
+import { SkiInfoComponent } from './profile/eventrelated/skiinfo/skiinfo.component';
 import { RunningInfoComponent } from './profile/eventrelated/runninginfo/runninginfo.component';
 import { HikingInfoComponent } from './profile/eventrelated/hikinginfo/hikinginfo.component';
 import { CampingInfoComponent } from './profile/eventrelated/campinginfo/campinginfo.component';
@@ -53,7 +53,7 @@ import { EventRelatedMenuDummyComponent } from './profile/eventrelated/eventrela
     EventRelatedComponent,
     GroupInfoComponent,
     GeneralInfoComponent,
-    SkiiInfoComponent,
+    SkiInfoComponent,
     RunningInfoComponent,
     HikingInfoComponent,
     CampingInfoComponent,
@@ -63,7 +63,7 @@ import { EventRelatedMenuDummyComponent } from './profile/eventrelated/eventrela
     ProfileMenuDummyComponent,
     EventRelatedMenuDummyComponent
   ],
-  providers: [ProfileService]
+  providers: []
 })
 
 export class UserModule { }

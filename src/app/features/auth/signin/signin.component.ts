@@ -83,9 +83,7 @@ export class SignInComponent implements AfterViewInit {
       .subscribe(
         data => {
           this.message = this.messages.success;
-          this.processing = false;
           this.reset();
-          // TODO: navigate to previous page if exisits.
           const redirectUrl = this.authService.redirectUrl;
           if (redirectUrl) {
             this.router.navigateByUrl(redirectUrl);
@@ -103,8 +101,8 @@ export class SignInComponent implements AfterViewInit {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-          this.processing = false;
-        }
+        },
+        () => this.processing = false
       );
   }
 

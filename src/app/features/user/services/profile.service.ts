@@ -14,7 +14,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { MediaQueryBreakPoint } from 'app/config/common/app.config';
 import { EndPoint } from 'app/config/common/http.config';
 import { HttpService } from 'app/shared/services/http.service';
+import { LocalStorageService } from 'app/shared/services/localstorage.service';
 import { Util } from 'app/shared/util/util';
+import { IProfile } from '../model/profile.model';
 
 export enum ProfileObserver {
   ALL,
@@ -43,6 +45,7 @@ const EVENT_RELATED_MENU_URL = '/user/profile/eventrelated/menu';
 export class ProfileService implements OnDestroy {
 
   profileEvent$: Subject<IProfileEvent>;
+  profileUpdated$: Subject<IProfile>;
   subscription: Subscription;
   menuMode: string;
   selectedProfileMenuUrl: string;
@@ -50,8 +53,11 @@ export class ProfileService implements OnDestroy {
   activeUrl: string;
   menuRedirect: boolean;
 
-  constructor(private httpService: HttpService, private router: Router) {
+  constructor(private httpService: HttpService,
+              private localStorageService: LocalStorageService,
+              private router: Router) {
     this.profileEvent$ = new Subject<IProfileEvent>();
+    this.profileUpdated$ = new Subject<IProfile>();
     this.menuMode = this.getMenuMode();
     this.selectedProfileMenuUrl = null;
     this.previousBreakPoint = Util.currentMediaQueryBreakPoint();
@@ -181,6 +187,29 @@ export class ProfileService implements OnDestroy {
       type: ProfileEventType.MENU_SELECTED,
       value: selectedUrl
     });
+  }
+
+  getProfile(): Observable<{}> {
+    return this.httpService.get(EndPoint.getUrl('profile.getProfile'))
+      .map(response => response.json())
+      .map(data => this.processProfileData(data));
+  }
+
+  saveProfile(profileData: {}): Observable<{}> {
+    return this.httpService.post(EndPoint.getUrl('profile.saveProfile'), profileData)
+      .map(response => response.json())
+      .map(data => this.processProfileData(data));
+  }
+
+  processProfileData(profileData: {}): IProfile {
+    const profile: IProfile = {
+      personal: profileData['personal'],
+      relevant: profileData['relevant'],
+      group: null
+    };
+    this.localStorageService.saveProfile(profile);
+    this.profileUpdated$.next(profile);
+    return profile;
   }
 
   changePassword(changePasswordData: {}): Observable<{}> {

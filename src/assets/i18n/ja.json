@@ -1,7 +1,10 @@
 {
+  "APP": {
+    "DATE_FORMAT": "YYYY年M月D日"
+  },
   "MAIN": {
     "SIDE_NAV": {
-      "ABOUT_US": "About Us",
+      "ABOUT_US": "About Us JA",
       "CREATE_EVENT": "Create an Event",
       "HELP": "Help",
       "LANGUAGE": {
@@ -45,10 +48,13 @@
         }
       }
     },
+    "SEARCH_MENU": {
+      "DATE_RANGE_PICKER": {
+        "LABEL": "Select Date Range"
+      }
+    },
     "FOOTER": {
       "CONTENT": "Copyright &copy; 2017 AcrossJapan K.K. All Rights Reserved."
-    },
-    "SEARCH_MENU": {
     }
   },
   "AUTH": {
@@ -107,8 +113,8 @@
       "LABEL": "Profile",
       "PERSONAL_INFO": {
         "LABEL": "Personal Information",
-        "FULLNAME": "Full Name JA",
-        "USERNAME": "User Name JA",
+        "FULLNAME": "Full Name",
+        "USERNAME": "User Name",
         "EMAIL": "Email",
         "GENDER": {
           "LABEL": "Gender",
@@ -119,7 +125,6 @@
           "LABEL": "Birth Date",
           "DATE_FORMAT_HINT": "e.g., Jan 6, 1980"
         },
-        "BIRTHDAY_LABEL": "Birth Date",
         "ADDRESS": "Address",
         "POSTCODE": "Postal Code",
         "PHONE_NUMBER": "Phone Number",
@@ -142,8 +147,8 @@
         "RUNNING": {
           "LABEL": "Running"
         },
-        "SKII": {
-          "LABEL": "Skii"
+        "SKI": {
+          "LABEL": "Ski"
         },
         "HIKING": {
           "LABEL": "Hiking"
@@ -174,8 +179,10 @@
   },
   "SHARED": {
     "DATE_PICKER": {
-      "TODAY_BUTTON_TXT": "Today",
-      "DATE_FORMAT": "YYYY年M月D日"
+      "DATE_RANGE_CALENDAR": {
+        "START_DATE_LABEL": "Select Start Date",
+        "END_DATE_LABEL": "Select End Date"
+      }
     }
   },
   "MESSAGES": {
@@ -262,7 +269,10 @@
       },
       "DATE_PICKER": {
         "DATE_NOT_WITHIN_RANGE": "Invalid date: outside allowed date range",
-        "INVALID_DATE_FORMAT": "Invalid date format"
+        "INVALID_DATE_FORMAT": "Invalid date format",
+        "INVALID_DATE_RANGE_FORMAT": "Invalid date range format",
+        "INVALID_START_DATE": "Invalid start date format",
+        "SELECT_END_DATE": "Please select end date"
       }
     }
   }

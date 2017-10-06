@@ -3,7 +3,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 
 import { IDate, IDateRange } from 'app/config/interfaces';
-import { LOCALE, MOMENT_LOCALE, DEFAULT_MOMENT_LOCALE } from 'app/config/common/app.config';
+import { LOCALE, MOMENT_LOCALE, DEFAULT_MOMENT_LOCALE, DATE_FORMAT } from 'app/config/common/app.config';
 
 export enum DateField {YEAR, MONTH, DAY}
 
@@ -15,7 +15,6 @@ export class MomentService {
   curLocale: string;
 
   constructor(private translateService: TranslateService) {
-
     translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       switch (this.translateService.currentLang) {
         case LOCALE.CHINESE: this.curLocale = MOMENT_LOCALE.CHINESE; break;
@@ -33,6 +32,10 @@ export class MomentService {
     this.monthLabels = moment.localeData().monthsShort();
     this.dayLabels = this.curLocale === MOMENT_LOCALE.ENGLISH ?
       moment.localeData().weekdaysShort() : moment.localeData().weekdaysMin();
+  }
+
+  getTime(date: IDate): number {
+    return this.getDate(date.year, date.month, date.day).getTime();
   }
 
   getDate(year: number, month: number, day: number): Date {
@@ -98,12 +101,12 @@ export class MomentService {
     return jsDate2 < jsDate1 ? -1 : jsDate2 > jsDate1 ? 1 : 0;
   }
 
-  isValidDate(dateText: string, dateFormat: string) {
+  isValidDate(dateText: string) {
     if (!dateText || dateText.trim() === '') {
       return true;
     }
-    const _dateFormat = this.translateService.instant(dateFormat);
-    return moment(this.removeExtraSpace(dateText), _dateFormat, true).isValid();
+    const dateFormat = this.translateService.instant(DATE_FORMAT);
+    return moment(this.removeExtraSpace(dateText), dateFormat, true).isValid();
   }
 
   dateWithinRange(date: IDate, dateRange: IDateRange): boolean {
@@ -136,18 +139,27 @@ export class MomentService {
     return {year: newDate.getFullYear(), month: newDate.getMonth() + 1, day: newDate.getDate()};
   }
 
-  parseDate(date: string, dateFormat: string): IDate {
-    if (!date || date.trim() === '') {
+  parseJSDate(date: Date): IDate {
+    if (!date) {
       return null;
     }
-    const _dateFormat = this.translateService.instant(dateFormat);
-    const momentDate = moment(this.removeExtraSpace(date), _dateFormat);
+    const dateFormat = this.translateService.instant(DATE_FORMAT);
+    const momentDate = moment(date, dateFormat);
     return {year: momentDate.year(), month: momentDate.month() + 1, day: momentDate.date()};
   }
 
-  formatDate(date: IDate, dateFormat: string): string {
-    const _dateFormat = this.translateService.instant(dateFormat);
-    return moment(this.getDate(date.year, date.month, date.day)).format(_dateFormat);
+  parseDate(date: string): IDate {
+    if (!date || date.trim() === '') {
+      return null;
+    }
+    const dateFormat = this.translateService.instant(DATE_FORMAT);
+    const momentDate = moment(this.removeExtraSpace(date), dateFormat);
+    return {year: momentDate.year(), month: momentDate.month() + 1, day: momentDate.date()};
+  }
+
+  formatDate(date: IDate): string {
+    const dateFormat = this.translateService.instant(DATE_FORMAT);
+    return moment(this.getDate(date.year, date.month, date.day)).format(dateFormat);
   }
 
   private removeExtraSpace(value: string): string {

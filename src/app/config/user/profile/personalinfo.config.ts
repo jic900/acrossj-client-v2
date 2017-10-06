@@ -43,12 +43,14 @@ export class PersonalInfoConfig implements IForm {
     {
       name: 'username',
       type: 'input',
-      placeHolder: 'USER.PROFILE.PERSONAL_INFO.USERNAME'
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.USERNAME',
+      readOnly: true
     },
     {
       name: 'email',
       type: 'input',
-      placeHolder: 'USER.PROFILE.PERSONAL_INFO.EMAIL'
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.EMAIL',
+      readOnly: true
     },
     {
       name: 'gender',

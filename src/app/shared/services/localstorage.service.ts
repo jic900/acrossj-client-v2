@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import { IProfile } from 'app/features/user/model/profile.model';
 
 @Injectable()
 export class LocalStorageService {
@@ -35,7 +36,14 @@ export class LocalStorageService {
     localStorage.setItem('user', JSON.stringify(decodedToken));
   }
 
+  saveProfile(profile: IProfile): void {
+    if (profile) {
+      localStorage.setItem('profile', JSON.stringify(profile));
+    }
+  }
+
   deleteToken() {
+    localStorage.removeItem('profile');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.tokenDeleted$.next();

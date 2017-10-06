@@ -19,15 +19,15 @@ export class SelectComponent implements OnInit {
 
   @Input() inputData: IListElement;
   @Input() required: boolean;
+  @Input() selectedValue: string;
   @Output() bindControl: EventEmitter<{}>;
-  @Output() selected: EventEmitter<IListItem>;
-  selectedValue: string;
+  @Output() selectedValueChange: EventEmitter<IListItem>;
   formControl: FormControl;
 
   constructor() {
     this.required = false;
     this.bindControl = new EventEmitter<{}>();
-    this.selected = new EventEmitter<IListItem>();
+    this.selectedValueChange = new EventEmitter<IListItem>();
   }
 
   ngOnInit() {
@@ -40,6 +40,6 @@ export class SelectComponent implements OnInit {
     const selectedElement: IListItem = (<IListItem[]>this.inputData.list).filter(element => {
       return element.name === this.selectedValue;
     })[0];
-    this.selected.emit(selectedElement);
+    this.selectedValueChange.emit(selectedElement);
   }
 }

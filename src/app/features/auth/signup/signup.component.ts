@@ -92,7 +92,6 @@ export class SignUpComponent implements AfterViewInit {
     const onSuccess = () => {
       this.message = this.messages.success;
       this.form.resetForm();
-      this.processing = false;
     };
 
     this.authService.signup(this.formGroup.value)
@@ -106,9 +105,9 @@ export class SignUpComponent implements AfterViewInit {
             onSuccess();
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
-            this.processing = false;
           }
-        }
+        },
+        () => this.processing = false
       );
   }
 

@@ -1,4 +1,7 @@
 {
+  "APP": {
+    "DATE_FORMAT": "MMM D, YYYY"
+  },
   "MAIN": {
     "SIDE_NAV": {
       "ABOUT_US": "About Us",
@@ -144,8 +147,8 @@
         "RUNNING": {
           "LABEL": "Running"
         },
-        "SKII": {
-          "LABEL": "Skii"
+        "SKI": {
+          "LABEL": "Ski"
         },
         "HIKING": {
           "LABEL": "Hiking"
@@ -176,7 +179,6 @@
   },
   "SHARED": {
     "DATE_PICKER": {
-      "DATE_FORMAT": "MMM D, YYYY",
       "DATE_RANGE_CALENDAR": {
         "START_DATE_LABEL": "Select Start Date",
         "END_DATE_LABEL": "Select End Date"

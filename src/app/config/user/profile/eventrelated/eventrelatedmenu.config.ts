@@ -53,15 +53,15 @@ export class EventRelatedMenuConfig implements IComponent {
           navIconClass: 'fa-angle-right'
         },
         {
-          name: 'skii',
+          name: 'ski',
           type: 'link',
-          display: 'USER.PROFILE.EVENT_RELATED.SKII.LABEL',
+          display: 'USER.PROFILE.EVENT_RELATED.SKI.LABEL',
           icon: {
             class: 'fa-info-circle',
             type: 'fa'
           },
           link: {
-            path: '/user/profile/eventrelated/skii'
+            path: '/user/profile/eventrelated/ski'
           },
           navIconClass: 'fa-angle-right'
         },

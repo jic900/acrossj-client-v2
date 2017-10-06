@@ -13,12 +13,12 @@ import { LOCALE, DEFAULT_LOCALE } from './config/common/app.config';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './features/auth/services/auth.service';
+import { ProfileService } from './features/user/services/profile.service';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './main/home/home.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SearchMenuComponent } from './main/searchmenu/searchmenu.component';
-
 
 export function translateLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -52,6 +52,7 @@ export function translateLoaderFactory(httpClient: HttpClient) {
   ],
   providers: [
     AuthService,
+    ProfileService,
     MdIconRegistry
   ],
   bootstrap: [AppComponent]

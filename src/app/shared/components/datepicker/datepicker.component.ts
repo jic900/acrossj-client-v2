@@ -25,7 +25,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
-import { MediaQueryBreakPoint } from 'app/config/common/app.config';
+import { DATE_FORMAT, MediaQueryBreakPoint } from 'app/config/common/app.config';
 import {
   IDatePickerElement,
   IValidator,
@@ -76,12 +76,11 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
 
   elements: IDatePicker;
   calOptions: ICalendarOptions;
-  dateFormat: string;
   dateRangeCalendarData: IDateRangeCalendar;
   formControl: FormControl;
   placeHolder: string;
-  selected: IDate[];
   inputValue: string;
+  selected: IDate[];
   opened: boolean;
   translateSub: Subscription;
 
@@ -97,7 +96,6 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     const datePickerConfig = new DatePickerConfig();
     this.elements = _.mapKeys(datePickerConfig.elements, 'name');
     this.calOptions = datePickerConfig.calendarOptions;
-    this.dateFormat = this.calOptions.dateFormat;
     this.dateRangeCalendarData = _.mapKeys(this.elements.dateRangeCalendar.elements, 'name');
     this.selected = null;
     this.inputValue = '';
@@ -137,11 +135,11 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
       return;
     }
     if (this.selected[0]) {
-      this.inputValue = this.momentService.formatDate(this.selected[0], this.dateFormat);
+      this.inputValue = this.momentService.formatDate(this.selected[0]);
     }
     if (this.mode === DatePickerMode.RANGE) {
       if (this.selected[1]) {
-        this.inputValue = `${this.inputValue} - ${this.momentService.formatDate(this.selected[1], this.dateFormat)}`;
+        this.inputValue = `${this.inputValue} - ${this.momentService.formatDate(this.selected[1])}`;
       } else {
         this.inputValue = `${this.inputValue} - ${this.translateService.instant(this.dateRangeCalendarData.endDate.display)}`;
       }
@@ -151,7 +149,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
   setPlaceHolder() {
     this.placeHolder = this.translateService.instant(this.data.placeHolder);
     if (this.mode === DatePickerMode.DEFAULT) {
-      const placeHolderFormat = this.translateService.instant(this.dateFormat).toLowerCase();
+      const placeHolderFormat = this.translateService.instant(DATE_FORMAT).toLowerCase();
       this.placeHolder = `${this.placeHolder} (${placeHolderFormat})`;
     }
   }
@@ -161,17 +159,17 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     controlValidators.forEach(validator => {
       if (this.mode === DatePickerMode.DEFAULT) {
         if (validator.name === 'dateWithinRange') {
-          validators.push(validator.validateFunc(this.data.enabledDateRange, this.dateFormat, this.momentService));
+          validators.push(validator.validateFunc(this.data.enabledDateRange, this.momentService));
         } else if (validator.name === 'isValidDate') {
-          validators.push(validator.validateFunc(this.dateFormat, this.momentService));
+          validators.push(validator.validateFunc(this.momentService));
         }
       } else if (this.data.readOnly) {
         if (validator.name === 'endDateExists') {
-          validators.push(validator.validateFunc(this.dateFormat, this.momentService));
+          validators.push(validator.validateFunc(this.momentService));
         }
       } else {
         if (validator.name === 'isValidDateRange') {
-          validators.push(validator.validateFunc(this.dateFormat, this.momentService));
+          validators.push(validator.validateFunc(this.momentService));
         }
       }
     });
@@ -229,8 +227,8 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
 
   onInputChange(value: string): void {
     if (this.mode === DatePickerMode.DEFAULT) {
-      this.selected = value && value.trim() !== '' && this.momentService.isValidDate(value, this.dateFormat) ?
-        [this.momentService.parseDate(value, this.dateFormat)] : null;
+      this.selected = value && value.trim() !== '' && this.momentService.isValidDate(value) ?
+        [this.momentService.parseDate(value)] : null;
     } else {
       // TODO
     }

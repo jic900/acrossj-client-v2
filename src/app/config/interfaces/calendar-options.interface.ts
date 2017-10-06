@@ -4,7 +4,7 @@ import {
 } from 'app/config/interfaces';
 
 export interface ICalendarOptions {
-  dateFormat: string;
+  dateFormat?: string;
   weekendHighlight?: boolean;
   markDates?: IDate[];
   highlightDates?: IDate[];

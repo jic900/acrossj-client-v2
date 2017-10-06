@@ -33,7 +33,8 @@ export class VerifyEmailComponent {
           }
         },
         err => {
-          if (err.name === 'EmailLinkExpired' || err.name === 'InvalidEmailLink' || err.name === 'VerifyToken' || err.name === 'UserNotFound') {
+          if (err.name === 'EmailLinkExpired' || err.name === 'InvalidEmailLink' ||
+              err.name === 'VerifyToken' || err.name === 'UserNotFound') {
             this.message = this.messages.invalidToken;
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);

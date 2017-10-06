@@ -11,7 +11,7 @@ import { ChangePasswordComponent } from './profile/changepassword/changepassword
 import { EventRelatedComponent } from './profile/eventrelated/eventrelated.component';
 import { EventRelatedMenuDummyComponent } from './profile/eventrelated/eventrelatedmenu/eventrelatedmenudummy.component';
 import { GeneralInfoComponent } from './profile/eventrelated/generalinfo/generalinfo.component';
-import { SkiiInfoComponent } from './profile/eventrelated/skiiinfo/skiiinfo.component';
+import { SkiInfoComponent } from './profile/eventrelated/skiinfo/skiinfo.component';
 import { RunningInfoComponent } from './profile/eventrelated/runninginfo/runninginfo.component';
 import { HikingInfoComponent } from './profile/eventrelated/hikinginfo/hikinginfo.component';
 import { CampingInfoComponent } from './profile/eventrelated/campinginfo/campinginfo.component';
@@ -41,7 +41,7 @@ const userRoutes: Routes = [
           {path: 'menu', component: EventRelatedMenuDummyComponent},
           {path: 'general', component: GeneralInfoComponent},
           {path: 'running', component: RunningInfoComponent},
-          {path: 'skii', component: SkiiInfoComponent},
+          {path: 'ski', component: SkiInfoComponent},
           {path: 'hiking', component: HikingInfoComponent},
           {path: 'camping', component: CampingInfoComponent},
           {path: 'bicycling', component: BicyclingInfoComponent},

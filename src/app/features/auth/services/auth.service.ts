@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpService } from 'app/shared/services/http.service';
 import { LocalStorageService } from 'app/shared/services/localstorage.service';
 import { EndPoint } from 'app/config/common/http.config';
+import { ProfileService } from 'app/features/user/services/profile.service';
 
 @Injectable()
 export class AuthService implements OnDestroy {
@@ -18,7 +19,9 @@ export class AuthService implements OnDestroy {
   subscription: Subscription;
   redirectUrl: string;
 
-  constructor(private httpService: HttpService, private localStorageService: LocalStorageService) {
+  constructor(private httpService: HttpService,
+              private localStorageService: LocalStorageService,
+              private profileService: ProfileService) {
     this.authenticated = false;
     this.authenticated$ = new BehaviorSubject<boolean>(this.authenticated);
     if (localStorageService.tokenNotExpired()) {
@@ -55,6 +58,7 @@ export class AuthService implements OnDestroy {
       .map(data => {
         this.localStorageService.saveToken(data.token);
         this.setAuthenticated(true);
+        this.profileService.getProfile().subscribe();
         return data;
       });
   }

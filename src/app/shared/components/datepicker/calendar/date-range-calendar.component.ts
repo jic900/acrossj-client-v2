@@ -77,11 +77,11 @@ export class DateRangeCalendarComponent implements OnChanges, AfterContentInit {
     if (! this.selectedRange) {
       this.calTitle = this.translateService.instant(this.data.startDate.display);
     } else {
-      this.calTitle = this.momentService.formatDate(this.selectedRange[0], this.options.dateFormat);
+      this.calTitle = this.momentService.formatDate(this.selectedRange[0]);
       if (this.selectedRange[1] === null) {
         this.calTitle = `${this.calTitle} - ${this.translateService.instant(this.data.endDate.display)}`;
       } else {
-        this.calTitle = `${this.calTitle} - ${this.momentService.formatDate(this.selectedRange[1], this.options.dateFormat)}`;
+        this.calTitle = `${this.calTitle} - ${this.momentService.formatDate(this.selectedRange[1])}`;
       }
     }
     this.selectState = this.selectedRange && this.selectedRange[1] === null ? SelectState.END : SelectState.START;
