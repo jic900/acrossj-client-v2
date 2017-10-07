@@ -220,6 +220,7 @@
     "USER": {
       "PROFILE": {
         "PERSONAL_INFO": {
+          "SUCCESS": "Your personal information has been successfully updated."
         },
         "CHANGE_PASSWORD": {
           "SUCCESS": "Your password has been successfully changed.",

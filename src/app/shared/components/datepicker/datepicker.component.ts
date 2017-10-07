@@ -72,6 +72,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
 
   @Input() data: IDatePickerElement;
   @Input() mode: DatePickerMode;
+  @Output() clicked: EventEmitter<void>;
   @Output() bindControl: EventEmitter<{}>;
 
   elements: IDatePicker;
@@ -100,6 +101,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     this.selected = null;
     this.inputValue = '';
     this.opened = false;
+    this.clicked = new EventEmitter<void>();
     this.bindControl = new EventEmitter<{}>();
 
     this.translateSub = translateService.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -178,7 +180,12 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     this.bindControl.emit({'name': this.data.name, 'control': this.formControl});
   }
 
-  onClick(event: any): void {
+  onClicked(event: any): void {
+    this.clicked.emit();
+    event.preventDefault();
+  }
+
+  onTriggerClicked(event: any): void {
     this.open(event);
     event.stopPropagation();
   }
@@ -199,6 +206,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     }
     this.openAsPopup();
     this.opened = true;
+    this.clicked.emit();
     event.stopPropagation();
   }
 
@@ -222,6 +230,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
   clearInput(event: any): void {
     this.selected = null;
     this.inputValue = '';
+    this.clicked.emit();
     event.stopPropagation();
   }
 

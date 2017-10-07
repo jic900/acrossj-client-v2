@@ -1,7 +1,9 @@
+<div #anchor></div>
 <aj-profiledetail [title]="formData.name">
-  <form novalidate [formGroup]="formGroup" (ngSubmit)="onSave($event)" #form="ngForm">
+  <form novalidate [formGroup]="formGroup" (ngSubmit)="onSave($event)">
     <aj-message *ngIf="message" [data]="message"></aj-message>
     <aj-input
+      #firstInput
       [inputData]="formElements.username"
       [type]="'text'"
       [disabled]="formElements.username.readOnly"
@@ -11,20 +13,24 @@
     <aj-input
       [inputData]="formElements.fullname"
       [type]="'text'"
+      (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-input>
     <aj-input
       [inputData]="formElements.email"
       [type]="'text'"
       [disabled]="formElements.email.readOnly"
+      (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-input>
     <aj-select
       [inputData]="formElements.gender"
+      (onOpen)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-select>
     <aj-datepicker
       [data]="formElements.birthday"
+      (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-datepicker>
     <!--<aj-datepicker-->
@@ -35,16 +41,19 @@
     <aj-input
       [inputData]="formElements.address"
       [type]="'text'"
+      (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-input>
     <aj-input
       [inputData]="formElements.postcode"
       [type]="'text'"
+      (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-input>
     <aj-input
       [inputData]="formElements.phonenumber"
       [type]="'text'"
+      (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-input>
     <div class="profile-btn-container">

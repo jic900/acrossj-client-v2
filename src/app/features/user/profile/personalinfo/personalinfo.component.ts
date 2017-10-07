@@ -2,7 +2,7 @@
  * Created by LAE86643 on 8/6/2017.
  */
 
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
@@ -13,11 +13,11 @@ import {
   IPersonalInfoMessage
 } from 'app/config/user/profile/personalinfo.config';
 import { IForm, IMessageElement, IDateRange, IDate } from 'app/config/interfaces';
+import { Util } from 'app/shared/util/util';
 import { ProfileService } from 'app/features/user/services/profile.service';
 import { MomentService } from 'app/shared/services/moment.service';
 import { LocalStorageService } from 'app/shared/services/localstorage.service';
 import { IProfile, IPersonal } from 'app/features/user/model/profile.model';
-
 
 @Component({
   selector: 'aj-personalinfo',
@@ -34,7 +34,7 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
   message: IMessageElement;
   processing: boolean;
   subscription: Subscription;
-  selectedGender: string;
+  @ViewChild('anchor') anchorElement: ElementRef;
 
   constructor(private profileService: ProfileService,
               private momentService: MomentService,
@@ -55,6 +55,8 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
     if (profileInStorage) {
       const profile: IProfile = JSON.parse(profileInStorage);
       this.populatePersonalInfo(profile.personal);
+    } else {
+      this.loadPersonalInfo();
     }
   }
 
@@ -103,7 +105,20 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
 
   }
 
+  loadPersonalInfo(): void {
+    this.processing = true;
+    this.message = null;
+    this.profileService.getProfile().subscribe(
+      (profile: IProfile) => this.populatePersonalInfo(profile.personal),
+      err => this.message = Util.createErrorMessage(err.name, err.message),
+      () => this.processing = false
+    );
+  }
+
   onSave(event: any): void {
+    event.preventDefault();
+    this.processing = true;
+    this.message = null;
     if (this.formGroup.value.birthday && this.formGroup.value.birthday.trim() !== '') {
       this.formGroup.value.birthday =
         this.momentService.getTime(this.momentService.parseDate(this.formGroup.value.birthday));
@@ -114,8 +129,12 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
           this.message = this.messages.success;
         },
         err => {
+          this.message = Util.createErrorMessage(err.name, err.message);
         },
-        () => this.processing = false
+        () => {
+          this.processing = false;
+          this.anchorElement.nativeElement.scrollIntoView();
+        }
       );
   }
 }

@@ -20,12 +20,14 @@ export class SelectComponent implements OnInit {
   @Input() inputData: IListElement;
   @Input() required: boolean;
   @Input() selectedValue: string;
+  @Output() onOpen: EventEmitter<void>;
   @Output() bindControl: EventEmitter<{}>;
   @Output() selectedValueChange: EventEmitter<IListItem>;
   formControl: FormControl;
 
   constructor() {
     this.required = false;
+    this.onOpen = new EventEmitter<void>();
     this.bindControl = new EventEmitter<{}>();
     this.selectedValueChange = new EventEmitter<IListItem>();
   }
@@ -34,6 +36,10 @@ export class SelectComponent implements OnInit {
     const validators = this.required ? [Validators.required] : [];
     this.formControl = new FormControl('', validators);
     this.bindControl.emit({'name': this.inputData.name, 'control': this.formControl});
+  }
+
+  onOpened(event): void {
+    this.onOpen.emit();
   }
 
   onChange(event): void {

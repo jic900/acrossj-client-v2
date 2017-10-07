@@ -2,6 +2,7 @@
   placeholder="{{inputData.placeHolder | translate}}"
   [(ngModel)]="selectedValue"
   [formControl]="formControl"
+  (onOpen)="onOpened($event)"
   (change)="onChange($event)">
   <md-option *ngFor="let item of inputData.list" [value]="item.name">
     {{item.display | translate}}

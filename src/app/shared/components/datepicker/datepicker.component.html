@@ -1,10 +1,11 @@
 <md-input-container (mousedown)="onMouseDown($event)">
-  <div *ngIf="data.readOnly" class="datepicker-input-clicker" (click)="onClick($event)"></div>
+  <div *ngIf="data.readOnly" class="datepicker-input-clicker" (click)="onTriggerClicked($event)"></div>
   <input
     mdInput
     validateonblur
     [formControl]="formControl"
     placeholder="{{placeHolder}}"
+    (click)="onClicked($event)"
     [(ngModel)]="inputValue"
     (ngModelChange)="onInputChange($event)">
   <button

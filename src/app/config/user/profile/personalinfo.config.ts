@@ -111,4 +111,18 @@ export class PersonalInfoConfig implements IForm {
       }
     },
   ];
+
+  messages: IMessageElement[] = [
+    {
+      name: 'success',
+      message: {
+        display: 'MESSAGES.USER.PROFILE.PERSONAL_INFO.SUCCESS',
+        type: 'success',
+        icon: {
+          class: 'fa-check-circle',
+          type: 'fa'
+        }
+      }
+    }
+  ];
 }
