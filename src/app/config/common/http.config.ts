@@ -23,7 +23,9 @@ const EndPointConfig = {
     refreshToken: 'auth/refreshtoken'
   },
   profile: {
-    changePassword: 'profile/changepassword'
+    changePassword: 'profile/changepassword',
+    getProfile: 'profile/userprofile',
+    saveProfile: 'profile/userprofile'
   }
 };
 
