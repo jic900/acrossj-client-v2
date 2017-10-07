@@ -138,6 +138,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     }
     if (this.selected[0]) {
       this.inputValue = this.momentService.formatDate(this.selected[0]);
+      this.formControl.markAsDirty();
     }
     if (this.mode === DatePickerMode.RANGE) {
       if (this.selected[1]) {
@@ -145,6 +146,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
       } else {
         this.inputValue = `${this.inputValue} - ${this.translateService.instant(this.dateRangeCalendarData.endDate.display)}`;
       }
+      this.formControl.markAsDirty();
     }
   }
 

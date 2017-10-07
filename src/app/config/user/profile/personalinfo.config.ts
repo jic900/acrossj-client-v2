@@ -9,8 +9,10 @@ import {
   IDatePickerElement,
   ILinkElement,
   IListElement,
-  IMessageElement
+  IMessageElement,
+  IValidator
 } from 'app/config/interfaces';
+import { ValidationUtil } from 'app/shared/util/validation-util';
 
 export interface IPersonalInfo {
   fullname: IInputElement;
@@ -111,6 +113,13 @@ export class PersonalInfoConfig implements IForm {
       }
     },
   ];
+
+  validator: IValidator = {
+    name: 'fieldsTouched',
+    type: 'custom',
+    error: 'ERRORS.VALIDATION.SHARED.FIELDS_TOUCHED',
+    validateFunc: ValidationUtil.fieldsTouched
+  };
 
   messages: IMessageElement[] = [
     {

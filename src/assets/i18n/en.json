@@ -274,6 +274,9 @@
         "INVALID_DATE_RANGE_FORMAT": "Invalid date range format",
         "INVALID_START_DATE": "Invalid start date format",
         "SELECT_END_DATE": "Please select end date"
+      },
+      "SHARED": {
+        "FIELDS_TOUCHED": "No value has been entered"
       }
     }
   }

@@ -35,13 +35,22 @@ export class ValidationUtil {
     return momentService.isValidDate(dateRangeParts[1]) ? null : {'endDateExists': true};
   }
 
-  public static passwordMatch =
-    (passwordField: string, confirmPasswordField: string) => (formGroup: FormGroup) => {
-      const passwordControl = formGroup.get(passwordField);
-      const confirmPasswordControl = formGroup.get(confirmPasswordField);
-      if (passwordControl && confirmPasswordControl) {
-        return passwordControl.value === confirmPasswordControl.value ? null : {'passwordMatch': true};
-      }
-      return null;
+  public static passwordMatch = (passwordField: string, confirmPasswordField: string) => (formGroup: FormGroup) => {
+    const passwordControl = formGroup.get(passwordField);
+    const confirmPasswordControl = formGroup.get(confirmPasswordField);
+    if (passwordControl && confirmPasswordControl) {
+      return passwordControl.value === confirmPasswordControl.value ? null : {'passwordMatch': true};
     }
+    return null;
+  }
+
+  public static fieldsTouched = () => (formGroup: FormGroup) => {
+    const controlNames = Object.keys(formGroup.controls);
+    for (const control of controlNames) {
+      if (formGroup.get(control).dirty) {
+        return null;
+      }
+    }
+    return {'fieldsTouched': true};
+  }
 }

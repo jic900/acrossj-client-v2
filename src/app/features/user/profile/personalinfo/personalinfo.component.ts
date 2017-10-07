@@ -43,9 +43,9 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
     this.formElements = _.mapKeys(this.formData.elements, 'name');
     this.formElements.birthday.enabledDateRange = this.enabledDOBDateRange();
     this.messages = _.mapKeys(this.formData.messages, 'name');
-    this.formGroup = new FormGroup({});
     this.message = null;
     this.processing = false;
+    this.formGroup = new FormGroup({}, this.formData.validator.validateFunc());
     this.subscription = this.profileService.profileUpdated$
       .subscribe((profile: IProfile) => this.populatePersonalInfo(profile.personal));
   }
