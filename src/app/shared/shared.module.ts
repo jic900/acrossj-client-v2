@@ -19,15 +19,14 @@ import {
   CovalentDataTableModule, CovalentMediaModule, CovalentLoadingModule,
   CovalentNotificationsModule, CovalentLayoutModule, CovalentMenuModule,
   CovalentPagingModule, CovalentSearchModule, CovalentStepsModule,
-  CovalentCommonModule, CovalentDialogsModule, CovalentExpansionPanelModule
+  CovalentCommonModule, CovalentDialogsModule, CovalentExpansionPanelModule,
+  TdLoadingService
 } from '@covalent/core';
 import { FlexLayoutModule, } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthConfig } from 'angular2-jwt';
 
 import { ValidateOnBlurDirective } from './directives/validate-onblur.directive';
-import { LoaderComponent } from './components/loader/loader.component';
-import { LoaderService } from './components/loader/loader.service';
 import { LocalStorageService } from './services/localstorage.service';
 import { MomentService } from './services/moment.service';
 import { HttpService } from './services/http.service';
@@ -68,7 +67,7 @@ const COVALENT_MODULES: any[] = [
 export function httpServiceFactory(
   http: Http,
   options: RequestOptions,
-  loaderService: LoaderService,
+  loaderService: TdLoadingService,
   localStorageService: LocalStorageService
 ) {
   return new HttpService(new AuthConfig({
@@ -92,7 +91,6 @@ export function httpServiceFactory(
   ],
   declarations: [
     ValidateOnBlurDirective,
-    LoaderComponent,
     MenuComponent,
     NavListComponent,
     IconComponent,
@@ -111,7 +109,6 @@ export function httpServiceFactory(
     FLEX_LAYOUT_MODULES,
     TranslateModule,
     ValidateOnBlurDirective,
-    LoaderComponent,
     MenuComponent,
     NavListComponent,
     IconComponent,
@@ -121,13 +118,12 @@ export function httpServiceFactory(
     DatePickerComponent
   ],
   providers: [
-    LoaderService,
     LocalStorageService,
     MomentService,
     {
       provide: HttpService,
       useFactory: httpServiceFactory,
-      deps: [Http, RequestOptions, LoaderService, LocalStorageService]
+      deps: [Http, RequestOptions, TdLoadingService, LocalStorageService]
     }
   ],
   entryComponents: [

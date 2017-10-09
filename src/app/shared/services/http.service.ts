@@ -6,13 +6,13 @@ import {
   Request,
   Response
 } from '@angular/http';
+import { TdLoadingService } from '@covalent/core';
 import { Observable } from 'rxjs/Observable';
 import { TimeoutError } from 'rxjs/Rx';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 
 import { HttpConfig, EndPoint } from 'app/config/common/http.config';
 import { LocalStorageService } from './localstorage.service';
-import { LoaderService } from '../components/loader/loader.service';
 
 const ERR_CONNECTION_REFUSED = 0;
 const ERR_SYSTEM_UNAVAILABLE = 503;
@@ -28,7 +28,7 @@ export class HttpService extends AuthHttp {
     options: AuthConfig,
     http: Http,
     defaultOptions: RequestOptions,
-    private loaderService: LoaderService,
+    private loaderService: TdLoadingService,
     private localStorageService: LocalStorageService
   ) {
     super(options, http, defaultOptions);
@@ -61,7 +61,7 @@ export class HttpService extends AuthHttp {
   }
 
   private intercept(observable: Observable<Response>): Observable<Response> {
-    this.loaderService.show();
+    this.loaderService.register();
     return observable
       // .do((res: Response) => {
       //   this.onSuccess(res);
@@ -74,7 +74,7 @@ export class HttpService extends AuthHttp {
       // .timeoutWith(AppConfig.HTTP_TIMEOUT, this.onTimeout)
       // .timeoutWith(1000, this.onTimeout())
       .catch(this.onCatch)
-      .finally(() => this.loaderService.hide());
+      .finally(() => this.loaderService.resolve());
 
     // return observable.catch((err, source) => {
     //   if (err.status  == 401 && !_.endsWith(err.url, 'api/auth/login')) {
@@ -127,7 +127,7 @@ export class HttpService extends AuthHttp {
     let count = 0;
     return attempts.flatMap(error => {
       if (error instanceof TimeoutError) {
-        console.log('retrying');
+        // console.log('retrying');
         return ++count >= HttpConfig.HTTP_RETRY_MAX ? Observable.throw(error) : Observable.timer(count * HttpConfig.HTTP_RETRY_DELAY);
       }
       return Observable.throw(error);
