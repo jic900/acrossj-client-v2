@@ -68,6 +68,7 @@ export class SendVerifyEmailComponent {
       .subscribe(
         data => {
           onSuccess();
+          this.processing = false;
         },
         err => {
           if (err.name === 'UserNotFound') {
@@ -78,8 +79,8 @@ export class SendVerifyEmailComponent {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-        },
-        () => this.processing = false
+          this.processing = false;
+        }
       );
   }
 }

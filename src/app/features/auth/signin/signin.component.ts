@@ -90,6 +90,7 @@ export class SignInComponent implements AfterViewInit {
           } else {
             this.router.navigateByUrl('/');
           }
+          this.processing = false;
         },
         err => {
           if (err.name === 'UserNotFound') {
@@ -101,8 +102,8 @@ export class SignInComponent implements AfterViewInit {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-        },
-        () => this.processing = false
+          this.processing = false;
+        }
       );
   }
 

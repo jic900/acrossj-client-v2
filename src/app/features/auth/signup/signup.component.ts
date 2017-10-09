@@ -98,6 +98,7 @@ export class SignUpComponent implements AfterViewInit {
       .subscribe(
         data => {
           onSuccess();
+          this.processing = false;
         },
         err => {
           // Ignore error when verify email is failed to be sent
@@ -106,8 +107,8 @@ export class SignUpComponent implements AfterViewInit {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-        },
-        () => this.processing = false
+          this.processing = false;
+        }
       );
   }
 

@@ -75,9 +75,4 @@ export class MainComponent implements OnInit, OnDestroy {
       }
     }
   }
-
-  signout(): void {
-    this.authService.signout();
-    this.router.navigate(['/']);
-  }
 }

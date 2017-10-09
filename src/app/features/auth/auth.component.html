@@ -1,7 +1,8 @@
-<mat-card [hidden]="authState != 'signin' && authState != 'signup'">
-  <mat-tab-group #tabGroup [dynamicHeight]="true"
-                [(selectedIndex)]="selectedIndex"
-                (selectedIndexChange)="onSelectedTabIndexChange()">
+<mat-card *ngIf="authState === 'signin' || authState === 'signup'">
+  <mat-tab-group
+    [dynamicHeight]="true"
+    [(selectedIndex)]="selectedIndex"
+    (selectedIndexChange)="onSelectedTabIndexChange()">
     <mat-tab label="{{authData.signin.display | translate}}">
       <aj-signin></aj-signin>
     </mat-tab>
@@ -11,7 +12,7 @@
   </mat-tab-group>
 </mat-card>
 
-<mat-card [hidden]="authState != 'verifyemail'">
+<mat-card *ngIf="authState === 'verifyemail'">
   <mat-card-header>
     <mat-card-title>{{authData.verifyEmail.display | translate}}</mat-card-title>
   </mat-card-header>
@@ -20,7 +21,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card [hidden]="authState != 'sendverifyemail'">
+<mat-card *ngIf="authState === 'sendverifyemail'">
   <mat-card-header>
     <mat-card-title>{{authData.sendVerifyEmail.display | translate}}</mat-card-title>
   </mat-card-header>
@@ -29,7 +30,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card [hidden]="authState != 'forgotpassword'">
+<mat-card *ngIf="authState === 'forgotpassword'">
   <mat-card-header>
     <mat-card-title>{{authData.forgotPassword.display | translate}}</mat-card-title>
   </mat-card-header>
@@ -38,7 +39,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card [hidden]="authState != 'resetpassword'">
+<mat-card *ngIf="authState === 'resetpassword'">
   <mat-card-header>
     <mat-card-title>{{authData.resetPassword.display | translate}}</mat-card-title>
   </mat-card-header>
@@ -46,4 +47,3 @@
     <aj-resetpassword></aj-resetpassword>
   </mat-card-content>
 </mat-card>
-

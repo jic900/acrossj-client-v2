@@ -40,6 +40,9 @@ export class ForgotPasswordComponent {
     this.processing = false;
     this.message = this.messages.hint;
     this.showInput = true;
+    if (this.form) {
+      this.form.resetForm();
+    }
   }
 
   onClicked(event): void {
@@ -59,12 +62,13 @@ export class ForgotPasswordComponent {
       this.message = this.messages.success;
       this.showInput = false;
       this.form.resetForm();
-    }
+    };
 
     this.authService.forgotPassword(this.formGroup.value)
       .subscribe(
         data => {
           onSuccess();
+          this.processing = false;
         },
         err => {
           if (err.name === 'UserNotFound') {
@@ -75,8 +79,8 @@ export class ForgotPasswordComponent {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-        },
-        () => this.processing = false
+          this.processing = false;
+        }
       );
   }
 }

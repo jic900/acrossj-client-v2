@@ -134,7 +134,8 @@ class SideNavConfig implements ISideNavConfig {
           name: 'signout',
           type: 'link',
           display: 'MAIN.HEADER.USER_AUTHED.MENU.SIGNOUT',
-          icon: {class: 'fa-sign-out', type: 'fa'}
+          icon: {class: 'fa-sign-out', type: 'fa'},
+          link: {path: '/auth', param: 'signout'}
         }
       ]
     },
@@ -244,7 +245,8 @@ class HeaderConfig implements IHeaderConfig {
         {
           name: 'signout',
           display: 'MAIN.HEADER.USER_AUTHED.MENU.SIGNOUT',
-          icon: {class: 'fa-sign-out', type: 'fa'}
+          icon: {class: 'fa-sign-out', type: 'fa'},
+          link: {path: '/auth', param: 'signout'}
         }
       ]
     }

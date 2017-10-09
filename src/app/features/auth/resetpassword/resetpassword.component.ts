@@ -113,6 +113,7 @@ export class ResetPasswordComponent implements AfterViewInit {
         data => {
           this.message = this.messages.success;
           this.showInput = false;
+          this.processing = false;
         },
         err => {
           if (err.name === 'EmailLinkExpired' ||
@@ -123,12 +124,9 @@ export class ResetPasswordComponent implements AfterViewInit {
             this.showInput = false;
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
-            // this.form.resetForm();
-            // const decodedToken = this.jwtHelper.decodeToken(this.token);
-            // this.formGroup.get('username').setValue(decodedToken.username);
           }
-        },
-        () => this.processing = false
+          this.processing = false;
+        }
       );
   }
 }

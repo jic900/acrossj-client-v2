@@ -1,14 +1,15 @@
 import {
   Component,
-  AfterViewInit,
   OnDestroy,
-  ViewChild
+  ViewChild,
+  HostListener
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 
 import { AuthConfig, IAuth } from 'app/config/auth/auth.config';
+import { KeyCode } from 'app/shared/util/util';
 import { AuthService } from './services/auth.service';
 import { SignInComponent } from './signin/signin.component';
 import { SignUpComponent } from './signup/signup.component';
@@ -23,7 +24,7 @@ import { ResetPasswordComponent } from './resetpassword/resetpassword.component'
   styleUrls: ['./auth.component.scss']
 })
 
-export class AuthComponent implements AfterViewInit, OnDestroy {
+export class AuthComponent implements OnDestroy {
 
   authData: IAuth;
   @ViewChild(SignInComponent) signInComponent: SignInComponent;
@@ -40,77 +41,99 @@ export class AuthComponent implements AfterViewInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router) {
     this.authData = _.mapKeys(new AuthConfig().elements, 'name');
-    this.selectedIndex = 1;
+    this.subscription = this.route.params.subscribe(params => {
+      this.onRouteChange(params['id']);
+    });
   }
 
-  ngAfterViewInit(): void {
-    this.subscription = this.route.params.subscribe(params => {
-      setTimeout(() => {
-        this.onRouteChange(params['id']);
-      });
-    });
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    if (event.keyCode === KeyCode.LEFT_ARROW) {
+      this.selectedIndex = 0;
+    } else if (event.keyCode === KeyCode.RIGHT_ARROW) {
+      this.selectedIndex = 1;
+    }
   }
 
   onRouteChange(newRoute: string): void {
     this.authState = newRoute;
     switch (this.authState) {
-      case 'signin': {
-        this.selectedIndex = 0;
-        this.signInComponent.reset();
-        break;
-      }
-      case 'signup': {
-        this.selectedIndex = 1;
-        this.signUpComponent.reset();
-        break;
-      }
-      case 'signout': {
-        this.authService.signout();
+      case 'signin': this.onSignin(); break;
+      case 'signup': this.onSignup(); break;
+      case 'signout': this.onSignout(); break;
+      case 'verifyemail': this.onVerifyEmail(); break;
+      case 'sendverifyemail': this.onSendVerifyEmail(); break;
+      case 'forgotpassword': this.onForgotPassword(); break;
+      case 'resetpassword': this.onResetPassword(); break;
+      default: this.router.navigateByUrl('404');
+    }
+  }
+
+  onSignin(): void {
+    this.selectedIndex = 0;
+    if (this.signInComponent) {
+      this.signInComponent.reset();
+    }
+  }
+
+  onSignup(): void {
+    this.selectedIndex = 1;
+    if (this.signUpComponent) {
+      this.signUpComponent.reset();
+    }
+  }
+
+  onSignout(): void {
+    this.authService.signout();
+    this.router.navigateByUrl('/');
+  }
+
+  onVerifyEmail(): void {
+    setTimeout(() => {
+      const token = this.route.snapshot.queryParams['token'];
+      if (!token || this.authService.authenticated) {
         this.router.navigateByUrl('/');
-        break;
+      } else {
+        this.router.navigateByUrl(`/auth/${this.route.snapshot.url.join('/')}`);
+        this.verifyEmailComponent.verifyEmail(this.route.snapshot.queryParams['token']);
       }
-      case 'verifyemail': {
+    });
+  }
+
+  onSendVerifyEmail(): void {
+    setTimeout(() => {
+      if (this.sendVerifyEmailComponent) {
+        this.sendVerifyEmailComponent.reset();
+      }
+    });
+  }
+
+  onForgotPassword(): void {
+    setTimeout(() => {
+      if (this.forgotPasswordComponent) {
+        this.forgotPasswordComponent.reset();
+      }
+    });
+  }
+
+  onResetPassword(): void {
+    setTimeout(() => {
+      if (this.authService.authenticated) {
+        this.router.navigateByUrl('/');
+      } else {
         const token = this.route.snapshot.queryParams['token'];
-        if (!token || this.authService.authenticated) {
+        if (!token) {
           this.router.navigateByUrl('/');
         } else {
           this.router.navigateByUrl(`/auth/${this.route.snapshot.url.join('/')}`);
-          this.verifyEmailComponent.verifyEmail(this.route.snapshot.queryParams['token']);
+          this.resetPasswordComponent.setToken(token);
         }
-        break;
       }
-      case 'sendverifyemail': {
-        this.sendVerifyEmailComponent.reset();
-        break;
-      }
-      case 'forgotpassword': {
-        this.forgotPasswordComponent.reset();
-        break;
-      }
-      case 'resetpassword': {
-        if (this.authService.authenticated) {
-          this.router.navigateByUrl('/');
-          // this.router.navigateByUrl('/profile/changepassword');
-        } else {
-          const token = this.route.snapshot.queryParams['token'];
-          if (!token) {
-            this.router.navigateByUrl('/');
-          } else {
-            this.router.navigateByUrl(`/auth/${this.route.snapshot.url.join('/')}`);
-            // setTimeout(() => {
-            //   if (token) {
-            //     this.resetPasswordComponent.setToken(token);
-            //   }
-            // }, 500);
-            this.resetPasswordComponent.setToken(token);
-          }
-        }
-        break;
-      }
-    }
+    });
   }
+
   onSelectedTabIndexChange(): void {
-    // this.selectedIndex === 0 ? this.signUpForm.reset() : this.signInForm.reset();
+    this.selectedIndex === 0 ? this.signInComponent.reset() : this.signUpComponent.reset();
     this.selectedIndex === 0 ? this.router.navigateByUrl('/auth/signin') : this.router.navigateByUrl('/auth/signup');
   }
 

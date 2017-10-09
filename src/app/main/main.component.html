@@ -4,18 +4,10 @@
       [navListData]="sideNavData.appMenu"
       (clicked)="layout.close() && sidenav.close() && onClicked($event)">
     </aj-navlist>
-
     <mat-divider></mat-divider>
-
     <aj-navlist
-      *ngIf="!authenticated"
-      [navListData]="sideNavData.authMenu"
+      [navListData]="!authenticated ? sideNavData.authMenu : sideNavData.signoutMenu"
       (clicked)="layout.close() && sidenav.close()">
-    </aj-navlist>
-    <aj-navlist
-      *ngIf="authenticated"
-      [navListData]="sideNavData.signoutMenu"
-      (clicked)="layout.close() && sidenav.close() && signout()">
     </aj-navlist>
 
     <div td-navigation-drawer-menu>
@@ -43,11 +35,9 @@
       <div *ngIf="widthIsMedium()">
         <aj-menu [menuData]="headerData.languageMenu" (clicked)="onClicked($event)"></aj-menu>
       </div>
-      <div *ngIf="widthIsMedium() && !authenticated">
-        <aj-menu [menuData]="headerData.userMenu"></aj-menu>
-      </div>
-      <div *ngIf="widthIsMedium() && authenticated">
-        <aj-menu [menuData]="headerData.userMenuAuthed" (clicked)="signout()"></aj-menu>
+
+      <div *ngIf="widthIsMedium()">
+        <aj-menu [menuData]="!authenticated ? headerData.userMenu : headerData.userMenuAuthed"></aj-menu>
       </div>
     </div>
 
