@@ -198,7 +198,10 @@ class HeaderConfig implements IHeaderConfig {
       name: 'languageMenu',
       type: 'list',
       icon: {class: 'language', type: 'md'},
-      tooltip: 'MAIN.HEADER.LANGUAGE.TOOLTIP',
+      tooltip: {
+        display: 'MAIN.HEADER.LANGUAGE.TOOLTIP',
+        position: 'below'
+      },
       list: [
         {
           name: 'lang_en',
@@ -221,7 +224,10 @@ class HeaderConfig implements IHeaderConfig {
       name: 'userMenu',
       type: 'list',
       icon: {class: 'account_circle', type: 'md'},
-      tooltip: 'MAIN.HEADER.USER.TOOLTIP',
+      tooltip: {
+        display: 'MAIN.HEADER.USER.TOOLTIP',
+        position: 'left'
+      },
       list: [
         {
           name: 'signin',
@@ -241,6 +247,10 @@ class HeaderConfig implements IHeaderConfig {
       name: 'userMenuAuthed',
       type: 'list',
       icon: {class: 'account_circle', type: 'md'},
+      tooltip: {
+        display: 'MAIN.HEADER.USER_AUTHED.TOOLTIP',
+        position: 'below'
+      },
       list: [
         {
           name: 'signout',

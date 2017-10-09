@@ -1,7 +1,8 @@
 import {
   Component,
   AfterViewInit,
-  ViewChild
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -39,6 +40,7 @@ export class SignInComponent implements AfterViewInit {
   passwordType: string;
   processing: boolean;
   message: IMessageElement;
+  @ViewChild('anchor') anchorElement: ElementRef;
 
   constructor(private authService: AuthService, private router: Router) {
     this.formData = new SignInConfig();
@@ -79,6 +81,11 @@ export class SignInComponent implements AfterViewInit {
     this.processing = true;
     // this.message = null;
 
+    const onComplete = () => {
+      this.processing = false;
+      this.anchorElement.nativeElement.scrollIntoView();
+    };
+
     this.authService.signin(this.formGroup.value)
       .subscribe(
         data => {
@@ -90,7 +97,7 @@ export class SignInComponent implements AfterViewInit {
           } else {
             this.router.navigateByUrl('/');
           }
-          this.processing = false;
+          onComplete();
         },
         err => {
           if (err.name === 'UserNotFound') {
@@ -102,7 +109,7 @@ export class SignInComponent implements AfterViewInit {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-          this.processing = false;
+          onComplete();
         }
       );
   }

@@ -36,13 +36,14 @@
         }
       },
       "USER": {
-        "TOOLTIP": "Please sign in or sign up",
+        "TOOLTIP": "Sign in or sign up",
         "MENU": {
           "SIGNIN": "Sign In",
           "SIGNUP": "Sign Up"
         }
       },
       "USER_AUTHED": {
+        "TOOLTIP": "Sign out",
         "MENU": {
           "SIGNOUT": "Sign Out"
         }

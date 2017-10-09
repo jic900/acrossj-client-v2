@@ -7,7 +7,7 @@
     <mat-divider></mat-divider>
     <aj-navlist
       [navListData]="!authenticated ? sideNavData.authMenu : sideNavData.signoutMenu"
-      (clicked)="layout.close() && sidenav.close()">
+      (clicked)="layout.close() && sidenav.close() && anchor.scrollIntoView()">
     </aj-navlist>
 
     <div td-navigation-drawer-menu>
@@ -37,7 +37,10 @@
       </div>
 
       <div *ngIf="widthIsMedium()">
-        <aj-menu [menuData]="!authenticated ? headerData.userMenu : headerData.userMenuAuthed"></aj-menu>
+        <aj-menu
+          [menuData]="!authenticated ? headerData.userMenu : headerData.userMenuAuthed"
+          (clicked)="anchor.scrollIntoView()">
+        </aj-menu>
       </div>
     </div>
 
@@ -45,6 +48,7 @@
       <mat-sidenav #sidenav mode="over" align="end" opened="false">
         <aj-searchmenu></aj-searchmenu>
       </mat-sidenav>
+      <div #anchor></div>
       <router-outlet></router-outlet>
     </mat-sidenav-container>
     <td-layout-footer>

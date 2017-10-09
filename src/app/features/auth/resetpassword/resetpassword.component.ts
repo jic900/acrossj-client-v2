@@ -1,4 +1,9 @@
-import { Component, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { JwtHelper } from 'angular2-jwt';
 import * as _ from 'lodash';
@@ -37,6 +42,7 @@ export class ResetPasswordComponent implements AfterViewInit {
   jwtHelper: JwtHelper;
   token: string;
   showInput: boolean;
+  @ViewChild('anchor') anchorElement: ElementRef;
 
   constructor(private authService: AuthService) {
     this.formData = new ResetPasswordConfig();
@@ -108,12 +114,17 @@ export class ResetPasswordComponent implements AfterViewInit {
       newPassword: this.formGroup.value.password
     };
 
+    const onComplete = () => {
+      this.processing = false;
+      this.anchorElement.nativeElement.scrollIntoView();
+    };
+
     this.authService.resetPassword(requestData)
       .subscribe(
         data => {
           this.message = this.messages.success;
           this.showInput = false;
-          this.processing = false;
+          onComplete();
         },
         err => {
           if (err.name === 'EmailLinkExpired' ||
@@ -125,7 +136,7 @@ export class ResetPasswordComponent implements AfterViewInit {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-          this.processing = false;
+          onComplete();
         }
       );
   }

@@ -1,7 +1,8 @@
 import {
   Component,
   AfterViewInit,
-  ViewChild
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
@@ -38,6 +39,7 @@ export class SignUpComponent implements AfterViewInit {
   passwordType: string;
   processing: boolean;
   message: IMessageElement;
+  @ViewChild('anchor') anchorElement: ElementRef;
 
   constructor(private authService: AuthService) {
     this.formData = new SignUpConfig();
@@ -93,12 +95,16 @@ export class SignUpComponent implements AfterViewInit {
       this.message = this.messages.success;
       this.form.resetForm();
     };
+    const onComplete = () => {
+      this.processing = false;
+      this.anchorElement.nativeElement.scrollIntoView();
+    };
 
     this.authService.signup(this.formGroup.value)
       .subscribe(
         data => {
           onSuccess();
-          this.processing = false;
+          onComplete();
         },
         err => {
           // Ignore error when verify email is failed to be sent
@@ -107,7 +113,7 @@ export class SignUpComponent implements AfterViewInit {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-          this.processing = false;
+          onComplete();
         }
       );
   }

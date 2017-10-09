@@ -123,17 +123,21 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
       this.formGroup.value.birthday =
         this.momentService.getTime(this.momentService.parseDate(this.formGroup.value.birthday));
     }
+
+    const onComplete = () => {
+      this.processing = false;
+      this.anchorElement.nativeElement.scrollIntoView();
+    };
+
     this.profileService.saveProfile({personal: this.formGroup.value})
       .subscribe(
         data => {
           this.message = this.messages.success;
+          onComplete();
         },
         err => {
           this.message = Util.createErrorMessage(err.name, err.message);
-        },
-        () => {
-          this.processing = false;
-          this.anchorElement.nativeElement.scrollIntoView();
+          onComplete();
         }
       );
   }

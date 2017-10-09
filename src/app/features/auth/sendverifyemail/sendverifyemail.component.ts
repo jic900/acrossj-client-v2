@@ -1,4 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 
@@ -26,6 +30,7 @@ export class SendVerifyEmailComponent {
   processing: boolean;
   message: IMessageElement;
   showInput: boolean;
+  @ViewChild('anchor') anchorElement: ElementRef;
 
   constructor(private authService: AuthService) {
     this.formData = new SendVerifyEmailConfig();
@@ -63,12 +68,16 @@ export class SendVerifyEmailComponent {
       this.showInput = false;
       this.form.resetForm();
     }
+    const onComplete = () => {
+      this.processing = false;
+      this.anchorElement.nativeElement.scrollIntoView();
+    };
 
     this.authService.sendVerifyEmail(this.formGroup.value)
       .subscribe(
         data => {
           onSuccess();
-          this.processing = false;
+          onComplete();
         },
         err => {
           if (err.name === 'UserNotFound') {
@@ -79,7 +88,7 @@ export class SendVerifyEmailComponent {
           } else {
             this.message = Util.createErrorMessage(err.name, err.message);
           }
-          this.processing = false;
+          onComplete();
         }
       );
   }

@@ -3,12 +3,13 @@
  */
 
 import { IIcon } from './icon.interface';
+import { ITooltip } from './tooltip.interface';
 
 export interface IElement {
   name: string;
   type?: string;
   display?: string;
   description?: string;
-  tooltip?: string;
+  tooltip?: ITooltip;
   icon?: IIcon;
 }

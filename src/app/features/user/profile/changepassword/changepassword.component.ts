@@ -2,7 +2,8 @@ import {
   Component,
   AfterViewInit,
   HostBinding,
-  ViewChild
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
@@ -42,6 +43,7 @@ export class ChangePasswordComponent implements AfterViewInit {
   passwordType: string;
   processing: boolean;
   message: IMessageElement;
+  @ViewChild('anchor') anchorElement: ElementRef;
 
   constructor(private profileService: ProfileService) {
     this.formData = new ChangePasswordConfig();
@@ -97,11 +99,17 @@ export class ChangePasswordComponent implements AfterViewInit {
       newPassword: this.formGroup.value.password
     };
 
+    const onComplete = () => {
+      this.processing = false;
+      this.anchorElement.nativeElement.scrollIntoView();
+    };
+
     this.profileService.changePassword(requestData)
       .subscribe(
         data => {
           this.message = this.messages.success;
           this.form.resetForm();
+          onComplete();
         },
         err => {
           if (err.name === 'InvalidPassword') {
@@ -112,7 +120,7 @@ export class ChangePasswordComponent implements AfterViewInit {
             this.message = Util.createErrorMessage(err.name, err.message);
             this.form.resetForm();
           }
-          this.processing = false;
+          onComplete();
         }
       );
   }
