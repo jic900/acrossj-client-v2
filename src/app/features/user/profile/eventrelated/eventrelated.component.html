@@ -1,17 +1,17 @@
-<md-card>
-  <md-card-header *ngIf="widthIsMedium()">
+<mat-card>
+  <mat-card-header *ngIf="widthIsMedium()">
     <span>{{title | translate}}</span>
-  </md-card-header>
-  <md-card-content>
-    <md-sidenav-container class="eventrelated-sidenav-container">
-      <md-sidenav
+  </mat-card-header>
+  <mat-card-content>
+    <mat-sidenav-container class="eventrelated-sidenav-container">
+      <mat-sidenav
         #sidenav
         [mode]="menuMode"
         class="eventrelated-sidenav"
         [opened]="menuOpenedDefault">
         <aj-eventrelatedmenu></aj-eventrelatedmenu>
-      </md-sidenav>
+      </mat-sidenav>
       <router-outlet></router-outlet>
-    </md-sidenav-container>
-  </md-card-content>
-</md-card>
+    </mat-sidenav-container>
+  </mat-card-content>
+</mat-card>

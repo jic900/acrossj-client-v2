@@ -1,9 +1,9 @@
 <div class="user-top-image" [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')'}">
 </div>
 <div class="user-container">
-  <nav *ngIf="widthIsMedium()" md-tab-nav-bar>
+  <nav *ngIf="widthIsMedium()" mat-tab-nav-bar>
     <div class="tab-navbar-content">
-      <a md-tab-link
+      <a matTabLink
          *ngFor="let tabLink of tabLinks"
          [routerLink]="tabLink.name !== userElements.profile.name ? [tabLink.link.path] : [getProfileLink()]"
          routerLinkActive #rla="routerLinkActive"

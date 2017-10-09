@@ -1,38 +1,38 @@
-<md-card class="cal-card">
+<mat-card class="cal-card">
   <table class="header-table">
     <tr>
       <td class="header-cell">
         <div class="header-cell-content">
-          <button md-icon-button (click)="onPrevMonth()">
-            <md-icon aria-label="Previous Month">chevron_left</md-icon>
+          <button mat-icon-button (click)="onPrevMonth()">
+            <mat-icon aria-label="Previous Month">chevron_left</mat-icon>
           </button>
-          <button md-button
+          <button mat-button
                   class="header-cell-label"
                   (click)="onSelectMonthClicked($event)"
                   [@slideCalendar]="viewState"
                   (@slideCalendar.done)="resetViewState()">
             {{visibleMonth.monthTxt | translate}}
           </button>
-          <button md-icon-button (click)="onNextMonth()">
-            <md-icon aria-label="Next Month">chevron_right</md-icon>
+          <button mat-icon-button (click)="onNextMonth()">
+            <mat-icon aria-label="Next Month">chevron_right</mat-icon>
           </button>
         </div>
       </td>
       <td></td>
       <td class="header-cell">
         <div class="header-cell-content">
-          <button md-icon-button (click)="onPrevYear()">
-            <md-icon aria-label="Previous Year">chevron_left</md-icon>
+          <button mat-icon-button (click)="onPrevYear()">
+            <mat-icon aria-label="Previous Year">chevron_left</mat-icon>
           </button>
-          <button md-button
+          <button mat-button
                   class="header-cell-label"
                   (click)="onSelectYearClicked($event)"
                   [@slideCalendar]="viewState"
                   (@slideCalendar.done)="resetViewState()">
             {{visibleMonth.year}}
           </button>
-          <button md-icon-button (click)="onNextYear()">
-            <md-icon aria-label="Next Year">chevron_right</md-icon>
+          <button mat-icon-button (click)="onNextYear()">
+            <mat-icon aria-label="Next Year">chevron_right</mat-icon>
           </button>
         </div>
       </td>
@@ -83,8 +83,8 @@
     <tbody [@slideCalendar]="viewState" (@slideCalendar.done)="resetViewState()">
       <tr>
         <td colspan="5">
-          <button md-icon-button class="year-btn-cell" (click)="onPrevYears($event)">
-            <md-icon class="md-24" aria-label="Previous Years">expand_less</md-icon>
+          <button mat-icon-button class="year-btn-cell" (click)="onPrevYears($event)">
+            <mat-icon class="mat-24" aria-label="Previous Years">expand_less</mat-icon>
           </button>
         </td>
       </tr>
@@ -102,12 +102,12 @@
       </tr>
       <tr>
         <td colspan="5">
-          <button md-icon-button class="year-btn-cell" (click)="onNextYears($event)">
-            <md-icon class="md-24" aria-label="Next Years">expand_more</md-icon>
+          <button mat-icon-button class="year-btn-cell" (click)="onNextYears($event)">
+            <mat-icon class="mat-24" aria-label="Next Years">expand_more</mat-icon>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-</md-card>
+</mat-card>
 

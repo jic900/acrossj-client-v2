@@ -18,11 +18,11 @@ html, body {
     min-height: 80px;
 }
 // Href line height wasn't right for md-icon-button
-a[md-icon-button] {
+a[mat-icon-button] {
     line-height: 36px;
 }
 
-md-icon {
+mat-icon {
   font-size: 26px !important;
   line-height: 26px !important;
 }
@@ -32,11 +32,20 @@ md-icon {
   text-transform: capitalize;
 }
 
-md-card[hidden] {
+mat-card[hidden] {
   display: none;
 }
 
-md-icon.flag-icon-jp {
+.mat-form-field-underline {
+  background-color: rgba(0, 0, 0, .12) !important;
+}
+
+.mat-card-content {
+  font-size: 16px !important;
+  padding: 25px 16px !important;
+}
+
+mat-icon.flag-icon-jp {
   height: 18px !important;
   border: solid 1px rgba(0,0,0,.2) !important;
 }

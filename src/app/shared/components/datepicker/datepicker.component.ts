@@ -15,11 +15,11 @@ import {
 } from '@angular/core';
 import {
   Overlay,
+  OverlayConfig,
   OverlayRef,
-  OverlayState,
   PositionStrategy
-} from '@angular/material';
-import { ComponentPortal } from '@angular/cdk';
+} from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -288,18 +288,18 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private createPopup(): void {
-    const overlayState = new OverlayState();
-    overlayState.positionStrategy = this.widthIsExtraSmall() ?
+    const overlayConfig = new OverlayConfig();
+    overlayConfig.positionStrategy = this.widthIsExtraSmall() ?
       this.overlay.position().global().centerHorizontally().centerVertically() :
       this.createPopupPositionStrategy();
     // overlayState.positionStrategy = this.createPopupPositionStrategy();
-    overlayState.hasBackdrop = true;
+    overlayConfig.hasBackdrop = true;
     // overlayState.backdropClass = 'cdk-overlay-transparent-backdrop';
-    overlayState.backdropClass = 'cdk-overlay-dark-backdrop';
-    overlayState.direction = 'ltr';
-    overlayState.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    overlayConfig.backdropClass = 'cdk-overlay-dark-backdrop';
+    overlayConfig.direction = 'ltr';
+    overlayConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
-    this.popupRef = this.overlay.create(overlayState);
+    this.popupRef = this.overlay.create(overlayConfig);
   }
 
   private createPopupPositionStrategy(): PositionStrategy {

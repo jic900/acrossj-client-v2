@@ -1,18 +1,18 @@
-<md-nav-list>
+<mat-nav-list>
   <ng-template let-item let-i="index" ngFor [ngForOf]="navListData.list">
     <a *ngIf="item.type === 'link'"
-       md-list-item
+       mat-list-item
        [ngClass]="{'item-selected': selectable && selectedIndex === i}"
        (click)="onClicked(i, item)">
       <aj-icon *ngIf="item.icon" [data]="item.icon"></aj-icon>
       <span *ngIf="!multiLine">{{item.display | translate}}</span>
-      <h3 *ngIf="multiLine" md-line> {{item.display | translate}} </h3>
-      <p *ngIf="multiLine" md-line> {{item.description | translate}} </p>
+      <h3 *ngIf="multiLine" matLine> {{item.display | translate}} </h3>
+      <p *ngIf="multiLine" matLine> {{item.description | translate}} </p>
     </a>
 
-    <td-expansion-panel *ngIf="item.type === 'list'">
+    <td-expansion-panel *ngIf="item.type === 'list'" #submenu>
       <ng-template td-expansion-panel-label>
-        <a md-list-item
+        <a mat-list-item
            disableRipple
            [ngClass]="{'item-selected': selectable && selectedIndex === i}"
            (click)="onClicked(i, item)">
@@ -20,14 +20,14 @@
           {{item.display | translate}}
         </a>
       </ng-template>
-      <md-list>
+      <mat-list>
         <a *ngFor="let subItem of item.list"
-           md-list-item
-           (click)="onClicked(-1, subItem)">
+           mat-list-item
+           (click)="submenu.close() && onClicked(-1, subItem)">
           <aj-icon *ngIf="subItem.icon" [data]="subItem.icon"></aj-icon>
           <span>{{subItem.display | translate}}</span>
         </a>
-      </md-list>
+      </mat-list>
     </td-expansion-panel>
   </ng-template>
-</md-nav-list>
+</mat-nav-list>

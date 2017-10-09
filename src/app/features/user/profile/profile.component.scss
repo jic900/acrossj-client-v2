@@ -18,9 +18,15 @@
     padding-left: 80px;
     width: 400px;
   }
-  .profile-sidenav.eventrelated-selected {
+  :host /deep/ .profile-sidenav-container.eventrelated-selected .profile-sidenav {
     padding-left: 0;
     width: 320px;
+  }
+  :host /deep/ .profile-sidenav-container mat-sidenav-content {
+    margin-left: 400px !important;
+  }
+  :host /deep/ .profile-sidenav-container.eventrelated-selected mat-sidenav-content {
+    margin-left: 320px !important;
   }
 }
 
@@ -28,6 +34,9 @@
   .profile-sidenav {
     padding-left: 120px;
     width: 440px;
+  }
+  :host /deep/ .profile-sidenav-container mat-sidenav-content {
+    margin-left: 440px !important;
   }
 }
 
@@ -51,7 +60,7 @@
   width: 100%;
   height: 50px;
   margin: 0 auto;
-  color: white;
+  color: white !important;
   background-color: #616161;
   border: none;
   font-size: 16px;

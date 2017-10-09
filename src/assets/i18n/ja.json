@@ -71,8 +71,8 @@
       "LABEL": "Sign Up",
       "USERNAME": "Username",
       "EMAIL": "Email",
-      "PASSWORD": "New Password",
-      "CONFIRM_PASSWORD": "Confirm New Password",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password",
       "SHOW_PASSWORD": "Show Password",
       "BTN_LABEL": "Sign Up",
       "SEND_EMAIL": "Resend Verification Email"

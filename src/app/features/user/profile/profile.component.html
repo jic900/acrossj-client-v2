@@ -1,11 +1,10 @@
-<md-sidenav-container class="profile-sidenav-container">
-  <md-sidenav
+<mat-sidenav-container class="profile-sidenav-container" [ngClass]="{'eventrelated-selected': eventRelatedSelected}">
+  <mat-sidenav
     #sidenav
     [mode]="menuMode"
     class="profile-sidenav"
-    [ngClass]="{'eventrelated-selected': eventRelatedSelected}"
     [opened]="menuOpenedDefault">
     <aj-profilemenu></aj-profilemenu>
-  </md-sidenav>
+  </mat-sidenav>
   <router-outlet></router-outlet>
-</md-sidenav-container>
+</mat-sidenav-container>

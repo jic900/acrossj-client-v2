@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { IListElement } from 'app/config/interfaces';
-import { IListItem } from '../../../config/interfaces/list-item';
+import { IListItem } from 'app/config/interfaces/list-item';
 
 @Component({
   selector: 'aj-menu',

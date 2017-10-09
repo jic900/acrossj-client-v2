@@ -1,16 +1,16 @@
-<button md-icon-button mdTooltip="{{menuData.tooltip | translate}}" [mdMenuTriggerFor]="menu">
+<button mat-icon-button matTooltip="{{menuData.tooltip | translate}}" [matMenuTriggerFor]="menu">
   {{menuData.display | translate}}
   <aj-icon *ngIf="menuData.icon" [data]="menuData.icon"></aj-icon>
 </button>
 
-<md-menu #menu="mdMenu">
+<mat-menu #menu="matMenu">
   <ng-template let-item ngFor [ngForOf]="menuData.list">
     <button
-      md-menu-item
+      mat-menu-item
       [routerLink]="item.link ? item.link.param ? [item.link.path, item.link.param] : [item.link.path] : []"
       (click)="onClicked(item)">
       <aj-icon *ngIf="item.icon" [data]="item.icon"></aj-icon>
       <span *ngIf="item.display">{{item.display | translate}}</span>
     </button>
   </ng-template>
-</md-menu>
+</mat-menu>

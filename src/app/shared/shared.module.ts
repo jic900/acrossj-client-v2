@@ -3,14 +3,18 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
+
 import {
-  MdButtonModule, MdCardModule, MdIconModule,
-  MdListModule, MdMenuModule, MdTooltipModule,
-  MdSlideToggleModule, MdInputModule, MdCheckboxModule,
-  MdToolbarModule, MdSnackBarModule, MdSidenavModule,
-  MdTabsModule, MdSelectModule, MdProgressBarModule, OverlayModule,
-  PortalModule, StyleModule, A11yModule
+  MatButtonModule, MatCardModule, MatIconModule,
+  MatListModule, MatMenuModule, MatTooltipModule,
+  MatSlideToggleModule, MatInputModule, MatCheckboxModule,
+  MatToolbarModule, MatSnackBarModule, MatSidenavModule,
+  MatTabsModule, MatSelectModule, MatProgressBarModule, MatAutocompleteModule
 } from '@angular/material';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
+import { A11yModule } from '@angular/cdk/a11y';
+
 import {
   CovalentDataTableModule, CovalentMediaModule, CovalentLoadingModule,
   CovalentNotificationsModule, CovalentLayoutModule, CovalentMenuModule,
@@ -46,12 +50,12 @@ const ANGULAR_MODULES: any[] = [
 ];
 
 const MATERIAL_MODULES: any[] = [
-  MdButtonModule, MdCardModule, MdIconModule,
-  MdListModule, MdMenuModule, MdTooltipModule,
-  MdSlideToggleModule, MdInputModule, MdCheckboxModule,
-  MdToolbarModule, MdSnackBarModule, MdSidenavModule,
-  MdTabsModule, MdSelectModule, MdProgressBarModule, OverlayModule,
-  PortalModule, StyleModule, A11yModule
+  MatButtonModule, MatCardModule, MatIconModule,
+  MatListModule, MatMenuModule, MatTooltipModule,
+  MatSlideToggleModule, MatInputModule, MatCheckboxModule,
+  MatToolbarModule, MatSnackBarModule, MatSidenavModule,
+  MatTabsModule, MatSelectModule, MatProgressBarModule, OverlayModule,
+  PortalModule, A11yModule
 ];
 
 const COVALENT_MODULES: any[] = [

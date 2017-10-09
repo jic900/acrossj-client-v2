@@ -143,7 +143,7 @@ export class ProfileService implements OnDestroy {
         return;
       }
     }
-    if (this.activeUrl !== PROFILE_MENU_URL && this.activeUrl !== EVENT_RELATED_MENU_URL) {
+    if (this.activeUrl && this.activeUrl !== PROFILE_MENU_URL && this.activeUrl !== EVENT_RELATED_MENU_URL) {
       if (!this.activeUrl.includes('eventrelated')) {
         this.onMenuOpenedChanged(ProfileObserver.EVENT_RELATED, this.getDefaultMenuOpened());
         this.onMenuOpenedChanged(ProfileObserver.PROFILE, this.getDefaultMenuOpened());

@@ -1,31 +1,31 @@
 :host /deep/ {
-  td-navigation-drawer md-toolbar {
+  td-navigation-drawer mat-toolbar {
     padding-bottom: 10px !important;
   }
 
-  td-navigation-drawer md-toolbar .md-body-1 {
+  td-navigation-drawer mat-toolbar .md-body-1 {
     margin-top: 15px;
-    margin-left: 20px;
+    margin-left: 35px;
     font-size: 15px;
     font-weight: 500 !important;
   }
 
-  md-toolbar md-icon {
+  mat-toolbar mat-icon {
     margin-right: 0;
   }
 
-  md-toolbar .mat-icon.md-icon-logo {
+  mat-toolbar .mat-icon.mat-icon-logo {
     padding-top: 7px;
     width: 140px;
     height: auto
   }
 
-  td-navigation-drawer md-toolbar .mat-icon.md-icon-logo {
+  td-navigation-drawer mat-toolbar .mat-icon.mat-icon-logo {
     width: 160px;
     height: auto
   }
 
-  md-divider {
+  mat-divider {
     margin: 0 15px !important;
     border-top-color: rgba(0, 0, 0, .15);
   }
@@ -37,18 +37,18 @@
   height: 100%;
 }
 
-.searchmenu-container md-sidenav {
+.searchmenu-container mat-sidenav {
   width: 450px;
   //opacity: 0.2;
   //background-color: inherit;
 }
 @media (max-width: 768px) {
-  .searchmenu-container md-sidenav {
+  .searchmenu-container mat-sidenav {
     width: 100%;
   }
 }
 
-.searchmenu-container md-sidenav {
+.searchmenu-container mat-sidenav {
   max-width: 500px;
 }
 

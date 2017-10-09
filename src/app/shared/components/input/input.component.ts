@@ -1,5 +1,7 @@
 import {
   Component,
+  OnChanges,
+  SimpleChanges,
   OnInit,
   ElementRef,
   Renderer2,
@@ -21,11 +23,11 @@ import {
   styleUrls: ['./input.component.scss']
 })
 
-export class InputComponent implements OnInit {
+export class InputComponent implements OnChanges, OnInit {
 
   @Input() inputData: IInputElement;
   @Input() type: string;
-  @Input() disabled: boolean;
+  @Input() readonly: boolean;
   @Input() customValidators: {};
   @Input() formValidatorData: IFormValidatorData;
   @Output() bindControl: EventEmitter<{}>;
@@ -34,9 +36,14 @@ export class InputComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
     this.type = 'text';
-    this.disabled = false;
     this.bindControl = new EventEmitter<{}>();
     this.clicked = new EventEmitter<void>();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.readonly) {
+      this.readonly = false;
+    }
   }
 
   ngOnInit() {
@@ -57,21 +64,11 @@ export class InputComponent implements OnInit {
         }
       });
     }
-    this.formControl = this.disabled ?
-      new FormControl({value: '', disabled: true}, validators, asyncValidators) :
-      new FormControl('', validators, asyncValidators);
+    this.formControl = new FormControl('', validators, asyncValidators);
     this.bindControl.emit({'name': this.inputData.name, 'control': this.formControl});
   }
 
   onClick(event): void {
-    // workaround to fix angular material bug
-    // if (this.inputData.readOnly) {
-    //   setTimeout(() => {
-    //     this.renderer.removeClass(this.elementRef.nativeElement.firstElementChild, 'mat-focused');
-    //   }, 10);
-    // } else {
-    //   this.clicked.emit();
-    // }
     this.clicked.emit();
   }
 

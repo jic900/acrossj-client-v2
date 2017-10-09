@@ -9,7 +9,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { MdSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material';
 
 import {
   ProfileService,
@@ -27,7 +27,7 @@ import {
 
 export class ProfileComponent implements AfterViewInit, OnDestroy {
 
-  @ViewChild('sidenav') sideNav: MdSidenav;
+  @ViewChild('sidenav') sideNav: MatSidenav;
   menuMode: string;
   menuOpenedDefault: string;
   eventRelatedSelected: boolean;

@@ -1,49 +1,49 @@
-<md-card [hidden]="authState != 'signin' && authState != 'signup'">
-  <md-tab-group #tabGroup [dynamicHeight]="true"
+<mat-card [hidden]="authState != 'signin' && authState != 'signup'">
+  <mat-tab-group #tabGroup [dynamicHeight]="true"
                 [(selectedIndex)]="selectedIndex"
                 (selectedIndexChange)="onSelectedTabIndexChange()">
-    <md-tab label="{{authData.signin.display | translate}}">
+    <mat-tab label="{{authData.signin.display | translate}}">
       <aj-signin></aj-signin>
-    </md-tab>
-    <md-tab label="{{authData.signup.display | translate}}">
+    </mat-tab>
+    <mat-tab label="{{authData.signup.display | translate}}">
       <aj-signup></aj-signup>
-    </md-tab>
-  </md-tab-group>
-</md-card>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
 
-<md-card [hidden]="authState != 'verifyemail'">
-  <md-card-header>
-    <md-card-title>{{authData.verifyEmail.display | translate}}</md-card-title>
-  </md-card-header>
-  <md-card-content>
+<mat-card [hidden]="authState != 'verifyemail'">
+  <mat-card-header>
+    <mat-card-title>{{authData.verifyEmail.display | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
     <aj-verifyemail></aj-verifyemail>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
 
-<md-card [hidden]="authState != 'sendverifyemail'">
-  <md-card-header>
-    <md-card-title>{{authData.sendVerifyEmail.display | translate}}</md-card-title>
-  </md-card-header>
-  <md-card-content>
+<mat-card [hidden]="authState != 'sendverifyemail'">
+  <mat-card-header>
+    <mat-card-title>{{authData.sendVerifyEmail.display | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
     <aj-sendverifyemail></aj-sendverifyemail>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
 
-<md-card [hidden]="authState != 'forgotpassword'">
-  <md-card-header>
-    <md-card-title>{{authData.forgotPassword.display | translate}}</md-card-title>
-  </md-card-header>
-  <md-card-content>
+<mat-card [hidden]="authState != 'forgotpassword'">
+  <mat-card-header>
+    <mat-card-title>{{authData.forgotPassword.display | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
     <aj-forgotpassword></aj-forgotpassword>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
 
-<md-card [hidden]="authState != 'resetpassword'">
-  <md-card-header>
-    <md-card-title>{{authData.resetPassword.display | translate}}</md-card-title>
-  </md-card-header>
-  <md-card-content>
+<mat-card [hidden]="authState != 'resetpassword'">
+  <mat-card-header>
+    <mat-card-title>{{authData.resetPassword.display | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
     <aj-resetpassword></aj-resetpassword>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
 

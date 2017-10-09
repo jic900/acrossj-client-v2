@@ -2,10 +2,10 @@
   <td-navigation-drawer [logo]="sideNavData.logo.icon.class" [name]="getName()">
     <aj-navlist
       [navListData]="sideNavData.appMenu"
-      (clicked)="($event) !== 'language' ? layout.close() && sidenav.close() && onClicked($event) : null">
+      (clicked)="layout.close() && sidenav.close() && onClicked($event)">
     </aj-navlist>
 
-    <md-divider></md-divider>
+    <mat-divider></mat-divider>
 
     <aj-navlist
       *ngIf="!authenticated"
@@ -28,16 +28,16 @@
 
   <td-layout-nav>
     <div td-toolbar-content layout="row" layout-align="center center" flex>
-      <button md-icon-button td-menu-button tdLayoutToggle>
+      <button mat-icon-button td-menu-button tdLayoutToggle>
         <aj-icon [data]="headerData.toggleButton.icon"></aj-icon>
       </button>
       <aj-icon
         [data]="headerData.logo.icon"
-        [cssClass]="'md-icon-logo cursor-pointer'"
+        [cssClass]="'mat-icon-logo cursor-pointer'"
         [link]="headerData.logo.link">
       </aj-icon>
       <span flex></span>
-      <button md-icon-button (click)="sidenav.toggle()">
+      <button mat-icon-button (click)="sidenav.toggle()">
         <aj-icon [data]="headerData.searchLink.icon" [cssClass]="'search-icon'"></aj-icon>
       </button>
       <div *ngIf="widthIsMedium()">
@@ -47,21 +47,21 @@
         <aj-menu [menuData]="headerData.userMenu"></aj-menu>
       </div>
       <div *ngIf="widthIsMedium() && authenticated">
-        <aj-menu [menuData]="headerData.userMenuAuthed"></aj-menu>
+        <aj-menu [menuData]="headerData.userMenuAuthed" (clicked)="signout()"></aj-menu>
       </div>
     </div>
 
-    <md-sidenav-container class="searchmenu-container">
-      <md-sidenav #sidenav mode="over" align="end" opened="false">
+    <mat-sidenav-container class="searchmenu-container">
+      <mat-sidenav #sidenav mode="over" align="end" opened="false">
         <aj-searchmenu></aj-searchmenu>
-      </md-sidenav>
+      </mat-sidenav>
       <router-outlet></router-outlet>
-    </md-sidenav-container>
+    </mat-sidenav-container>
     <td-layout-footer>
       <div
         layout="row"
         layout-align="start center"
-        class="md-caption"
+        class="mat-caption"
         innerHTML="{{footerData.content.display | translate}}">
       </div>
     </td-layout-footer>

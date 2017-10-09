@@ -5,7 +5,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { MdSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material';
 
 import { MediaQueryBreakPoint } from 'app/config/common/app.config';
 import { Util } from 'app/shared/util/util';
@@ -25,7 +25,7 @@ import {
 
 export class EventRelatedComponent implements AfterViewInit, OnDestroy {
 
-  @ViewChild('sidenav') sideNav: MdSidenav;
+  @ViewChild('sidenav') sideNav: MatSidenav;
   title: string;
   menuOpenedDefault: string;
   menuMode: string;

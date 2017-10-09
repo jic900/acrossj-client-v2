@@ -43,9 +43,7 @@ export class LocalStorageService {
   }
 
   deleteToken() {
-    localStorage.removeItem('profile');
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.clear();
     this.tokenDeleted$.next();
   }
 }

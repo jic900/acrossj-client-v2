@@ -1,8 +1,8 @@
-<md-card>
-  <md-card-header *ngIf="widthLessThanMedium()">
+<mat-card>
+  <mat-card-header *ngIf="widthLessThanMedium()">
     <span>{{menuElements.title.display | translate}}</span>
-  </md-card-header>
-  <md-card-content>
+  </mat-card-header>
+  <mat-card-content>
     <aj-navlist
       [navListData]="menuElements.menuList"
       [(selectedIndex)]="selectedIndex"
@@ -10,5 +10,5 @@
       [showDivider]="widthLessThanMedium()"
       [showNavIcon]="widthLessThanMedium()">
     </aj-navlist>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>

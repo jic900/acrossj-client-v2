@@ -7,7 +7,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MdIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material';
 
 import { LOCALE, DEFAULT_LOCALE } from './config/common/app.config';
 import { SharedModule } from './shared/shared.module';
@@ -53,27 +53,27 @@ export function translateLoaderFactory(httpClient: HttpClient) {
   providers: [
     AuthService,
     ProfileService,
-    MdIconRegistry
+    MatIconRegistry
   ],
   bootstrap: [AppComponent]
 })
 
 export class AppModule {
 
-  constructor(private translate: TranslateService, mdIconRegistry: MdIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(private translate: TranslateService, matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     translate.addLangs([LOCALE.CHINESE, LOCALE.JAPANESE, LOCALE.ENGLISH]);
     translate.setDefaultLang(DEFAULT_LOCALE);
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|ja|zh/) ? browserLang : 'en');
     // translate.use('zh');
 
-    mdIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-    mdIconRegistry.registerFontClassAlias('flag-icon-css', 'flag-icon');
-    mdIconRegistry.addSvgIconInNamespace('assets', 'logo',
+    matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+    matIconRegistry.registerFontClassAlias('flag-icon-css', 'flag-icon');
+    matIconRegistry.addSvgIconInNamespace('assets', 'logo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logo.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'logo_iconed',
+    matIconRegistry.addSvgIconInNamespace('assets', 'logo_iconed',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logo-iconed.svg'));
-    mdIconRegistry.addSvgIconInNamespace('assets', 'fa-calendar-plus-o',
+    matIconRegistry.addSvgIconInNamespace('assets', 'fa-calendar-plus-o',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/calendar-plus-o.svg'));
   }
 }

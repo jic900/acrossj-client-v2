@@ -1,20 +1,33 @@
-<md-icon
-  *ngIf="data.avatar"
-  md-list-avatar
+<mat-icon
+  *ngIf="data.avatar && !isSvgIcon()"
+  mat-list-avatar
   [ngClass]="cssClass ? cssClass : ''"
   fontSet="{{isFontSet() ? data.type : ''}}"
   fontIcon="{{isFontSet() ? data.class : ''}}"
-  [svgIcon]="isSvgIcon() ? data.class : ''"
   [routerLink]="link ? link.param ? [link.path, link.param] : [link.path] : []">
   {{isMaterialIcon() ? data.class : ''}}
-</md-icon>
+</mat-icon>
 
-<md-icon
-  *ngIf="!data.avatar"
+<mat-icon
+  *ngIf="data.avatar && isSvgIcon()"
+  mat-list-avatar
+  [ngClass]="cssClass ? cssClass : ''"
+  [svgIcon]="isSvgIcon() ? data.class : ''"
+  [routerLink]="link ? link.param ? [link.path, link.param] : [link.path] : []">
+</mat-icon>
+
+<mat-icon
+  *ngIf="!data.avatar && !isSvgIcon()"
   [ngClass]="cssClass ? cssClass : ''"
   fontSet="{{isFontSet() ? data.type : ''}}"
   fontIcon="{{isFontSet() ? data.class : ''}}"
-  [svgIcon]="isSvgIcon() ? data.class : ''"
   [routerLink]="link ? link.param ? [link.path, link.param] : [link.path] : []">
   {{isMaterialIcon() ? data.class : ''}}
-</md-icon>
+</mat-icon>
+
+<mat-icon
+  *ngIf="!data.avatar && isSvgIcon()"
+  [ngClass]="cssClass ? cssClass : ''"
+  svgIcon="{{isSvgIcon() ? data.class : ''}}"
+  [routerLink]="link ? link.param ? [link.path, link.param] : [link.path] : []">
+</mat-icon>

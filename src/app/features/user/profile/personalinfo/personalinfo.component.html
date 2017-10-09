@@ -6,7 +6,7 @@
       #firstInput
       [inputData]="formElements.username"
       [type]="'text'"
-      [disabled]="formElements.username.readOnly"
+      [readonly]="formElements.username.readOnly"
       (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-input>
@@ -19,7 +19,7 @@
     <aj-input
       [inputData]="formElements.email"
       [type]="'text'"
-      [disabled]="formElements.email.readOnly"
+      [readonly]="formElements.email.readOnly"
       (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-input>

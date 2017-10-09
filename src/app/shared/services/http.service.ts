@@ -36,7 +36,7 @@ export class HttpService extends AuthHttp {
   }
 
   refreshToken(): Observable<{}> {
-    const reqBody = {'username': this.localStorageService.get('username')};
+    const reqBody = {'username': JSON.parse(this.localStorageService.get('user')).userName};
     this.refreshingToken = true;
     return this.post(EndPoint.getUrl('auth.refreshToken'), reqBody)
       .map(response => response.json())

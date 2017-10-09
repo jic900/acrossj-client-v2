@@ -1,10 +1,12 @@
-<md-select
-  placeholder="{{inputData.placeHolder | translate}}"
-  [(ngModel)]="selectedValue"
-  [formControl]="formControl"
-  (onOpen)="onOpened($event)"
-  (change)="onChange($event)">
-  <md-option *ngFor="let item of inputData.list" [value]="item.name">
-    {{item.display | translate}}
-  </md-option>
-</md-select>
+<mat-form-field>
+  <mat-select
+    placeholder="{{inputData.placeHolder | translate}}"
+    [(ngModel)]="selectedValue"
+    [formControl]="formControl"
+    (onOpen)="onOpened($event)"
+    (change)="onChange($event)">
+    <mat-option *ngFor="let item of inputData.list" [value]="item.name">
+      {{item.display | translate}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

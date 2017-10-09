@@ -1,16 +1,17 @@
-<md-input-container [class.mat-input-invalid]="formValidateFailed()">
+<mat-form-field [class.mat-input-invalid]="formValidateFailed()">
   <input id="{{inputData.name}}"
-         mdInput
+         matInput
          validateonblur
          type="{{type}}"
+         readonly="{{readonly}}"
          [formControl]="formControl"
          (click)="onClick($event)"
          placeholder="{{inputData.placeHolder | translate}}">
-  <md-error *ngIf="validateFailed()">
+  <mat-error *ngIf="validateFailed()">
     {{getValidatorError() | translate}}
-  </md-error>
-  <md-hint *ngIf="formValidateFailed()" style="color: red">
+  </mat-error>
+  <mat-hint *ngIf="formValidateFailed()" style="color: red">
     {{getFormValidateError() | translate}}
-  </md-hint>
-</md-input-container>
+  </mat-hint>
+</mat-form-field>
 

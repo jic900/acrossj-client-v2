@@ -1,14 +1,13 @@
-<md-card>
-  <md-card-header *ngIf="widthLessThanMedium()">
+<mat-card>
+  <mat-card-header *ngIf="widthLessThanMedium()">
     <div *ngIf="widthLessThanMedium()" class="back-link-icon">
       <a [routerLink]="[menuElements.backLink.link.path]">
         <aj-icon [data]="menuElements.backLink.icon" [cssClass]="'cursor-pointer'"></aj-icon>
       </a>
     </div>
     <span>{{menuElements.title.display | translate}}</span>
-    <!--<md-card-title>{{menuElements.title.display | translate}}</md-card-title>-->
-  </md-card-header>
-  <md-card-content>
+  </mat-card-header>
+  <mat-card-content>
     <aj-navlist
       [navListData]="menuElements.menuList"
       [(selectedIndex)]="selectedIndex"
@@ -16,5 +15,5 @@
       [showDivider]="widthLessThanMedium()"
       [showNavIcon]="widthLessThanMedium()">
     </aj-navlist>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
