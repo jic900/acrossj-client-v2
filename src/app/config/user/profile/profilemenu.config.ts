@@ -75,7 +75,7 @@ export class ProfileMenuConfig implements IComponent {
         {
           name: 'transportationinfo',
           type: 'link',
-          display: 'USER.PROFILE.TRANSPORTATION.LABEL',
+          display: 'USER.PROFILE.TRANSPORTATION_INFO.LABEL',
           icon: {
             class: 'fa-car',
             type: 'fa'
