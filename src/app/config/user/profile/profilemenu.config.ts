@@ -73,6 +73,22 @@ export class ProfileMenuConfig implements IComponent {
           }
         },
         {
+          name: 'transportationinfo',
+          type: 'link',
+          display: 'USER.PROFILE.TRANSPORTATION.LABEL',
+          icon: {
+            class: 'fa-car',
+            type: 'fa'
+          },
+          link: {
+            path: '/user/profile/transportation'
+          },
+          navIcon: {
+            class: 'fa-angle-right',
+            type: 'fa'
+          }
+        },
+        {
           name: 'groupInfo',
           type: 'link',
           display: 'USER.PROFILE.GROUP_INFO.LABEL',

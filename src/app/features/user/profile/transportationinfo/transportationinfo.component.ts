@@ -12,25 +12,24 @@ import * as _ from 'lodash';
 import { IForm, IMessageElement } from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
 import {
-  IRunningInfo,
-  IRunningInfoMessage,
-  RunningInfoConfig
-} from 'app/config/user/profile/eventrelated/runninginfo.config';
+  ITransportationInfo,
+  ITransportationInfoMessage,
+  TransportationInfoConfig
+} from 'app/config/user/profile/transportationinfo.config';
 import { LocalStorageService } from 'app/shared/services/localstorage.service';
 import { ProfileService } from 'app/features/user/services/profile.service';
-import { IProfile, IRunning } from 'app/features/user/model/profile.model';
+import { IProfile, ITransportation } from 'app/features/user/model/profile.model';
 
 @Component({
-  selector: 'aj-runninginfo',
-  templateUrl: './runninginfo.component.html',
-  styleUrls: ['./runninginfo.component.scss']
+  selector: 'aj-transportationinfo',
+  templateUrl: './transportationinfo.component.html',
+  styleUrls: ['./transportationinfo.component.scss']
 })
-
-export class RunningInfoComponent implements AfterViewInit, OnDestroy {
+export class TransportationInfoComponent implements AfterViewInit, OnDestroy {
 
   formData: IForm;
-  formElements: IRunningInfo;
-  messages: IRunningInfoMessage;
+  formElements: ITransportationInfo;
+  messages: ITransportationInfoMessage;
   formGroup: FormGroup;
   message: IMessageElement;
   processing: boolean;
@@ -38,24 +37,23 @@ export class RunningInfoComponent implements AfterViewInit, OnDestroy {
   @ViewChild('anchor') anchorElement: ElementRef;
 
   constructor(private profileService: ProfileService, private localStorageService: LocalStorageService) {
-    this.formData = new RunningInfoConfig();
+    this.formData = new TransportationInfoConfig();
     this.formElements = _.mapKeys(this.formData.elements, 'name');
     this.messages = _.mapKeys(this.formData.messages, 'name');
     this.message = null;
     this.processing = false;
     this.formGroup = new FormGroup({}, this.formData.validator.validateFunc());
-    this.subscription = this.profileService.profileUpdated$.subscribe(
-      (profile: IProfile) => this.populateRunningInfo(profile.relevant ? profile.relevant.running : null)
-    );
+    this.subscription = this.profileService.profileUpdated$
+      .subscribe((profile: IProfile) => this.populateTransportationInfo(profile.transportation));
   }
 
   ngAfterViewInit(): void {
     const profileInStorage = this.localStorageService.get('profile');
     if (profileInStorage) {
       const profile: IProfile = JSON.parse(profileInStorage);
-      this.populateRunningInfo(profile.relevant ? profile.relevant.running : null);
+      this.populateTransportationInfo(profile.transportation);
     } else {
-      this.loadRunningInfo();
+      this.loadTransportationInfo();
     }
   }
 
@@ -63,11 +61,11 @@ export class RunningInfoComponent implements AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  populateRunningInfo(running: IRunning): void {
+  populateTransportationInfo(transportation: ITransportation): void {
     setTimeout(() => {
-      if (running) {
-        Object.keys(running).forEach((field) => {
-          this.formGroup.get(field).setValue(running[field]);
+      if (transportation) {
+        Object.keys(transportation).forEach((field) => {
+          this.formGroup.get(field).setValue(transportation[field]);
         });
       }
     });
@@ -85,12 +83,12 @@ export class RunningInfoComponent implements AfterViewInit, OnDestroy {
     this.formGroup.addControl(controlData['name'], controlData['control']);
   }
 
-  loadRunningInfo(): void {
+  loadTransportationInfo(): void {
     this.processing = true;
     this.message = null;
     this.profileService.getProfile().subscribe(
       (profile: IProfile) => {
-        this.populateRunningInfo(profile.relevant ? profile.relevant.running : null);
+        this.populateTransportationInfo(profile.transportation);
         this.processing = false;
       },
       err => {
@@ -110,7 +108,7 @@ export class RunningInfoComponent implements AfterViewInit, OnDestroy {
       this.anchorElement.nativeElement.scrollIntoView();
     };
 
-    this.profileService.saveProfile({'relevant.running': this.formGroup.value})
+    this.profileService.saveProfile({transportation: this.formGroup.value})
       .subscribe(
         data => {
           this.message = this.messages.success;

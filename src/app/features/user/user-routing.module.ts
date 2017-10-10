@@ -17,6 +17,7 @@ import { HikingInfoComponent } from './profile/eventrelated/hikinginfo/hikinginf
 import { CampingInfoComponent } from './profile/eventrelated/campinginfo/campinginfo.component';
 import { BicyclingInfoComponent } from './profile/eventrelated/bicyclinginfo/bicyclinginfo.component';
 import { OthersInfoComponent } from './profile/eventrelated/othersinfo/othersinfo.component';
+import { TransportationInfoComponent } from './profile/transportationinfo/transportationinfo.component';
 import { GroupInfoComponent } from './profile/groupinfo/groupinfo.component';
 import { EventSummaryComponent } from '../event/eventsummary.component';
 import { MessageSummaryComponent } from './message/messagesummary.component';
@@ -24,16 +25,14 @@ import { UploadSummaryComponent } from './upload/uploadsummary.component';
 import { ProfileMenuDummyComponent } from './profile/profilemenu/profilemenudummy.component';
 
 const userRoutes: Routes = [
-  {path: '', component: UserComponent,
+  {path: '', component: UserComponent, canActivate: [AuthGuard],
     children: [
       {path: '', redirectTo: '/user/dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: DashboardComponent},
-      {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children: [
-      // {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children: [
+      {path: 'profile', component: ProfileComponent, children: [
         {path: '', redirectTo: '/user/profile/menu', pathMatch: 'full'},
         {path: 'menu', component: ProfileMenuDummyComponent},
         {path: 'personalinfo', component: PersonalInfoComponent, canDeactivate: [CanDeactivateGuard]},
-        {path: 'personalinfo/:flag', component: PersonalInfoComponent, canDeactivate: [CanDeactivateGuard]},
         {path: 'changepassword', component: ChangePasswordComponent},
         {path: 'eventrelated', component: EventRelatedComponent, children: [
           {path: '', redirectTo: '/user/profile/eventrelated/menu', pathMatch: 'full'},
@@ -46,6 +45,7 @@ const userRoutes: Routes = [
           {path: 'bicycling', component: BicyclingInfoComponent},
           {path: 'others', component: OthersInfoComponent}
         ]},
+        {path: 'transportation', component: TransportationInfoComponent},
         {path: 'groupinfo', component: GroupInfoComponent}
       ]},
       {path: 'events', component: EventSummaryComponent},

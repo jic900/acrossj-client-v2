@@ -1,7 +1,15 @@
-<aj-profiledetail [title]="'Hiking'">
-  <div style="padding: 30px">
-    <h2>
-      hikinginfo works!
-    </h2>
-  </div>
+<div #anchor></div>
+<aj-profiledetail [title]="formData.name">
+  <form novalidate [formGroup]="formGroup" (ngSubmit)="onSave($event)">
+    <aj-message *ngIf="message" [data]="message"></aj-message>
+    <div class="profile-btn-container">
+      <button
+        class="profile-btn"
+        type="submit"
+        [disabled]="!isValid()"
+        [ngClass]="{'disabled': !isValid()}">
+        {{ formElements.saveButton.display | translate }}
+      </button>
+    </div>
+  </form>
 </aj-profiledetail>

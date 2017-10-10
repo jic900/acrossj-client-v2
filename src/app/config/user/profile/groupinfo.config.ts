@@ -1,3 +1,7 @@
+/**
+ * Created by LAE84266 on 11/08/2017.
+ */
+
 import {
   IForm,
   IElement,
@@ -7,23 +11,23 @@ import {
 } from 'app/config/interfaces';
 import { ValidationUtil } from 'app/shared/util/validation-util';
 
-export interface IGeneralInfo {
+export interface IGroupInfo {
   saveButton: IElement;
   backLink: ILinkElement;
 }
 
-export interface IGeneralInfoMessage {
+export interface IGroupInfoMessage {
   success: IMessageElement;
 }
 
-export class GeneralInfoConfig implements IForm {
+export class GroupInfoConfig implements IForm {
 
-  name = 'USER.PROFILE.EVENT_RELATED.GENERAL.LABEL';
+  name = 'USER.PROFILE.GROUP_INFO.LABEL';
   elements: [IElement, ILinkElement] = [
     {
       name: 'saveButton',
       type: 'button',
-      display: 'USER.PROFILE.EVENT_RELATED.GENERAL.BTN_LABEL'
+      display: 'USER.PROFILE.GROUP_INFO.BTN_LABEL'
     },
     {
       name: 'backLink',
@@ -49,7 +53,7 @@ export class GeneralInfoConfig implements IForm {
     {
       name: 'success',
       message: {
-        display: 'MESSAGES.USER.PROFILE.EVENT_RELATED.GENERAL.SUCCESS',
+        display: 'MESSAGES.USER.PROFILE.GROUP_INFO.SUCCESS',
         type: 'success',
         icon: {
           class: 'fa-check-circle',

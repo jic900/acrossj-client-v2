@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from 'app/features/user/user-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { EventModule } from 'app/features/event/event.module';
-import { ProfileService } from './services/profile.service';
 import { UserComponent } from './user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -18,6 +17,7 @@ import { UploadSummaryComponent } from './upload/uploadsummary.component';
 import { UploadDetailComponent } from './upload/uploaddetail/uploaddetail.component';
 import { ProfileDetailComponent } from './profile/profiledetail/profiledetail.component';
 import { EventRelatedComponent } from './profile/eventrelated/eventrelated.component';
+import { TransportationInfoComponent } from './profile/transportationinfo/transportationinfo.component';
 import { GroupInfoComponent } from './profile/groupinfo/groupinfo.component';
 import { GeneralInfoComponent } from './profile/eventrelated/generalinfo/generalinfo.component';
 import { SkiInfoComponent } from './profile/eventrelated/skiinfo/skiinfo.component';
@@ -51,6 +51,7 @@ import { EventRelatedMenuDummyComponent } from './profile/eventrelated/eventrela
     UploadSummaryComponent,
     UploadDetailComponent,
     EventRelatedComponent,
+    TransportationInfoComponent,
     GroupInfoComponent,
     GeneralInfoComponent,
     SkiInfoComponent,

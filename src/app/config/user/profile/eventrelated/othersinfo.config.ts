@@ -7,23 +7,23 @@ import {
 } from 'app/config/interfaces';
 import { ValidationUtil } from 'app/shared/util/validation-util';
 
-export interface IGeneralInfo {
+export interface IOthersInfo {
   saveButton: IElement;
   backLink: ILinkElement;
 }
 
-export interface IGeneralInfoMessage {
+export interface IOthersInfoMessage {
   success: IMessageElement;
 }
 
-export class GeneralInfoConfig implements IForm {
+export class OthersInfoConfig implements IForm {
 
-  name = 'USER.PROFILE.EVENT_RELATED.GENERAL.LABEL';
+  name = 'USER.PROFILE.EVENT_RELATED.OTHERS.LABEL';
   elements: [IElement, ILinkElement] = [
     {
       name: 'saveButton',
       type: 'button',
-      display: 'USER.PROFILE.EVENT_RELATED.GENERAL.BTN_LABEL'
+      display: 'USER.PROFILE.EVENT_RELATED.OTHERS.BTN_LABEL'
     },
     {
       name: 'backLink',
@@ -49,7 +49,7 @@ export class GeneralInfoConfig implements IForm {
     {
       name: 'success',
       message: {
-        display: 'MESSAGES.USER.PROFILE.EVENT_RELATED.GENERAL.SUCCESS',
+        display: 'MESSAGES.USER.PROFILE.EVENT_RELATED.OTHERS.SUCCESS',
         type: 'success',
         icon: {
           class: 'fa-check-circle',

@@ -99,7 +99,7 @@ export class PersonalInfoConfig implements IForm {
     {
       name: 'saveButton',
       type: 'button',
-      display: 'USER.PROFILE.PERSONAL_INFO.SAVEBTN_LABEL'
+      display: 'USER.PROFILE.PERSONAL_INFO.BTN_LABEL'
     },
     {
       name: 'backLink',

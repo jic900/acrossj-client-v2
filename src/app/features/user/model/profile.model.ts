@@ -4,8 +4,9 @@
 
 export interface IProfile {
   personal: IPersonal;
-  relevant: IEventRelatedInfo;
-  group: IGroupInfo;
+  relevant: IEventRelated;
+  transportation: ITransportation;
+  group: IGroup;
 }
 
 export interface IPersonal {
@@ -17,45 +18,49 @@ export interface IPersonal {
   phonenumber?: string;
 }
 
-export interface IEventRelatedInfo {
-  general: IGeneralInfo;
-  ski: ISkiInfo;
-  hiking: IHikingInfo;
-  running: IRunningInfo;
-  bicycling: IBicyclingInfo;
-  camping: ICampingInfo;
-  others: IOthersInfo;
+export interface ITransportation {
+  subwayStation?: string;
 }
 
-export interface IGroupInfo {
+export interface IEventRelated {
+  general: IGeneral;
+  ski: ISki;
+  hiking: IHiking;
+  running: IRunning;
+  bicycling: IBicycling;
+  camping: ICamping;
+  others: IOthers;
+}
+
+export interface IGroup {
   data: string;
 }
 
-export interface IGeneralInfo {
+export interface IGeneral {
   data: string;
 }
 
-export interface ISkiInfo {
+export interface ISki {
   data: string;
 }
 
-export interface IHikingInfo {
+export interface IHiking {
   data: string;
 }
 
-export interface IRunningInfo {
+export interface IRunning {
   data: string;
 }
 
-export interface IBicyclingInfo {
+export interface IBicycling {
   data: string;
 }
 
-export interface ICampingInfo {
+export interface ICamping {
   data: string;
 }
 
-export interface IOthersInfo {
+export interface IOthers {
   data: string;
 }
 

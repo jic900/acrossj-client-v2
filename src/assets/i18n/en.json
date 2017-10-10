@@ -129,7 +129,7 @@
         "ADDRESS": "Address",
         "POSTCODE": "Postal Code",
         "PHONE_NUMBER": "Phone Number",
-        "SAVEBTN_LABEL": "Save"
+        "BTN_LABEL": "Save"
       },
       "CHANGE_PASSWORD": {
         "LABEL": "Change Password",
@@ -143,29 +143,41 @@
         "LABEL": "Event Related Information",
         "MENU_LABEL": "Event Related Information",
         "GENERAL": {
-          "LABEL": "General"
+          "LABEL": "General",
+          "BTN_LABEL": "Save"
         },
         "RUNNING": {
-          "LABEL": "Running"
+          "LABEL": "Running",
+          "BTN_LABEL": "Save"
         },
         "SKI": {
-          "LABEL": "Ski"
+          "LABEL": "Ski",
+          "BTN_LABEL": "Save"
         },
         "HIKING": {
-          "LABEL": "Hiking"
+          "LABEL": "Hiking",
+          "BTN_LABEL": "Save"
         },
         "CAMPING": {
-          "LABEL": "Camping"
+          "LABEL": "Camping",
+          "BTN_LABEL": "Save"
         },
         "BICYCLING": {
-          "LABEL": "Bicycling"
+          "LABEL": "Bicycling",
+          "BTN_LABEL": "Save"
         },
         "OTHERS": {
-          "LABEL": "Other"
+          "LABEL": "Others",
+          "BTN_LABEL": "Save"
         }
       },
+      "TRANSPORTATION_INFO": {
+        "LABEL": "Transportation",
+        "BTN_LABEL": "Save"
+      },
       "GROUP_INFO": {
-        "LABEL": "Group Information"
+        "LABEL": "Group Information",
+        "BTN_LABEL": "Save"
       }
     },
     "EVENTS": {
@@ -228,6 +240,35 @@
           "INVALID_USERNAME": "The username does not exist.",
           "INVALID_PASSWORD": "The current password entered is incorrect.",
           "SAME_PASSWORD": "Your new password cannot be the same as the current password."
+        },
+        "EVENT_RELATED": {
+          "GENERAL": {
+            "SUCCESS": "Your general information has been successfully updated."
+          },
+          "RUNNING": {
+            "SUCCESS": "Your running related information has been successfully updated."
+          },
+          "SKI": {
+            "SUCCESS": "Your ski related information has been successfully updated."
+          },
+          "HIKING": {
+            "SUCCESS": "Your hiking related information has been successfully updated."
+          },
+          "CAMPING": {
+            "SUCCESS": "Your camping related information has been successfully updated."
+          },
+          "BICYCLING": {
+            "SUCCESS": "Your bicycling related information has been successfully updated."
+          },
+          "OTHERS": {
+            "SUCCESS": "Your other information has been successfully updated."
+          }
+        },
+        "TRANSPORTATION_INFO": {
+          "SUCCESS": "Your transportation information has been successfully updated."
+        },
+        "GROUP_INFO": {
+          "SUCCESS": "Your group information has been successfully updated."
         }
       }
     }

@@ -102,16 +102,20 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
       controlData['control'].setValue(user.email);
     }
     this.formGroup.addControl(controlData['name'], controlData['control']);
-
   }
 
   loadPersonalInfo(): void {
     this.processing = true;
     this.message = null;
     this.profileService.getProfile().subscribe(
-      (profile: IProfile) => this.populatePersonalInfo(profile.personal),
-      err => this.message = Util.createErrorMessage(err.name, err.message),
-      () => this.processing = false
+      (profile: IProfile) => {
+        this.populatePersonalInfo(profile.personal);
+        this.processing = false;
+      },
+      err => {
+        this.message = Util.createErrorMessage(err.name, err.message);
+        this.processing = false;
+      }
     );
   }
 
