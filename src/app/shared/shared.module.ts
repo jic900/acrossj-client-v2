@@ -35,10 +35,11 @@ import { NavListComponent } from './components/navlist/navlist.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputComponent } from './components/input/input.component';
 import { MessageComponent } from './components/message/message.component';
-import { SelectComponent } from './components/select/select.component';
+import { MatSelectComponent } from './components/mat-select/mat-select.component';
 import { DatePickerComponent, DatePickerContentComponent } from './components/datepicker/datepicker.component';
 import { DateCalendarComponent } from './components/datepicker/calendar/date-calendar.component';
 import { DateRangeCalendarComponent } from './components/datepicker/calendar/date-range-calendar.component';
+import { SelectComponent } from './components/select/select.component';
 
 const FLEX_LAYOUT_MODULES: any[] = [
   FlexLayoutModule,
@@ -96,11 +97,12 @@ export function httpServiceFactory(
     IconComponent,
     InputComponent,
     MessageComponent,
-    SelectComponent,
+    MatSelectComponent,
     DatePickerComponent,
     DatePickerContentComponent,
     DateCalendarComponent,
-    DateRangeCalendarComponent
+    DateRangeCalendarComponent,
+    SelectComponent
   ],
   exports: [
     ANGULAR_MODULES,
@@ -114,8 +116,9 @@ export function httpServiceFactory(
     IconComponent,
     InputComponent,
     MessageComponent,
-    SelectComponent,
-    DatePickerComponent
+    MatSelectComponent,
+    DatePickerComponent,
+    SelectComponent
   ],
   providers: [
     LocalStorageService,

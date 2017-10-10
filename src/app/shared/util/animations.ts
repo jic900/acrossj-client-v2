@@ -33,7 +33,7 @@ export const slideInDownAnimation: AnimationTriggerMetadata = trigger('routeAnim
 
 /**
  * This animation fades in the background color and text content of the
- * select's options. It is time delayed to occur 100ms after the overlay
+ * mat-select's options. It is time delayed to occur 100ms after the overlay
  * panel has transformed in.
  */
 export const fadeInContent: AnimationTriggerMetadata = trigger('fadeInContent', [

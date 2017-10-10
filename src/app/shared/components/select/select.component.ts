@@ -1,13 +1,9 @@
 import {
   Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter
+  OnInit
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 
-import { IListElement, IListItem } from 'app/config/interfaces';
+enum SelectMode {SINGLE, MULTI}
 
 @Component({
   selector: 'aj-select',
@@ -17,35 +13,9 @@ import { IListElement, IListItem } from 'app/config/interfaces';
 
 export class SelectComponent implements OnInit {
 
-  @Input() inputData: IListElement;
-  @Input() required: boolean;
-  @Input() selectedValue: string;
-  @Output() onOpen: EventEmitter<void>;
-  @Output() bindControl: EventEmitter<{}>;
-  @Output() selectedValueChange: EventEmitter<IListItem>;
-  formControl: FormControl;
-
-  constructor() {
-    this.required = false;
-    this.onOpen = new EventEmitter<void>();
-    this.bindControl = new EventEmitter<{}>();
-    this.selectedValueChange = new EventEmitter<IListItem>();
-  }
+  constructor() { }
 
   ngOnInit() {
-    const validators = this.required ? [Validators.required] : [];
-    this.formControl = new FormControl('', validators);
-    this.bindControl.emit({'name': this.inputData.name, 'control': this.formControl});
   }
 
-  onOpened(event): void {
-    this.onOpen.emit();
-  }
-
-  onChange(event): void {
-    const selectedElement: IListItem = (<IListItem[]>this.inputData.list).filter(element => {
-      return element.name === this.selectedValue;
-    })[0];
-    this.selectedValueChange.emit(selectedElement);
-  }
 }

@@ -45,7 +45,7 @@ export class ProfileMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.CHANGE_PASSWORD.LABEL',
           icon: {
-            class: 'fa-info-circle',
+            class: 'fa-key',
             type: 'fa'
           },
           link: {
@@ -77,7 +77,7 @@ export class ProfileMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.TRANSPORTATION_INFO.LABEL',
           icon: {
-            class: 'fa-car',
+            class: 'fa-bus',
             type: 'fa'
           },
           link: {
@@ -93,8 +93,8 @@ export class ProfileMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.GROUP_INFO.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            class: 'people',
+            type: 'md'
           },
           link: {
             path: '/user/profile/groupinfo'
