@@ -73,6 +73,20 @@ export class AppModule {
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logo.svg'));
     matIconRegistry.addSvgIconInNamespace('assets', 'logo_iconed',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logo-iconed.svg'));
+    matIconRegistry.addSvgIconInNamespace('assets', 'general',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/general.svg'));
+    matIconRegistry.addSvgIconInNamespace('assets', 'ski',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/ski.svg'));
+    matIconRegistry.addSvgIconInNamespace('assets', 'running',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/running.svg'));
+    matIconRegistry.addSvgIconInNamespace('assets', 'camping',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/camping.svg'));
+    matIconRegistry.addSvgIconInNamespace('assets', 'hike',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/hike.svg'));
+    matIconRegistry.addSvgIconInNamespace('assets', 'bicycle',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/bicycle.svg'));
+    matIconRegistry.addSvgIconInNamespace('assets', 'skills',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/skills.svg'));
     matIconRegistry.addSvgIconInNamespace('assets', 'fa-calendar-plus-o',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/calendar-plus-o.svg'));
   }

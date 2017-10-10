@@ -31,8 +31,8 @@ export class EventRelatedMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.EVENT_RELATED.GENERAL.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            class: 'assets:general',
+            type: 'svg'
           },
           link: {
             path: '/user/profile/eventrelated/general'
@@ -44,8 +44,8 @@ export class EventRelatedMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.EVENT_RELATED.RUNNING.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            class: 'assets:running',
+            type: 'svg'
           },
           link: {
             path: '/user/profile/eventrelated/running'
@@ -57,8 +57,8 @@ export class EventRelatedMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.EVENT_RELATED.SKI.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            class: 'assets:ski',
+            type: 'svg'
           },
           link: {
             path: '/user/profile/eventrelated/ski'
@@ -70,8 +70,8 @@ export class EventRelatedMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.EVENT_RELATED.HIKING.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            class: 'assets:hike',
+            type: 'svg'
           },
           link: {
             path: '/user/profile/eventrelated/hiking'
@@ -83,8 +83,8 @@ export class EventRelatedMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.EVENT_RELATED.CAMPING.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            class: 'assets:camping',
+            type: 'svg'
           },
           link: {
             path: '/user/profile/eventrelated/camping'
@@ -96,8 +96,8 @@ export class EventRelatedMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.EVENT_RELATED.BICYCLING.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            class: 'assets:bicycle',
+            type: 'svg'
           },
           link: {
             path: '/user/profile/eventrelated/bicycling'
@@ -109,8 +109,10 @@ export class EventRelatedMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.EVENT_RELATED.OTHERS.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            // class: 'fa-list',
+            // type: 'fa'
+            class: 'list',
+            type: 'md'
           },
           link: {
             path: '/user/profile/eventrelated/others'

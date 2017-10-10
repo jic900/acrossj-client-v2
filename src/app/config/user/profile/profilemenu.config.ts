@@ -61,8 +61,8 @@ export class ProfileMenuConfig implements IComponent {
           type: 'link',
           display: 'USER.PROFILE.EVENT_RELATED.LABEL',
           icon: {
-            class: 'fa-info-circle',
-            type: 'fa'
+            class: 'assets:skills',
+            type: 'svg'
           },
           link: {
             path: '/user/profile/eventrelated/menu'
