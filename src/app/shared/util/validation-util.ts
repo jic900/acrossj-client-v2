@@ -43,14 +43,4 @@ export class ValidationUtil {
     }
     return null;
   }
-
-  public static fieldsTouched = () => (formGroup: FormGroup) => {
-    const controlNames = Object.keys(formGroup.controls);
-    for (const control of controlNames) {
-      if (formGroup.get(control).dirty) {
-        return null;
-      }
-    }
-    return {'fieldsTouched': true};
-  }
 }

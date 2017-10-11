@@ -74,6 +74,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
   @Input() mode: DatePickerMode;
   @Output() clicked: EventEmitter<void>;
   @Output() bindControl: EventEmitter<{}>;
+  @Output() inputChange: EventEmitter<void>;
 
   elements: IDatePicker;
   calOptions: ICalendarOptions;
@@ -103,6 +104,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     this.opened = false;
     this.clicked = new EventEmitter<void>();
     this.bindControl = new EventEmitter<{}>();
+    this.inputChange = new EventEmitter<void>();
 
     this.translateSub = translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this.setPlaceHolder();
@@ -177,26 +179,16 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
         }
       }
     });
-    this.formControl = ! this.data.readOnly ?
-      new FormControl('', validators, []) : new FormControl({value: '', disabled: true}, validators, []);
+    this.formControl = new FormControl('', validators, []);
     this.bindControl.emit({'name': this.data.name, 'control': this.formControl});
   }
 
   onClicked(event: any): void {
+    if (this.data.readOnly) {
+      this.open(event);
+    }
     this.clicked.emit();
     event.preventDefault();
-  }
-
-  onTriggerClicked(event: any): void {
-    this.open(event);
-    event.stopPropagation();
-  }
-
-  onMouseDown(event: any): void {
-    if (this.data.readOnly) {
-      this.formControl.disable();
-    }
-    event.stopPropagation();
   }
 
   open(event: any): void {
@@ -223,14 +215,13 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
       this.calendarPortal.detach();
     }
     this.opened = false;
-    if (this.data.readOnly && this.inputValue !== '') {
-      this.formControl.enable();
-      this.formControl.markAsTouched();
-    }
   }
 
   clearInput(event: any): void {
     this.selected = null;
+    if (this.inputValue !== '') {
+      this.formControl.markAsDirty();
+    }
     this.inputValue = '';
     this.clicked.emit();
     event.stopPropagation();
@@ -243,6 +234,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     } else {
       // TODO
     }
+    this.inputChange.emit();
   }
 
   onSelected(value: IDate[]): void {

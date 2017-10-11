@@ -2,7 +2,15 @@
  * Created by LAE86643 on 8/6/2017.
  */
 
-import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
@@ -18,11 +26,13 @@ import { ProfileService } from 'app/features/user/services/profile.service';
 import { MomentService } from 'app/shared/services/moment.service';
 import { LocalStorageService } from 'app/shared/services/localstorage.service';
 import { IProfile, IPersonal } from 'app/features/user/model/profile.model';
+// import { DatePickerMode } from 'app/shared/components/datepicker/datepicker.component';
 
 @Component({
   selector: 'aj-personalinfo',
   templateUrl: './personalinfo.component.html',
-  styleUrls: ['./personalinfo.component.scss']
+  styleUrls: ['./personalinfo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
@@ -35,17 +45,19 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
   processing: boolean;
   subscription: Subscription;
   @ViewChild('anchor') anchorElement: ElementRef;
+  // datePickerMode: DatePickerMode = DatePickerMode.RANGE;
 
   constructor(private profileService: ProfileService,
               private momentService: MomentService,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private changeDetectorRef: ChangeDetectorRef) {
     this.formData = new PersonalInfoConfig();
     this.formElements = _.mapKeys(this.formData.elements, 'name');
     this.formElements.birthday.enabledDateRange = this.enabledDOBDateRange();
     this.messages = _.mapKeys(this.formData.messages, 'name');
     this.message = null;
     this.processing = false;
-    this.formGroup = new FormGroup({}, this.formData.validator.validateFunc());
+    this.formGroup = new FormGroup({});
     this.subscription = this.profileService.profileUpdated$
       .subscribe((profile: IProfile) => this.populatePersonalInfo(profile.personal));
   }
@@ -87,12 +99,16 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
   }
 
   isValid(): boolean {
-    return this.formGroup.valid && !this.processing;
+    return this.formGroup.dirty && this.formGroup.valid && !this.processing;
   }
 
   onClicked(event): void {
     this.message = null;
   }
+
+  // onDateRangePickerInputChange(): void {
+  //   setTimeout(() => this.changeDetectorRef.detectChanges());
+  // }
 
   onBindControl(controlData: {}): void {
     const user = JSON.parse(this.localStorageService.get('user'));

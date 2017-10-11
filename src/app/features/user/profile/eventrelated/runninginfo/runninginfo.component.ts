@@ -43,7 +43,7 @@ export class RunningInfoComponent implements AfterViewInit, OnDestroy {
     this.messages = _.mapKeys(this.formData.messages, 'name');
     this.message = null;
     this.processing = false;
-    this.formGroup = new FormGroup({}, this.formData.validator.validateFunc());
+    this.formGroup = new FormGroup({});
     this.subscription = this.profileService.profileUpdated$.subscribe(
       (profile: IProfile) => this.populateRunningInfo(profile.relevant ? profile.relevant.running : null)
     );
@@ -74,7 +74,7 @@ export class RunningInfoComponent implements AfterViewInit, OnDestroy {
   }
 
   isValid(): boolean {
-    return this.formGroup.valid && !this.processing;
+    return this.formGroup.dirty && this.formGroup.valid && !this.processing;
   }
 
   onClicked(event): void {

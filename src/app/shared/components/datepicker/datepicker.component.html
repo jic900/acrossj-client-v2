@@ -1,10 +1,10 @@
-<mat-form-field (mousedown)="onMouseDown($event)">
-  <div *ngIf="data.readOnly" class="datepicker-input-clicker" (click)="onTriggerClicked($event)"></div>
+<mat-form-field>
   <input
     matInput
     validateonblur
     [formControl]="formControl"
     placeholder="{{placeHolder}}"
+    readonly="{{data.readOnly ? 'true' : 'false'}}"
     (click)="onClicked($event)"
     [(ngModel)]="inputValue"
     (ngModelChange)="onInputChange($event)">
