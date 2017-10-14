@@ -9,4 +9,5 @@ export interface IInputElement extends IElement {
   placeHolder: string;
   readOnly?: boolean;
   validators?: IValidator[];
+  hint?: string;
 }

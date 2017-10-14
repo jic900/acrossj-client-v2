@@ -9,7 +9,9 @@ import {
   MatListModule, MatMenuModule, MatTooltipModule,
   MatSlideToggleModule, MatInputModule, MatCheckboxModule,
   MatToolbarModule, MatSnackBarModule, MatSidenavModule,
-  MatTabsModule, MatSelectModule, MatProgressBarModule, MatAutocompleteModule
+  MatTabsModule, MatSelectModule, MatProgressBarModule,
+  MatChipsModule, MatRadioModule, MatFormFieldModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
@@ -40,6 +42,7 @@ import { DatePickerComponent, DatePickerContentComponent } from './components/da
 import { DateCalendarComponent } from './components/datepicker/calendar/date-calendar.component';
 import { DateRangeCalendarComponent } from './components/datepicker/calendar/date-range-calendar.component';
 import { SelectComponent } from './components/select/select.component';
+import { MultiSelectComponent } from './components/multiselect/multiselect.component';
 
 const FLEX_LAYOUT_MODULES: any[] = [
   FlexLayoutModule,
@@ -54,8 +57,9 @@ const MATERIAL_MODULES: any[] = [
   MatListModule, MatMenuModule, MatTooltipModule,
   MatSlideToggleModule, MatInputModule, MatCheckboxModule,
   MatToolbarModule, MatSnackBarModule, MatSidenavModule,
-  MatTabsModule, MatSelectModule, MatProgressBarModule, OverlayModule,
-  PortalModule, A11yModule
+  MatTabsModule, MatSelectModule, MatProgressBarModule,
+  MatChipsModule, MatRadioModule, MatFormFieldModule,
+  OverlayModule, PortalModule, A11yModule
 ];
 
 const COVALENT_MODULES: any[] = [
@@ -102,7 +106,8 @@ export function httpServiceFactory(
     DatePickerContentComponent,
     DateCalendarComponent,
     DateRangeCalendarComponent,
-    SelectComponent
+    SelectComponent,
+    MultiSelectComponent
   ],
   exports: [
     ANGULAR_MODULES,
@@ -118,7 +123,8 @@ export function httpServiceFactory(
     MessageComponent,
     MatSelectComponent,
     DatePickerComponent,
-    SelectComponent
+    SelectComponent,
+    MultiSelectComponent
   ],
   providers: [
     LocalStorageService,

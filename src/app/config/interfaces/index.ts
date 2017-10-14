@@ -14,4 +14,6 @@ export * from './list-item';
 export * from './message.interface';
 export * from './message-element.interface';
 export * from './validator.interface';
+export * from './select-element.interface';
+export * from './chip-options.interface';
 export * from './moment';

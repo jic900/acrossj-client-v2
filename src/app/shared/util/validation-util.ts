@@ -1,9 +1,48 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MomentService, DateField } from '../services/moment.service';
-import { IDate, IDateRange } from 'app/config/interfaces';
+import { IDate, IDateRange, IValidator } from 'app/config/interfaces';
 
 export class ValidationUtil {
+
+  public static generateFormControl = (controlValidators: IValidator[]) => {
+    const validators = [];
+    const asyncValidators = [];
+    if (controlValidators) {
+      controlValidators.forEach(validator => {
+        if (validator.type === 'builtin') {
+          validators.push(ValidationUtil.getBuiltinValidator(validator));
+        } else if (validator.type === 'custom') {
+          validators.push(validator.validateFunc);
+        } else if (validator.type === 'customAsync') {
+          asyncValidators.push(validator.validateFunc);
+        }
+      });
+    }
+    return new FormControl('', validators, asyncValidators);
+  }
+
+  public static getBuiltinValidator = (validator: IValidator) => {
+    switch (validator.name) {
+      case 'required':
+        return Validators.required;
+      case 'minlength':
+        return Validators.minLength(validator.value);
+      case 'maxlength':
+        return Validators.maxLength(validator.value);
+      case 'pattern':
+        return Validators.pattern(validator.value);
+    }
+  }
+
+  public static getValidatorError = (validators: IValidator[], formControl: FormControl) => {
+    for (const validator of validators) {
+      if (formControl.hasError(validator.name)) {
+        return validator.error;
+      }
+    }
+    return null;
+  }
 
   public static isValidDate = (momentService: MomentService) => (formControl: FormControl) => {
     return momentService.isValidDate(formControl.value) ? null : {'isValidDate': true};

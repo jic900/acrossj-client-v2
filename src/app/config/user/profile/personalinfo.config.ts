@@ -8,17 +8,16 @@ import {
   IInputElement,
   IDatePickerElement,
   ILinkElement,
-  IListElement,
   IMessageElement,
-  IValidator
+  IMultiSelectElement
 } from 'app/config/interfaces';
-import { ValidationUtil } from 'app/shared/util/validation-util';
 
 export interface IPersonalInfo {
   fullname: IInputElement;
   username: IInputElement;
   email: IInputElement;
-  gender: IListElement;
+  gender: IMultiSelectElement;
+  gender2: IMultiSelectElement;
   birthday: IDatePickerElement;
   dateRangePicker: IDatePickerElement;
   address: IInputElement;
@@ -35,7 +34,7 @@ export interface IPersonalInfoMessage {
 export class PersonalInfoConfig implements IForm {
 
   name = 'USER.PROFILE.PERSONAL_INFO.LABEL';
-  elements: [IInputElement, IInputElement, IInputElement, IListElement, IDatePickerElement, IDatePickerElement,
+  elements: [IInputElement, IInputElement, IInputElement, IMultiSelectElement, IMultiSelectElement, IDatePickerElement, IDatePickerElement,
     IInputElement, IInputElement, IInputElement, IElement, ILinkElement] = [
     {
       name: 'fullname',
@@ -58,17 +57,73 @@ export class PersonalInfoConfig implements IForm {
       name: 'gender',
       type: 'select',
       placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
-      list: [
+      hint: 'Enter new value if not listed',
+      toggleButton: {
+        name: 'toggleButton',
+        type: 'button',
+        icon: {class: 'keyboard_arrow_down', type: 'md'}
+      },
+      chipOptions: {
+        selectable: true,
+        removable: true,
+        addOnBlur: true
+      },
+      selectList: [
         {
           name: 'male',
-          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE'
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+          value: false
         },
         {
           name: 'female',
-          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE'
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE',
+          value: false
         }
       ]
     },
+    {
+      name: 'gender2',
+      type: 'select',
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
+      readOnly: true,
+      toggleButton: {
+        name: 'toggleButton',
+        type: 'button',
+        icon: {class: 'keyboard_arrow_down', type: 'md'}
+      },
+      chipOptions: {
+        selectable: true,
+        removable: true,
+        addOnBlur: true
+      },
+      selectList: [
+        {
+          name: 'male',
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+          value: false
+        },
+        {
+          name: 'female',
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE',
+          value: false
+        }
+      ]
+    },
+    // {
+    //   name: 'gender',
+    //   type: 'select',
+    //   placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
+    //   list: [
+    //     {
+    //       name: 'male',
+    //       display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE'
+    //     },
+    //     {
+    //       name: 'female',
+    //       display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE'
+    //     }
+    //   ]
+    // },
     {
       name: 'birthday',
       type: 'datepicker',

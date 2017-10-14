@@ -1,0 +1,56 @@
+mat-form-field {
+  width: 100%;
+}
+
+:host /deep/ .select-toggle-button mat-icon {
+  font-size: 20px !important;
+  width: 24px;
+  height: 24px;
+}
+
+:host /deep/ .mat-chip {
+  line-height: 14px;
+  border-radius: 16px !important;
+  padding: 4px 8px !important;
+}
+
+:host /deep/ mat-chip .mat-icon {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 20px !important;
+  line-height: 20px !important;
+  margin-left: 2px !important;
+  //padding: 0 !important;
+}
+
+:host /deep/ mat-form-field .mat-form-field-infix {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+:host /deep/ mat-form-field mat-chip-list {
+  //flex: auto;
+}
+:host /deep/ mat-form-field mat-chip-list .mat-chip-list-wrapper {
+  //flex: auto;
+  //flex-wrap: nowrap;
+}
+
+:host /deep/ mat-form-field input {
+  flex: auto;
+  width: 0;
+  min-width: 50px;
+}
+:host /deep/ mat-form-field input.noFocus {
+  height: 0;
+}
+
+//:host /deep/ mat-form-field.mat-focused .mat-form-field-underline {
+//  background-color: rgba(0, 0, 0, .12) !important;
+//}
+
+//:host /deep/ mat-form-field.mat-focused .mat-form-field-ripple {
+//  background-color: rgba(0, 0, 0, .12) !important;
+//  height: 1px;
+//}

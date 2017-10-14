@@ -3,7 +3,6 @@
   <form novalidate [formGroup]="formGroup" (ngSubmit)="onSave($event)">
     <aj-message *ngIf="message" [data]="message"></aj-message>
     <aj-input
-      #firstInput
       [inputData]="formElements.username"
       [type]="'text'"
       [readonly]="formElements.username.readOnly"
@@ -23,11 +22,21 @@
       (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-input>
-    <aj-mat-select
-      [inputData]="formElements.gender"
-      (onOpen)="onClicked($event)"
+    <!--<aj-mat-select-->
+      <!--[inputData]="formElements.gender"-->
+      <!--(onOpen)="onClicked($event)"-->
+      <!--(bindControl)="onBindControl($event)">-->
+    <!--</aj-mat-select>-->
+    <aj-multiselect
+      [data]="formElements.gender"
+      (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
-    </aj-mat-select>
+    </aj-multiselect>
+    <aj-multiselect
+      [data]="formElements.gender2"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-multiselect>
     <aj-datepicker
       [data]="formElements.birthday"
       (clicked)="onClicked($event)"

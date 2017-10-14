@@ -38,6 +38,7 @@ import {
   IDateRangeCalendar
 } from 'app/config/shared/datepicker.config';
 import { Util, KeyCode } from 'app/shared/util/util';
+import { ValidationUtil } from 'app/shared/util/validation-util';
 import { MomentService } from 'app/shared/services/moment.service';
 
 @Component({
@@ -126,6 +127,29 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
     this.generateFormControl(this.elements.dateInput.validators);
   }
 
+  generateFormControl(controlValidators: IValidator[]): void {
+    const validators = [];
+    controlValidators.forEach(validator => {
+      if (this.mode === DatePickerMode.DEFAULT) {
+        if (validator.name === 'dateWithinRange') {
+          validators.push(validator.validateFunc(this.data.enabledDateRange, this.momentService));
+        } else if (validator.name === 'isValidDate') {
+          validators.push(validator.validateFunc(this.momentService));
+        }
+      } else if (this.data.readOnly) {
+        if (validator.name === 'endDateExists') {
+          validators.push(validator.validateFunc(this.momentService));
+        }
+      } else {
+        if (validator.name === 'isValidDateRange') {
+          validators.push(validator.validateFunc(this.momentService));
+        }
+      }
+    });
+    this.formControl = new FormControl('', validators, []);
+    this.bindControl.emit({'name': this.data.name, 'control': this.formControl});
+  }
+
   ngOnDestroy(): void {
     this.translateSub.unsubscribe();
   }
@@ -158,29 +182,6 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
       const placeHolderFormat = this.translateService.instant(DATE_FORMAT).toLowerCase();
       this.placeHolder = `${this.placeHolder} (${placeHolderFormat})`;
     }
-  }
-
-  generateFormControl(controlValidators: IValidator[]): void {
-    const validators = [];
-    controlValidators.forEach(validator => {
-      if (this.mode === DatePickerMode.DEFAULT) {
-        if (validator.name === 'dateWithinRange') {
-          validators.push(validator.validateFunc(this.data.enabledDateRange, this.momentService));
-        } else if (validator.name === 'isValidDate') {
-          validators.push(validator.validateFunc(this.momentService));
-        }
-      } else if (this.data.readOnly) {
-        if (validator.name === 'endDateExists') {
-          validators.push(validator.validateFunc(this.momentService));
-        }
-      } else {
-        if (validator.name === 'isValidDateRange') {
-          validators.push(validator.validateFunc(this.momentService));
-        }
-      }
-    });
-    this.formControl = new FormControl('', validators, []);
-    this.bindControl.emit({'name': this.data.name, 'control': this.formControl});
   }
 
   onClicked(event: any): void {
@@ -254,12 +255,7 @@ export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   getValidatorError(): string {
-    for (const validator of this.elements.dateInput.validators) {
-      if (this.formControl.hasError(validator.name)) {
-        return validator.error;
-      }
-    }
-    return null;
+    return ValidationUtil.getValidatorError(this.elements.dateInput.validators, this.formControl);
   }
 
   private openAsPopup(): void {

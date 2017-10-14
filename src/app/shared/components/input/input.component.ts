@@ -3,19 +3,17 @@ import {
   OnChanges,
   SimpleChanges,
   OnInit,
-  ElementRef,
-  Renderer2,
   EventEmitter,
   Input,
   Output
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import {
   IInputElement,
-  IFormValidatorData,
-  IValidator
+  IFormValidatorData
 } from 'app/config/interfaces';
+import { ValidationUtil } from 'app/shared/util/validation-util';
 
 @Component({
   selector: 'aj-input',
@@ -28,13 +26,12 @@ export class InputComponent implements OnChanges, OnInit {
   @Input() inputData: IInputElement;
   @Input() type: string;
   @Input() readonly: boolean;
-  @Input() customValidators: {};
   @Input() formValidatorData: IFormValidatorData;
   @Output() bindControl: EventEmitter<{}>;
   @Output() clicked: EventEmitter<void>;
   formControl: FormControl;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+  constructor() {
     this.type = 'text';
     this.bindControl = new EventEmitter<{}>();
     this.clicked = new EventEmitter<void>();
@@ -47,24 +44,7 @@ export class InputComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    this.generateFormControl(this.inputData.validators, this.customValidators);
-  }
-
-  generateFormControl(controlValidators: IValidator[], customValidators: {}): void {
-    const validators = [];
-    const asyncValidators = [];
-    if (controlValidators) {
-      controlValidators.forEach(validator => {
-        if (validator.type === 'builtin') {
-          validators.push(this.getBuiltinValidator(validator));
-        } else if (validator.type === 'custom') {
-          validators.push(customValidators[validator.name]);
-        } else if (validator.type === 'customAsync') {
-          asyncValidators.push(customValidators[validator.name]);
-        }
-      });
-    }
-    this.formControl = new FormControl('', validators, asyncValidators);
+    this.formControl = ValidationUtil.generateFormControl(this.inputData.validators);
     this.bindControl.emit({'name': this.inputData.name, 'control': this.formControl});
   }
 
@@ -72,26 +52,8 @@ export class InputComponent implements OnChanges, OnInit {
     this.clicked.emit();
   }
 
-  getBuiltinValidator(validator: IValidator): Function {
-    switch (validator.name) {
-      case 'required':
-        return Validators.required;
-      case 'minlength':
-        return Validators.minLength(validator.value);
-      case 'maxlength':
-        return Validators.maxLength(validator.value);
-      case 'pattern':
-        return Validators.pattern(validator.value);
-    }
-  }
-
   getValidatorError(): string {
-    for (const validator of this.inputData.validators) {
-      if (this.formControl.hasError(validator.name)) {
-        return validator.error;
-      }
-    }
-    return null;
+    return ValidationUtil.getValidatorError(this.inputData.validators, this.formControl);
   }
 
   validateFailed(): boolean {

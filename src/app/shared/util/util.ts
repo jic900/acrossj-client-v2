@@ -1,11 +1,9 @@
 /**
  * Created by qiz264 on 2017-04-20.
  */
-import { FormGroup } from '@angular/forms';
 
 import { IMessageElement } from 'app/config/interfaces';
 import { AppConstant, MediaQueryBreakPoint } from 'app/config/common/app.config';
-
 
 export enum KeyCode {
   BACKSPACE = 8,
@@ -21,7 +19,8 @@ export enum KeyCode {
   UP_ARROW = 38,
   RIGHT_ARROW = 39,
   DOWN_ARROW = 40,
-  DELETE = 46
+  DELETE = 46,
+  COMMA = 188
 }
 
 export class Util {

@@ -1,29 +1,75 @@
-<!--<mat-form-field (mousedown)="onMouseDown($event)">-->
-  <!--<div *ngIf="data.readOnly" class="datepicker-input-clicker" (click)="onTriggerClicked($event)"></div>-->
+<!--<mat-form-field [floatPlaceholder]="getFloatingMode()" (click)="onFocus()">-->
+  <!--<mat-checkbox [formControl]="formControl" class="example-margin">Checked</mat-checkbox>-->
+  <!--<mat-checkbox class="example-margin">Indeterminate Indeterminate Indeterminate</mat-checkbox>-->
+  <!--<mat-checkbox [formControl]="formControl" class="example-margin">Checked</mat-checkbox>-->
+  <!--<mat-checkbox class="example-margin">Indeterminate</mat-checkbox>-->
+  <!--<mat-checkbox [formControl]="formControl" class="example-margin">Checked Indeterminate</mat-checkbox>-->
+  <!--<mat-checkbox class="example-margin">Indeterminate</mat-checkbox>-->
+
+  <!--<mat-radio-group>-->
+  <!--<mat-radio-button value="auto">Male</mat-radio-button>-->
+  <!--<mat-radio-button value="always">Female</mat-radio-button>-->
+  <!--<mat-radio-button value="auto">Male</mat-radio-button>-->
+  <!--<mat-radio-button value="always">Female</mat-radio-button>-->
+  <!--</mat-radio-group>-->
+
+
+  <!--<mat-chip-list (click)="onFocus()" #chipList>-->
+    <!--<mat-chip-->
+      <!--*ngFor="let chip of chips; let i = index"-->
+      <!--(click)="onFocus()"-->
+      <!--[selectable]="data.chipOptions.selectable"-->
+      <!--[removable]="data.chipOptions.removable"-->
+      <!--(remove)="removeChipAt(i)">-->
+      <!--{{chip | translate}}-->
+      <!--<mat-icon matChipRemove *ngIf="data.chipOptions.removable">cancel</mat-icon>-->
+    <!--</mat-chip>-->
+  <!--</mat-chip-list>-->
   <!--<input-->
+    <!--#selectInput-->
     <!--matInput-->
     <!--validateonblur-->
     <!--[formControl]="formControl"-->
-    <!--placeholder="{{placeHolder}}"-->
+    <!--placeholder="{{data.placeHolder | translate}}"-->
+    <!--readonly="{{data.readOnly ? 'true' : 'false'}}"-->
     <!--(click)="onClicked($event)"-->
+    <!--(blur)="onBlur()"-->
+    <!--(focus)="onFocus()"-->
+    <!--[ngClass]="{'noFocus': !inputFocused && chips.length > 0}"-->
     <!--[(ngModel)]="inputValue"-->
-    <!--(ngModelChange)="onInputChange($event)">-->
+    <!--(ngModelChange)="onInputChange($event)"-->
+    <!--[matChipInputFor]="chipList"-->
+    <!--[matChipInputSeparatorKeyCodes]="chipKeyCodes"-->
+    <!--[matChipInputAddOnBlur]="data.chipOptions.addOnBlur"-->
+    <!--(matChipInputTokenEnd)="addChip($event)">-->
+
+
+
+  <!--<input-->
+  <!--style="width: 40px"-->
+  <!--matInput-->
+  <!--validateonblur-->
+  <!--[formControl]="formControl"-->
+  <!--(click)="onClicked($event)"-->
+  <!--[(ngModel)]="inputValue"-->
+  <!--(ngModelChange)="onInputChange($event)">-->
+  <!--<input-->
+  <!--matInput-->
+  <!--validateonblur-->
+  <!--[formControl]="formControl"-->
+  <!--placeholder="Please specify"-->
+  <!--readonly="{{data.readOnly ? 'true' : 'false'}}"-->
+  <!--(click)="onClicked($event)"-->
+  <!--[(ngModel)]="inputValue"-->
+  <!--(ngModelChange)="onInputChange($event)">-->
+  <!--<mat-placeholder>{{data.placeHolder | translate}}</mat-placeholder>-->
   <!--<button-->
-    <!--*ngIf="inputValue && inputValue.trim() !== ''"-->
-    <!--mat-icon-button-->
-    <!--matSuffix-->
-    <!--type="button"-->
-    <!--class="datepicker-input-button"-->
-    <!--(click)="clearInput($event)">-->
-    <!--<aj-icon [data]="elements.clearButton.icon"></aj-icon>-->
-  <!--</button>-->
-  <!--<button-->
-    <!--mat-icon-button-->
-    <!--matSuffix-->
-    <!--type="button"-->
-    <!--class="datepicker-input-button"-->
-    <!--(click)="open($event)">-->
-    <!--<aj-icon [data]="elements.calButton.icon"></aj-icon>-->
+  <!--mat-icon-button-->
+  <!--matSuffix-->
+  <!--type="button"-->
+  <!--class="select-toggle-button"-->
+  <!--(click)="toggle($event)">-->
+  <!--<aj-icon [data]="data.toggleButton.icon"></aj-icon>-->
   <!--</button>-->
   <!--<mat-error *ngIf="validateFailed()">-->
     <!--{{getValidatorError() | translate}}-->
@@ -32,3 +78,4 @@
     <!--{{data.hint | translate}}-->
   <!--</mat-hint>-->
 <!--</mat-form-field>-->
+
