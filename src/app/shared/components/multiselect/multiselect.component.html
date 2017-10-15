@@ -17,9 +17,9 @@
     [formControl]="formControl"
     placeholder="{{data.placeHolder | translate}}"
     readonly="{{data.readOnly ? 'true' : 'false'}}"
-    (blur)="onBlur()"
+    (blur)="onBlur($event)"
     (focus)="onFocus()"
-    [ngClass]="{'noFocus': !inputFocused && chips.length > 0}"
+    [ngClass]="{'noFocus': chips.length > 0 && collapsed}"
     [matChipInputFor]="chipList"
     [matChipInputSeparatorKeyCodes]="chipKeyCodes"
     [matChipInputAddOnBlur]="data.chipOptions.addOnBlur"
@@ -32,7 +32,7 @@
     type="button"
     class="select-toggle-button"
     [ngClass]="{'expanded': !collapsed}"
-    (click)="toggle()">
+    (click)="toggle($event)">
     <aj-icon [data]="data.toggleButton.icon"></aj-icon>
   </button>
   <mat-error *ngIf="validateFailed()">

@@ -5,7 +5,9 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  ElementRef
+  ElementRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatCheckboxChange, MatChipInputEvent } from '@angular/material';
@@ -22,6 +24,7 @@ const CHIP_KEY_CODES = [KeyCode.ENTER, KeyCode.COMMA];
   selector: 'aj-multiselect',
   templateUrl: './multiselect.component.html',
   styleUrls: ['./multiselect.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     TdCollapseAnimation()
   ],
@@ -37,10 +40,9 @@ export class MultiSelectComponent implements OnInit {
   @Output() bindControl: EventEmitter<{}>;
   @Output() clicked: EventEmitter<void>;
   @ViewChild('selectInput') selectInput: ElementRef;
-
   inputFocused: boolean;
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService, private changeDetectorRef: ChangeDetectorRef) {
     this.chipKeyCodes = CHIP_KEY_CODES;
     this.chips = [];
     this.collapsed = true;
@@ -57,16 +59,29 @@ export class MultiSelectComponent implements OnInit {
     return this.chips.length === 0 && (!this.inputFocused || this.data.readOnly) ? 'never' : 'always';
   }
 
-  toggle(): void {
+  toggle(event: any): void {
     this.collapsed = !this.collapsed;
+    if (! this.collapsed) {
+      this.selectInput.nativeElement.focus();
+    }
+    event.stopPropagation();
   }
 
-  onBlur(): void {
-    this.inputFocused = false;
+  onBlur(event: any): void {
+    setTimeout(() => this.inputFocused = false);
+    setTimeout(() => {
+      if (! this.inputFocused) {
+        this.collapsed = true;
+        this.changeDetectorRef.detectChanges();
+      }
+    }, 200);
   }
 
   onFocus(): void {
     this.inputFocused = true;
+    if (this.chips.length === 0) {
+      this.collapsed = false;
+    }
   }
 
   onClicked(event: any): void {
@@ -74,7 +89,7 @@ export class MultiSelectComponent implements OnInit {
       this.selectInput.nativeElement.focus();
       this.collapsed = false;
     } else {
-      this.toggle();
+      this.toggle(event);
     }
     this.clicked.emit();
   }
@@ -86,6 +101,7 @@ export class MultiSelectComponent implements OnInit {
       const index = this.chips.findIndex((chip) => chip.name === event.source.name);
       this.chips.splice(index, 1);
     }
+    this.selectInput.nativeElement.focus();
   }
 
   validateChip(newChip: string): ISelectItem {
@@ -122,6 +138,7 @@ export class MultiSelectComponent implements OnInit {
   removeChipAt(index: number): void {
     this.chips[index].value = false;
     this.chips.splice(index, 1);
+    this.selectInput.nativeElement.focus();
   }
 
   validateFailed(): boolean {
