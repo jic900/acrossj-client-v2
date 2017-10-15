@@ -27,8 +27,13 @@
       <!--(onOpen)="onClicked($event)"-->
       <!--(bindControl)="onBindControl($event)">-->
     <!--</aj-mat-select>-->
-    <aj-multiselect
+    <aj-select
       [data]="formElements.gender"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-multiselect
+      [data]="formElements.gender1"
       (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-multiselect>

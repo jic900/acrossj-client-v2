@@ -9,6 +9,7 @@ import {
   IDatePickerElement,
   ILinkElement,
   IMessageElement,
+  ISelectElement,
   IMultiSelectElement
 } from 'app/config/interfaces';
 
@@ -16,7 +17,8 @@ export interface IPersonalInfo {
   fullname: IInputElement;
   username: IInputElement;
   email: IInputElement;
-  gender: IMultiSelectElement;
+  gender: ISelectElement;
+  gender1: IMultiSelectElement;
   gender2: IMultiSelectElement;
   birthday: IDatePickerElement;
   dateRangePicker: IDatePickerElement;
@@ -34,8 +36,8 @@ export interface IPersonalInfoMessage {
 export class PersonalInfoConfig implements IForm {
 
   name = 'USER.PROFILE.PERSONAL_INFO.LABEL';
-  elements: [IInputElement, IInputElement, IInputElement, IMultiSelectElement, IMultiSelectElement, IDatePickerElement, IDatePickerElement,
-    IInputElement, IInputElement, IInputElement, IElement, ILinkElement] = [
+  elements: [IInputElement, IInputElement, IInputElement, ISelectElement, IMultiSelectElement, IMultiSelectElement,
+    IDatePickerElement, IDatePickerElement, IInputElement, IInputElement, IInputElement, IElement, ILinkElement] = [
     {
       name: 'fullname',
       type: 'input',
@@ -55,6 +57,23 @@ export class PersonalInfoConfig implements IForm {
     },
     {
       name: 'gender',
+      type: 'select',
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
+      selectList: [
+        {
+          name: 'male',
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+          value: false
+        },
+        {
+          name: 'female',
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE',
+          value: false
+        }
+      ]
+    },
+    {
+      name: 'gender1',
       type: 'select',
       placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
       hint: 'Enter new value if not listed',
@@ -109,21 +128,6 @@ export class PersonalInfoConfig implements IForm {
         }
       ]
     },
-    // {
-    //   name: 'gender',
-    //   type: 'select',
-    //   placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
-    //   list: [
-    //     {
-    //       name: 'male',
-    //       display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE'
-    //     },
-    //     {
-    //       name: 'female',
-    //       display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE'
-    //     }
-    //   ]
-    // },
     {
       name: 'birthday',
       type: 'datepicker',

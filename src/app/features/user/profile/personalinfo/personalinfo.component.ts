@@ -77,6 +77,7 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
   }
 
   populatePersonalInfo(personalInfo: IPersonal) {
+    console.log(personalInfo);
     setTimeout(() => {
       if (personalInfo) {
         if (personalInfo.birthday) {
@@ -136,6 +137,7 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
   }
 
   onSave(event: any): void {
+    console.log(this.formGroup.value);
     event.preventDefault();
     this.processing = true;
     this.message = null;
