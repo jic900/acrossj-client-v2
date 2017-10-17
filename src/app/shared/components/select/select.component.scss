@@ -2,13 +2,6 @@ mat-form-field {
   width: 100%;
 }
 
-:host /deep/ mat-form-field .mat-form-field-infix {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 3px;
-}
-
 .select-radio-group {
   padding: 2px 0;
 }
@@ -18,16 +11,23 @@ mat-form-field {
   font-size: 16px;
 }
 
-:host /deep/ mat-form-field mat-radio-button .mat-radio-container {
-  width: 18px;
-  height: 18px;
-}
-:host /deep/ mat-form-field mat-radio-button .mat-radio-outer-circle {
-  width: 18px;
-  height: 18px;
-}
-
-:host /deep/ mat-form-field mat-radio-button .mat-radio-inner-circle {
-  width: 18px;
-  height: 18px;
+:host /deep/ {
+  mat-form-field .mat-form-field-infix {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 3px;
+  }
+  mat-form-field mat-radio-button .mat-radio-container {
+    width: 18px;
+    height: 18px;
+  }
+  mat-form-field mat-radio-button .mat-radio-outer-circle {
+    width: 18px;
+    height: 18px;
+  }
+  mat-form-field mat-radio-button .mat-radio-inner-circle {
+    width: 18px;
+    height: 18px;
+  }
 }

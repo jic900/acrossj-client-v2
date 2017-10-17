@@ -120,7 +120,7 @@ export class MultiSelectComponent implements OnInit {
         return null;
       }
     }
-    return {name: newChip.toLowerCase(), display: newChip, value: true};
+    return {name: newChip, display: newChip, value: true};
   }
 
   addChip(event: MatChipInputEvent): void {

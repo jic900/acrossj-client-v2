@@ -21,23 +21,14 @@ mat-form-field {
   transform: rotate(-180deg);
 }
 
-:host /deep/ .select-toggle-button mat-icon {
-  font-size: 26px !important;
-  width: 30px;
-  height: 30px !important;
-  line-height: 30px !important;
-  margin-right: 0;
-}
-
-:host /deep/ .mat-chip {
+mat-chip {
   line-height: 14px;
   border-radius: 16px !important;
   padding: 4px 8px !important;
   margin-top: 1px !important;
   //margin-bottom: 2px !important;
 }
-
-:host /deep/ mat-chip .mat-icon {
+mat-chip .mat-icon {
   width: 18px !important;
   height: 18px !important;
   font-size: 18px !important;
@@ -45,31 +36,38 @@ mat-form-field {
   margin-left: 2px !important;
 }
 
-:host /deep/ mat-form-field .mat-form-field-flex {
-  align-items: flex-end !important;
+:host /deep/ {
+  .select-toggle-button mat-icon {
+    font-size: 26px !important;
+    width: 30px;
+    height: 30px !important;
+    line-height: 30px !important;
+    margin-right: 0;
+  }
+  mat-form-field .mat-form-field-flex {
+    align-items: flex-end !important;
+  }
+  mat-form-field .mat-form-field-infix {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 3px;
+  }
+  mat-form-field.mat-focused .mat-form-field-ripple {
+    transform: none;
+    transition: none;
+    height: 1px;
+    background-color: rgba(0, 0, 0, .12) !important;
+  }
 }
 
-:host /deep/ mat-form-field .mat-form-field-infix {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 3px;
-}
-
-:host /deep/ mat-form-field input {
+mat-form-field input {
   flex: auto;
   width: 0;
   min-width: 50px;
 }
-:host /deep/ mat-form-field input.noFocus {
+mat-form-field input.noFocus {
   height: 0;
-}
-
-:host /deep/ mat-form-field.mat-focused .mat-form-field-ripple {
-  transform: none;
-  transition: none;
-  height: 1px;
-  background-color: rgba(0, 0, 0, .12) !important;
 }
 
 .select-options-container {
