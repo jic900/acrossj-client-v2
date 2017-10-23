@@ -27,21 +27,35 @@
       <!--(onOpen)="onClicked($event)"-->
       <!--(bindControl)="onBindControl($event)">-->
     <!--</aj-mat-select>-->
+    <!--<aj-select-->
+      <!--[data]="formElements.gender"-->
+      <!--(clicked)="onClicked($event)"-->
+      <!--(bindControl)="onBindControl($event)">-->
+    <!--</aj-select>-->
     <aj-select
       [data]="formElements.gender"
+      [mode]="formElements.gender.mode"
       (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
     </aj-select>
-    <aj-multiselect
-      [data]="formElements.gender1"
-      (clicked)="onClicked($event)"
-      (bindControl)="onBindControl($event)">
-    </aj-multiselect>
-    <aj-multiselect
+    <aj-select
       [data]="formElements.gender2"
+      [mode]="formElements.gender2.mode"
       (clicked)="onClicked($event)"
       (bindControl)="onBindControl($event)">
-    </aj-multiselect>
+    </aj-select>
+    <aj-select
+      [data]="formElements.gender3"
+      [mode]="formElements.gender3.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-select
+      [data]="formElements.gender4"
+      [mode]="formElements.gender4.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
     <aj-datepicker
       [data]="formElements.birthday"
       (clicked)="onClicked($event)"

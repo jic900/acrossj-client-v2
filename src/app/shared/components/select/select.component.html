@@ -1,23 +1,45 @@
-<mat-form-field [floatPlaceholder]="'always'">
-  <mat-radio-group
-    class="select-radio-group"
+<mat-form-field [floatPlaceholder]="getFloatingMode()">
+  <div class="select-input-clicker" (click)="onClicked($event)"></div>
+  <mat-chip-list
+    #chipList
     [formControl]="formControl"
-    [(ngModel)]="selected"
-    (change)="onChange($event)">
-    <mat-radio-button
-      *ngFor="let item of data.selectList"
-      class="select-radio-button"
-      [color]="'primary'"
-      [disableRipple]="true"
-      [value]="item.name">
-      {{item.display | translate}}
-    </mat-radio-button>
-  </mat-radio-group>
+    [(ngModel)]="chips"
+    (ngModelChange)="onValueChange($event)">
+    <mat-chip
+      *ngFor="let chip of chips; let i = index"
+      [selectable]="data.chipOptions.selectable"
+      [removable]="data.chipOptions.removable"
+      (remove)="removeChipAt(i)">
+      {{chip.display | translate}}
+      <mat-icon matChipRemove *ngIf="data.chipOptions.removable">cancel</mat-icon>
+    </mat-chip>
+    <input
+      #selectInput
+      matInput
+      validateonblur
+      placeholder="{{data.placeHolder | translate}}"
+      readonly="{{data.readOnly ? 'true' : 'false'}}"
+      (blur)="onBlur($event)"
+      (focus)="onFocus()"
+      [(ngModel)]="inputValue"
+      (ngModelChange)="onSelectInputChange($event)"
+      [ngClass]="{'noFocus': !isSingleMode() && chips.length > 0 && collapsed}"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="chipKeyCodes"
+      [matChipInputAddOnBlur]="data.chipOptions.addOnBlur"
+      (matChipInputTokenEnd)="addChip($event)">
+  </mat-chip-list>
 
-  <input matInput readonly="true" style="width: 0">
-
-  <mat-placeholder>{{data.placeHolder | translate}}</mat-placeholder>
-
+  <!--<mat-placeholder>{{data.placeHolder | translate}}</mat-placeholder>-->
+  <button
+    mat-icon-button
+    matSuffix
+    type="button"
+    class="select-toggle-button"
+    [ngClass]="{'expanded': !collapsed}"
+    (click)="toggle($event)">
+    <aj-icon [data]="{class: 'keyboard_arrow_down', type: 'md'}"></aj-icon>
+  </button>
   <mat-error *ngIf="validateFailed()">
     {{getValidatorError() | translate}}
   </mat-error>
@@ -26,3 +48,30 @@
   </mat-hint>
 </mat-form-field>
 
+<div *ngIf="!isSingleMode()" class="select-options-container" [ngStyle]="{'margin-top': data.hint ? '10px' : 0}" [@tdCollapse]="collapsed">
+  <mat-checkbox
+    *ngFor="let selectItem of data.selectList; let i = index"
+    class="select-options"
+    [name]="selectItem.name"
+    [color]="'primary'"
+    [tabIndex]="i"
+    [disableRipple]="true"
+    [(ngModel)]="selectItem.value"
+    (change)="onMultiSelectChange($event)">
+    {{selectItem.display | translate}}
+  </mat-checkbox>
+</div>
+
+<div *ngIf="isSingleMode()" class="select-options-container" [ngStyle]="{'margin-top': data.hint ? '10px' : 0}" [@tdCollapse]="collapsed">
+  <mat-radio-group [(ngModel)]="selected">
+    <mat-radio-button
+      *ngFor="let item of data.selectList; let i = index"
+      class="select-radio-button"
+      [color]="'primary'"
+      [disableRipple]="true"
+      [value]="item.name"
+      (change)="onSingleSelectChange(i, $event)">
+      {{item.display | translate}}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>

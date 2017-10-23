@@ -1,6 +1,7 @@
 /**
  * Created by LAE84266 on 16/08/2017.
  */
+import { ISelectItem } from 'app/config/interfaces/select-element.interface';
 
 export interface IProfile {
   personal: IPersonal;
@@ -11,7 +12,11 @@ export interface IProfile {
 
 export interface IPersonal {
   fullname?: string;
-  gender?: string;
+  // gender?: string;
+  gender?: ISelectItem[];
+  gender2?: ISelectItem[];
+  gender3?: ISelectItem[];
+  gender4?: ISelectItem[];
   birthday?: string;
   address?: string;
   postcode?: string;

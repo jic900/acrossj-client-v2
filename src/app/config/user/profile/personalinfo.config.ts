@@ -9,17 +9,20 @@ import {
   IDatePickerElement,
   ILinkElement,
   IMessageElement,
-  ISelectElement,
-  IMultiSelectElement
+  ISelectElement
 } from 'app/config/interfaces';
+import { SelectMode } from '../../interfaces/select-element.interface';
 
 export interface IPersonalInfo {
   fullname: IInputElement;
   username: IInputElement;
   email: IInputElement;
+  // gender: IListElement;
+  // gender: ISelectElement;
   gender: ISelectElement;
-  gender1: IMultiSelectElement;
-  gender2: IMultiSelectElement;
+  gender2: ISelectElement;
+  gender3: ISelectElement;
+  gender4: ISelectElement;
   birthday: IDatePickerElement;
   dateRangePicker: IDatePickerElement;
   address: IInputElement;
@@ -36,7 +39,7 @@ export interface IPersonalInfoMessage {
 export class PersonalInfoConfig implements IForm {
 
   name = 'USER.PROFILE.PERSONAL_INFO.LABEL';
-  elements: [IInputElement, IInputElement, IInputElement, ISelectElement, IMultiSelectElement, IMultiSelectElement,
+  elements: [IInputElement, IInputElement, IInputElement, ISelectElement, ISelectElement, ISelectElement, ISelectElement,
     IDatePickerElement, IDatePickerElement, IInputElement, IInputElement, IInputElement, IElement, ILinkElement] = [
     {
       name: 'fullname',
@@ -55,33 +58,29 @@ export class PersonalInfoConfig implements IForm {
       placeHolder: 'USER.PROFILE.PERSONAL_INFO.EMAIL',
       readOnly: true
     },
+    // {
+    //   name: 'gender',
+    //   type: 'select',
+    //   placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
+    //   selectList: [
+    //     {
+    //       name: 'male',
+    //       display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+    //       value: false
+    //     },
+    //     {
+    //       name: 'female',
+    //       display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE',
+    //       value: false
+    //     }
+    //   ]
+    // },
     {
       name: 'gender',
       type: 'select',
       placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
-      selectList: [
-        {
-          name: 'male',
-          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
-          value: false
-        },
-        {
-          name: 'female',
-          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE',
-          value: false
-        }
-      ]
-    },
-    {
-      name: 'gender1',
-      type: 'select',
-      placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
       hint: 'Enter new value if not listed',
-      toggleButton: {
-        name: 'toggleButton',
-        type: 'button',
-        icon: {class: 'keyboard_arrow_down', type: 'md'}
-      },
+      mode: SelectMode.MULTI,
       chipOptions: {
         selectable: true,
         removable: true,
@@ -105,11 +104,7 @@ export class PersonalInfoConfig implements IForm {
       type: 'select',
       placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
       readOnly: true,
-      toggleButton: {
-        name: 'toggleButton',
-        type: 'button',
-        icon: {class: 'keyboard_arrow_down', type: 'md'}
-      },
+      mode: SelectMode.MULTI,
       chipOptions: {
         selectable: true,
         removable: true,
@@ -128,6 +123,68 @@ export class PersonalInfoConfig implements IForm {
         }
       ]
     },
+    {
+      name: 'gender3',
+      type: 'select',
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
+      mode: SelectMode.SINGLE,
+      chipOptions: {
+        selectable: false,
+        removable: false,
+        addOnBlur: false
+      },
+      selectList: [
+        {
+          name: 'male',
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+          value: null
+        },
+        {
+          name: 'female',
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE',
+          value: null
+        }
+      ]
+    },
+    {
+      name: 'gender4',
+      type: 'select',
+      placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
+      readOnly: true,
+      mode: SelectMode.SINGLE,
+      chipOptions: {
+        selectable: false,
+        removable: false,
+        addOnBlur: false
+      },
+      selectList: [
+        {
+          name: 'male',
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+          value: 'male'
+        },
+        {
+          name: 'female',
+          display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE',
+          value: 'female'
+        }
+      ]
+    },
+    // {
+    //   name: 'gender',
+    //   type: 'select',
+    //   placeHolder: 'USER.PROFILE.PERSONAL_INFO.GENDER.LABEL',
+    //   list: [
+    //     {
+    //       name: 'male',
+    //       display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE'
+    //     },
+    //     {
+    //       name: 'female',
+    //       display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE'
+    //     }
+    //   ]
+    // },
     {
       name: 'birthday',
       type: 'datepicker',

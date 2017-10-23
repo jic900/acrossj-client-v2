@@ -77,13 +77,45 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
   }
 
   populatePersonalInfo(personalInfo: IPersonal) {
-    console.log(personalInfo);
     setTimeout(() => {
       if (personalInfo) {
         if (personalInfo.birthday) {
           const jsDate = new Date(personalInfo.birthday);
           personalInfo.birthday = this.momentService.formatDate(this.momentService.parseJSDate(jsDate));
         }
+        personalInfo.gender = [
+          {
+            name: 'male',
+            display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+            value: true
+          },
+          {
+            name: 'test',
+            display: 'test',
+            value: true
+          }
+        ];
+        personalInfo.gender2 = [
+          {
+            name: 'male',
+            display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+            value: true
+          }
+        ];
+        personalInfo.gender3 = [
+          {
+            name: 'male',
+            display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+            value: 34
+          }
+        ];
+        personalInfo.gender4 = [
+          {
+            name: 'male',
+            display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+            value: 'male'
+          }
+        ];
         Object.keys(personalInfo).forEach((field) => {
           this.formGroup.get(field).setValue(personalInfo[field]);
         });
@@ -139,28 +171,28 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
   onSave(event: any): void {
     console.log(this.formGroup.value);
     event.preventDefault();
-    this.processing = true;
     this.message = null;
     if (this.formGroup.value.birthday && this.formGroup.value.birthday.trim() !== '') {
       this.formGroup.value.birthday =
         this.momentService.getTime(this.momentService.parseDate(this.formGroup.value.birthday));
     }
 
-    const onComplete = () => {
-      this.processing = false;
-      this.anchorElement.nativeElement.scrollIntoView();
-    };
-
-    this.profileService.saveProfile({personal: this.formGroup.value})
-      .subscribe(
-        data => {
-          this.message = this.messages.success;
-          onComplete();
-        },
-        err => {
-          this.message = Util.createErrorMessage(err.name, err.message);
-          onComplete();
-        }
-      );
+    // this.processing = true;
+    // const onComplete = () => {
+    //   this.processing = false;
+    //   this.anchorElement.nativeElement.scrollIntoView();
+    // };
+	//
+    // this.profileService.saveProfile({personal: this.formGroup.value})
+    //   .subscribe(
+    //     data => {
+    //       this.message = this.messages.success;
+    //       onComplete();
+    //     },
+    //     err => {
+    //       this.message = Util.createErrorMessage(err.name, err.message);
+    //       onComplete();
+    //     }
+    //   );
   }
 }

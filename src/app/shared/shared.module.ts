@@ -42,7 +42,6 @@ import { DatePickerComponent, DatePickerContentComponent } from './components/da
 import { DateCalendarComponent } from './components/datepicker/calendar/date-calendar.component';
 import { DateRangeCalendarComponent } from './components/datepicker/calendar/date-range-calendar.component';
 import { SelectComponent } from './components/select/select.component';
-import { MultiSelectComponent } from './components/multiselect/multiselect.component';
 
 const FLEX_LAYOUT_MODULES: any[] = [
   FlexLayoutModule,
@@ -106,8 +105,7 @@ export function httpServiceFactory(
     DatePickerContentComponent,
     DateCalendarComponent,
     DateRangeCalendarComponent,
-    SelectComponent,
-    MultiSelectComponent
+    SelectComponent
   ],
   exports: [
     ANGULAR_MODULES,
@@ -123,8 +121,7 @@ export function httpServiceFactory(
     MessageComponent,
     MatSelectComponent,
     DatePickerComponent,
-    SelectComponent,
-    MultiSelectComponent
+    SelectComponent
   ],
   providers: [
     LocalStorageService,
