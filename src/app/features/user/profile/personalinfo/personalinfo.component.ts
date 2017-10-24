@@ -102,20 +102,20 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
             value: true
           }
         ];
-        personalInfo.gender3 = [
-          {
-            name: 'male',
-            display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
-            value: 34
-          }
-        ];
-        personalInfo.gender4 = [
-          {
-            name: 'male',
-            display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
-            value: 'male'
-          }
-        ];
+        // personalInfo.gender3 = [
+        //   {
+        //     name: 'male',
+        //     display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+        //     value: 34
+        //   }
+        // ];
+        // personalInfo.gender4 = [
+        //   {
+        //     name: 'male',
+        //     display: 'USER.PROFILE.PERSONAL_INFO.GENDER.MALE',
+        //     value: 'male'
+        //   }
+        // ];
         Object.keys(personalInfo).forEach((field) => {
           this.formGroup.get(field).setValue(personalInfo[field]);
         });

@@ -1,7 +1,13 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MomentService, DateField } from '../services/moment.service';
-import { IDate, IDateRange, IValidator } from 'app/config/interfaces';
+import {
+  IDate,
+  IDateRange,
+  IValidator,
+  SelectMode
+} from 'app/config/interfaces';
+import { SelectComponent } from '../components/select/select.component';
 
 export class ValidationUtil {
 
@@ -72,6 +78,13 @@ export class ValidationUtil {
   public static endDateExists = (momentService: MomentService) => (formControl: FormControl) => {
     const dateRangeParts = formControl.value.trim().split('-');
     return momentService.isValidDate(dateRangeParts[1]) ? null : {'endDateExists': true};
+  }
+
+  public static validSelectInput = (select: SelectComponent) => (formControl: FormControl) => {
+    if (select.mode === SelectMode.SINGLE && select.chips.length === 0 && select.inputValue && select.inputValue !== '') {
+      return {'validSelectInput': true};
+    }
+    return null;
   }
 
   public static passwordMatch = (passwordField: string, confirmPasswordField: string) => (formGroup: FormGroup) => {

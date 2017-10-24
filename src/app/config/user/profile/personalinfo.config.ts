@@ -9,9 +9,10 @@ import {
   IDatePickerElement,
   ILinkElement,
   IMessageElement,
-  ISelectElement
+  ISelectElement,
+  SelectMode
 } from 'app/config/interfaces';
-import { SelectMode } from '../../interfaces/select-element.interface';
+import { ValidationUtil } from 'app/shared/util/validation-util';
 
 export interface IPersonalInfo {
   fullname: IInputElement;
@@ -143,6 +144,14 @@ export class PersonalInfoConfig implements IForm {
           name: 'female',
           display: 'USER.PROFILE.PERSONAL_INFO.GENDER.FEMALE',
           value: null
+        }
+      ],
+      validators: [
+        {
+          name: 'validSelectInput',
+          type: 'custom',
+          error: 'Invalid gender select input',
+          validateFunc: ValidationUtil.validSelectInput
         }
       ]
     },

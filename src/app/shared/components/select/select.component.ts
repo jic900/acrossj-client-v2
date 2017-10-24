@@ -50,6 +50,7 @@ export class SelectComponent implements OnChanges, OnInit {
   constructor(private translateService: TranslateService, private changeDetectorRef: ChangeDetectorRef) {
     this.chipKeyCodes = CHIP_KEY_CODES;
     this.chips = [];
+    this.inputValue = '';
     this.collapsed = true;
     this.bindControl = new EventEmitter<{}>();
     this.clicked = new EventEmitter<void>();
@@ -62,6 +63,13 @@ export class SelectComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.data.validators) {
+      this.data.validators.forEach((validator) => {
+        if (validator.name === 'validSelectInput') {
+          validator.validateFunc = validator.validateFunc(this);
+        }
+      });
+    }
     this.formControl = ValidationUtil.generateFormControl(this.data.validators);
     this.bindControl.emit({'name': this.data.name, 'control': this.formControl});
   }
@@ -71,7 +79,8 @@ export class SelectComponent implements OnChanges, OnInit {
   }
 
   getFloatingMode(): string {
-    return this.chips.length === 0 && (!this.inputFocused || this.data.readOnly) ? 'never' : 'always';
+    return this.chips.length === 0 &&
+      ((!this.inputFocused && (!this.inputValue || this.inputValue === '')) || this.data.readOnly ) ? 'never' : 'always';
   }
 
   toggle(event: any): void {
@@ -117,10 +126,8 @@ export class SelectComponent implements OnChanges, OnInit {
             listItem.value = true;
           } else {
             if (! this.data.readOnly && chip.value) {
-              console.log('111111111  ' + chip.value);
               this.inputValue = chip.value;
               listItem.value = chip.value;
-              console.log(this.data.selectList);
             }
             this.selected = chip.name;
           }
@@ -143,17 +150,19 @@ export class SelectComponent implements OnChanges, OnInit {
 
   onSingleSelectChange(selectedIndex: number, event: any): void {
     if (this.chips.length === 0) {
+      if (! this.data.readOnly && this.inputValue) {
+        this.data.selectList[selectedIndex].value = this.inputValue;
+      }
       this.chips.push(this.data.selectList[selectedIndex]);
     } else {
       if (! this.data.readOnly) {
-        // this.chips[0].value = null;
-        // this.inputValue = '';
         this.data.selectList[selectedIndex].value = this.inputValue;
         this.chips[0].value = null;
       }
       this.chips[0] = this.data.selectList[selectedIndex];
     }
     this.formControl.markAsDirty();
+    this.formControl.updateValueAndValidity();
     if (! this.data.readOnly) {
       this.selectInput.nativeElement.focus();
     }
@@ -164,6 +173,7 @@ export class SelectComponent implements OnChanges, OnInit {
       this.chips[0].value = newValue;
       this.formControl.markAsDirty();
     }
+    this.formControl.updateValueAndValidity();
   }
 
   validateChip(newChip: string): ISelectItem {
