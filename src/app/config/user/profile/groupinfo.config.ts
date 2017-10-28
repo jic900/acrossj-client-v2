@@ -6,10 +6,8 @@ import {
   IForm,
   IElement,
   ILinkElement,
-  IMessageElement,
-  IValidator
+  IMessageElement
 } from 'app/config/interfaces';
-import { ValidationUtil } from 'app/shared/util/validation-util';
 
 export interface IGroupInfo {
   saveButton: IElement;

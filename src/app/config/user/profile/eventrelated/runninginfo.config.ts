@@ -2,10 +2,13 @@ import {
   IForm,
   IElement,
   ILinkElement,
-  IMessageElement
+  IMessageElement,
+  ISelectElement,
+  ISimpleSelectElement,
+  IInputElement,
+  SelectMode
 } from 'app/config/interfaces';
 import { ValidationUtil } from 'app/shared/util/validation-util';
-import { ISelectElement, ISimpleSelectElement, IInputElement, SelectMode } from 'app/config/interfaces';
 
 export interface IRunningInfo {
   shoeSize: ISelectElement;

@@ -197,6 +197,59 @@
         },
         "SKI": {
           "LABEL": "Ski",
+          "PROFICIENT": {
+            "LABEL": "Proficient In",
+            "SKI": "Ski",
+            "SNOWBOARD": "Snowboard"
+          },
+          "LICENSE": {
+            "LABEL": "Ski License",
+            "GRADE_1": "Grade 1",
+            "GRADE_2": "Grade 2",
+            "GRADE_3": "Grade 3"
+          },
+          "BOOTS_SIZE": {
+            "LABEL": "Ski Boots Size",
+            "XXL": "XXL",
+            "XL": "XL",
+            "L": "L",
+            "M": "M",
+            "S": "S",
+            "XS": "XS"
+          },
+          "JACKET_SIZE": {
+            "LABEL": "Ski Jacket Size",
+            "XXL": "XXL",
+            "XL": "XL",
+            "L": "L",
+            "M": "M",
+            "S": "S",
+            "XS": "XS"
+          },
+          "PANTS_SIZE": {
+            "LABEL": "Ski Pants Size",
+            "XXL": "XXL",
+            "XL": "XL",
+            "L": "L",
+            "M": "M",
+            "S": "S",
+            "XS": "XS"
+          },
+          "SKILL_LEVEL": {
+            "LABEL": "Skill Level",
+            "ADVANCED": "Advanced",
+            "INTERMEDIATE": "Intermediate",
+            "ENTRY": "Entry"
+          },
+          "OTHER_SKILLS": {
+            "LABEL": "Other Specialized Skills",
+            "JUMP": "Jump",
+            "PIPE": "Pipe",
+            "MOGUL": "Mogul"
+          },
+          "CERTIFICATE": {
+            "LABEL": "Certification"
+          },
           "BTN_LABEL": "Save"
         },
         "HIKING": {

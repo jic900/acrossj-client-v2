@@ -5,7 +5,7 @@ import {
   ViewChild,
   ElementRef
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 
@@ -114,6 +114,7 @@ export class SkiInfoComponent implements AfterViewInit, OnDestroy {
       .subscribe(
         data => {
           this.message = this.messages.success;
+          Object.values(this.formGroup.controls).forEach((formControl: FormControl) => formControl.markAsPristine());
           onComplete();
         },
         err => {

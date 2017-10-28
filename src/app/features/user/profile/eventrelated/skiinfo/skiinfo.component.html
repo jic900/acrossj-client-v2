@@ -2,6 +2,54 @@
 <aj-profiledetail [title]="formData.name">
   <form novalidate [formGroup]="formGroup" (ngSubmit)="onSave($event)">
     <aj-message *ngIf="message" [data]="message"></aj-message>
+    <aj-select
+      [data]="formElements.proficient"
+      [mode]="formElements.proficient.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-select
+      [data]="formElements.license"
+      [mode]="formElements.license.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-select
+      [data]="formElements.bootsSize"
+      [mode]="formElements.bootsSize.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-select
+      [data]="formElements.jacketSize"
+      [mode]="formElements.jacketSize.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-select
+      [data]="formElements.pantsSize"
+      [mode]="formElements.pantsSize.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-select
+      [data]="formElements.skillLevel"
+      [mode]="formElements.skillLevel.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-select
+      [data]="formElements.otherSkills"
+      [mode]="formElements.otherSkills.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-input
+      [inputData]="formElements.certificate"
+      [type]="'text'"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
     <div class="profile-btn-container">
       <button
         class="profile-btn"

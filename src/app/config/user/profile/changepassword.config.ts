@@ -2,7 +2,6 @@
  * Created by LAE84266 on 11/08/2017.
  */
 
-import { ValidationUtil } from 'app/shared/util/validation-util';
 import {
   IForm,
   IElement,
@@ -11,6 +10,7 @@ import {
   IValidator,
   IMessageElement
 } from 'app/config/interfaces';
+import { ValidationUtil } from 'app/shared/util/validation-util';
 
 export interface IChangePassword {
   oldPassword: IInputElement;

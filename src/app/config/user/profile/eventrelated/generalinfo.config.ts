@@ -2,10 +2,7 @@ import {
   IForm,
   IElement,
   ILinkElement,
-  IMessageElement
-} from 'app/config/interfaces';
-
-import {
+  IMessageElement,
   IInputElement,
   ISelectElement,
   ISimpleSelectElement,
