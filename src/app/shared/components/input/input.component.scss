@@ -22,3 +22,6 @@ mat-form-field {
   -webkit-box-shadow: 0 0 0px 1000px #fff inset;
 }
 
+:host /deep/ mat-form-field .mat-form-field-placeholder {
+  white-space: pre-wrap;
+}

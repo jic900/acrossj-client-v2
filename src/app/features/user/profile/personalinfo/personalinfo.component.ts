@@ -11,7 +11,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 
@@ -83,8 +83,8 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
           const jsDate = new Date(personalInfo.birthday);
           personalInfo.birthday = this.momentService.formatDate(this.momentService.parseJSDate(jsDate));
         }
-        if (personalInfo.gender) {
-          personalInfo.gender = this.formElements.gender.selectList.filter((item) => item.name === personalInfo.gender);
+        if (!personalInfo.gender || personalInfo.gender === '') {
+          personalInfo.gender = [];
         }
         Object.keys(personalInfo).forEach((field) => {
           this.formGroup.get(field).setValue(personalInfo[field]);
@@ -139,15 +139,11 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
   }
 
   onSave(event: any): void {
-    console.log(this.formGroup.value);
     event.preventDefault();
     this.message = null;
     if (this.formGroup.value.birthday && this.formGroup.value.birthday.trim() !== '') {
       this.formGroup.value.birthday =
         this.momentService.getTime(this.momentService.parseDate(this.formGroup.value.birthday));
-    }
-    if (this.formGroup.value.gender && this.formGroup.value.gender.length > 0) {
-      this.formGroup.value.gender = this.formGroup.value.gender[0].name;
     }
 
     this.processing = true;
@@ -156,10 +152,11 @@ export class PersonalInfoComponent implements AfterViewInit, OnDestroy {
       this.anchorElement.nativeElement.scrollIntoView();
     };
 
-    this.profileService.saveProfile({personal: this.formGroup.value})
+    this.profileService.saveProfile({'personal': this.formGroup.value})
       .subscribe(
         data => {
           this.message = this.messages.success;
+          Object.values(this.formGroup.controls).forEach((formControl: FormControl) => formControl.markAsPristine());
           onComplete();
         },
         err => {

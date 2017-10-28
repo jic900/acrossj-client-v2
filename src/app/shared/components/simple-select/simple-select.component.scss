@@ -1,0 +1,60 @@
+mat-form-field {
+  width: 100%;
+}
+
+.select-radio-button-group {
+  margin: 8px 0;
+}
+
+.select-radio-button {
+  margin: 8px 10px 8px 5px;
+  font-size: 14px;
+}
+
+.select-checkbox-group {
+  margin: 8px 0;
+}
+.select-checkbox {
+  margin: 5px 10px 5px 5px;
+}
+
+.row-layout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.column-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+:host /deep/ {
+  mat-form-field .mat-form-field-infix {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 3px;
+  }
+  mat-form-field mat-radio-button .mat-radio-container {
+    width: 18px;
+    height: 18px;
+  }
+  mat-form-field mat-radio-button .mat-radio-outer-circle {
+    width: 18px;
+    height: 18px;
+  }
+  mat-form-field mat-radio-button .mat-radio-inner-circle {
+    width: 18px;
+    height: 18px;
+  }
+  mat-form-field .mat-checkbox-inner-container {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+  }
+  mat-form-field .mat-checkbox-label {
+    font-size: 14px !important;
+    font-weight: normal;
+  }
+}

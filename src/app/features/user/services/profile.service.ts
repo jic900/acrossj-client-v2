@@ -205,8 +205,8 @@ export class ProfileService implements OnDestroy {
     const profile: IProfile = {
       personal: profileData['personal'],
       relevant: profileData['relevant'],
-      transportation: null,
-      group: null
+      transportation: profileData['transportation'],
+      group: profileData['group']
     };
     this.localStorageService.saveProfile(profile);
     this.profileUpdated$.next(profile);

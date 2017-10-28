@@ -5,6 +5,7 @@ export interface IProfile {
   group: IGroup;
 }
 
+
 export interface IPersonal {
   fullname?: string;
   gender?: any;
@@ -33,7 +34,10 @@ export interface IGroup {
 }
 
 export interface IGeneral {
-  data: string;
+  language?: any;
+  height: number;
+  weight: number;
+  organizational?: any;
 }
 
 export interface ISki {

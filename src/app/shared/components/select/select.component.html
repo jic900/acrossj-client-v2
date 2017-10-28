@@ -43,7 +43,7 @@
   <mat-error *ngIf="validateFailed()">
     {{getValidatorError() | translate}}
   </mat-error>
-  <mat-hint>
+  <mat-hint *ngIf="inputFocused">
     {{data.hint | translate}}
   </mat-hint>
 </mat-form-field>

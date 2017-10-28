@@ -12,7 +12,6 @@ import {
   ISelectElement,
   SelectMode
 } from 'app/config/interfaces';
-import { ValidationUtil } from 'app/shared/util/validation-util';
 
 export interface IPersonalInfo {
   fullname: IInputElement;

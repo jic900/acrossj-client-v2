@@ -144,6 +144,24 @@
         "MENU_LABEL": "Event Related Information",
         "GENERAL": {
           "LABEL": "General",
+          "LANGUAGE": {
+            "LABEL": "Language Skill",
+            "HINT": "Enter any other languages not listed below",
+            "ENGLISH": "English",
+            "CHINESE": "Chinese",
+            "JAPANESE": "Japanese"
+          },
+          "HEIGHT": {
+            "LABEL": "Height  (CM)"
+          },
+          "WEIGHT": {
+            "LABEL": "Weight  (KG)"
+          },
+          "ORGANIZATIONAL": {
+            "LABEL": "Organizational Skill",
+            "SKILL": "Previous organizational experience",
+            "MOTIVATION": "Motivation of being an organizer"
+          },
           "BTN_LABEL": "Save"
         },
         "RUNNING": {

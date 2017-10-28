@@ -2,6 +2,31 @@
 <aj-profiledetail [title]="formData.name">
   <form novalidate [formGroup]="formGroup" (ngSubmit)="onSave($event)">
     <aj-message *ngIf="message" [data]="message"></aj-message>
+    <aj-select
+      [data]="formElements.language"
+      [mode]="formElements.language.mode"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-select>
+    <aj-input
+      [inputData]="formElements.height"
+      [type]="'text'"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <aj-input
+      [inputData]="formElements.weight"
+      [type]="'text'"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <aj-simple-select
+      [data]="formElements.organizational"
+      [mode]="formElements.organizational.mode"
+      [layout]="formElements.organizational.layout"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-simple-select>
     <div class="profile-btn-container">
       <button
         class="profile-btn"

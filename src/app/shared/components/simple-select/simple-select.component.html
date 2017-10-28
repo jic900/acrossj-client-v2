@@ -1,0 +1,50 @@
+<mat-form-field [floatPlaceholder]="'always'">
+  <mat-radio-group
+    *ngIf="isSingleMode()"
+    class="select-radio-button-group"
+    [class]="isRowLayout() ? 'row-layout' : 'column-layout'"
+    [(ngModel)]="selected">
+    <mat-radio-button
+      *ngFor="let item of data.selectList; let i = index"
+      class="select-radio-button"
+      [color]="'primary'"
+      [disableRipple]="true"
+      [value]="item.name"
+      (change)="onSingleSelectChange(i, $event)">
+      {{item.display | translate}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <div
+    *ngIf="!isSingleMode()"
+    class="select-checkbox-group"
+    [class]="isRowLayout() ? 'row-layout' : 'column-layout'">
+    <mat-checkbox
+      *ngFor="let selectItem of data.selectList; let i = index"
+      class="select-checkbox"
+      [name]="selectItem.name"
+      [color]="'primary'"
+      [tabIndex]="i"
+      [disableRipple]="true"
+      [(ngModel)]="selectItem.value"
+      (change)="onMultiSelectChange($event)">
+      {{selectItem.display | translate}}
+    </mat-checkbox>
+  </div>
+
+  <input
+    matInput
+    [formControl]="formControl"
+    [(ngModel)]="value"
+    (ngModelChange)="onSelectedValueChange($event)"
+    readonly="true"
+    style="width: 0">
+
+  <mat-placeholder>{{data.placeHolder | translate}}</mat-placeholder>
+
+  <mat-error *ngIf="validateFailed()">
+    {{getValidatorError() | translate}}
+  </mat-error>
+  <mat-hint>
+    {{data.hint | translate}}
+  </mat-hint>
+</mat-form-field>

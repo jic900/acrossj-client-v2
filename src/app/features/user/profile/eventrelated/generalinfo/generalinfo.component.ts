@@ -5,7 +5,7 @@ import {
   ViewChild,
   ElementRef
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 
@@ -101,10 +101,11 @@ export class GeneralInfoComponent implements AfterViewInit, OnDestroy {
   }
 
   onSave(event: any): void {
+    console.log(this.formGroup.value);
     event.preventDefault();
-    this.processing = true;
     this.message = null;
 
+    this.processing = true;
     const onComplete = () => {
       this.processing = false;
       this.anchorElement.nativeElement.scrollIntoView();
@@ -114,6 +115,7 @@ export class GeneralInfoComponent implements AfterViewInit, OnDestroy {
       .subscribe(
         data => {
           this.message = this.messages.success;
+          Object.values(this.formGroup.controls).forEach((formControl: FormControl) => formControl.markAsPristine());
           onComplete();
         },
         err => {
