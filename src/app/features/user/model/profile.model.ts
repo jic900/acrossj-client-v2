@@ -35,8 +35,8 @@ export interface IGroup {
 
 export interface IGeneral {
   language?: any;
-  height: number;
-  weight: number;
+  height?: number;
+  weight?: number;
   organizational?: any;
 }
 
@@ -49,7 +49,10 @@ export interface IHiking {
 }
 
 export interface IRunning {
-  data: string;
+  shoeSize?: any;
+  tShirtSize?: any;
+  runnetId?: string;
+  marathon?: any;
 }
 
 export interface IBicycling {

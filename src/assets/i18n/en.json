@@ -166,6 +166,33 @@
         },
         "RUNNING": {
           "LABEL": "Running",
+          "SHOE_SIZE": {
+            "LABEL": "Shoe Size",
+            "UNIT": {
+              "US": "US",
+              "EUROPE": "Europe",
+              "CHINA": "China",
+              "JAPAN": "Japan",
+              "CM": "CM"
+            }
+          },
+          "TSHIRT_SIZE": {
+            "LABEL": "T-shirt Size",
+            "XXL": "XXL",
+            "XL": "XL",
+            "L": "L",
+            "M": "M",
+            "S": "S",
+            "XS": "XS"
+          },
+          "RUNNET_ID": {
+            "LABEL": "Runnet ID"
+          },
+          "MARATHON": {
+            "LABEL": "Marathon Race",
+            "FULL": "Full Distance",
+            "HALF": "Half Distance"
+          },
           "BTN_LABEL": "Save"
         },
         "SKI": {
@@ -334,6 +361,14 @@
         "INVALID_DATE_RANGE_FORMAT": "Invalid date range format",
         "INVALID_START_DATE": "Invalid start date format",
         "SELECT_END_DATE": "Please select end date"
+      },
+      "PROFILE": {
+        "EVENT_RELATED": {
+          "RUNNING": {
+            "SHOE_SIZE_UNIT_REQUIRED": "A shoe size unit is required",
+            "INVALID_SHOE_SIZE": "Invalid shoe size"
+          }
+        }
       }
     }
   }

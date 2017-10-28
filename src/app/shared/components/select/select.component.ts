@@ -3,6 +3,7 @@ import {
   OnChanges,
   SimpleChanges,
   OnInit,
+  OnDestroy,
   Input,
   Output,
   EventEmitter,
@@ -32,7 +33,7 @@ const CHIP_KEY_CODES = [KeyCode.ENTER, KeyCode.COMMA];
   ],
 })
 
-export class SelectComponent implements OnChanges, OnInit {
+export class SelectComponent implements OnChanges, OnInit, OnDestroy {
 
   @Input() data: ISelectElement;
   @Input() mode: SelectMode;
@@ -46,12 +47,14 @@ export class SelectComponent implements OnChanges, OnInit {
   chipKeyCodes: KeyCode[];
   inputFocused: boolean;
   selected: string;
+  destroy: boolean;
 
   constructor(private translateService: TranslateService, private changeDetectorRef: ChangeDetectorRef) {
     this.chipKeyCodes = CHIP_KEY_CODES;
     this.chips = [];
     this.inputValue = '';
     this.collapsed = true;
+    this.destroy = false;
     this.bindControl = new EventEmitter<{}>();
     this.clicked = new EventEmitter<void>();
   }
@@ -67,11 +70,18 @@ export class SelectComponent implements OnChanges, OnInit {
       this.data.validators.forEach((validator) => {
         if (validator.name === 'validSelectInput') {
           validator.validateFunc = validator.validateFunc(this);
+        } else if (validator.name === 'selectInputPattern') {
+          const field = this.mode === SelectMode.SINGLE ? 'value' : 'name';
+          validator.validateFunc = validator.validateFunc(field, validator.value);
         }
       });
     }
     this.formControl = ValidationUtil.generateFormControl(this.data.validators);
     this.bindControl.emit({'name': this.data.name, 'control': this.formControl});
+  }
+
+  ngOnDestroy(): void {
+    this.destroy = true;
   }
 
   isSingleMode(): boolean {
@@ -92,17 +102,23 @@ export class SelectComponent implements OnChanges, OnInit {
   }
 
   onBlur(event: any): void {
-    setTimeout(() => this.inputFocused = false);
+    setTimeout(() => {
+      this.inputFocused = false;
+      this.formControl.markAsTouched();
+    });
     setTimeout(() => {
       if (! this.inputFocused) {
         this.collapsed = true;
-        this.changeDetectorRef.detectChanges();
+        if (! this.destroy) {
+          this.changeDetectorRef.detectChanges();
+        }
       }
     }, 200);
   }
 
   onFocus(): void {
     this.inputFocused = true;
+    this.formControl.markAsUntouched();
     if (this.chips.length === 0) {
       this.collapsed = false;
     }
@@ -161,7 +177,9 @@ export class SelectComponent implements OnChanges, OnInit {
       }
       this.chips[0] = this.data.selectList[selectedIndex];
     }
-    this.formControl.markAsDirty();
+    if (this.inputValue && this.inputValue.trim() !== '') {
+      this.formControl.markAsDirty();
+    }
     this.formControl.updateValueAndValidity();
     if (! this.data.readOnly) {
       this.selectInput.nativeElement.focus();

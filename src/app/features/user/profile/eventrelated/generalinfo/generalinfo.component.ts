@@ -101,7 +101,7 @@ export class GeneralInfoComponent implements AfterViewInit, OnDestroy {
   }
 
   onSave(event: any): void {
-    console.log(this.formGroup.value);
+    // console.log(this.formGroup.value);
     event.preventDefault();
     this.message = null;
 

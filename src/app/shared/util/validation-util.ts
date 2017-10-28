@@ -8,6 +8,7 @@ import {
   SelectMode
 } from 'app/config/interfaces';
 import { SelectComponent } from '../components/select/select.component';
+import { ISelectItem } from '../../config/interfaces/select-element.interface';
 
 export class ValidationUtil {
 
@@ -83,6 +84,20 @@ export class ValidationUtil {
   public static validSelectInput = (select: SelectComponent) => (formControl: FormControl) => {
     if (select.mode === SelectMode.SINGLE && select.chips.length === 0 && select.inputValue && select.inputValue !== '') {
       return {'validSelectInput': true};
+    }
+    return null;
+  }
+
+  public static selectInputPattern = (field: string, pattern: any) => (formControl: FormControl) => {
+    const regexPattern = new RegExp(pattern);
+    for (const selectItem of <ISelectItem[]> formControl.value) {
+      let value = selectItem.value;
+      if (field === 'name') {
+        value = selectItem.name;
+      }
+      if (!value || (<string>value).trim() === '' || ! regexPattern.test(value)) {
+        return {'selectInputPattern': true};
+      }
     }
     return null;
   }
