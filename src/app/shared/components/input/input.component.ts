@@ -30,9 +30,11 @@ export class InputComponent implements OnChanges, OnInit {
   @Output() bindControl: EventEmitter<{}>;
   @Output() clicked: EventEmitter<void>;
   formControl: FormControl;
+  focused: boolean;
 
   constructor() {
     this.type = 'text';
+    this.focused = false;
     this.bindControl = new EventEmitter<{}>();
     this.clicked = new EventEmitter<void>();
   }

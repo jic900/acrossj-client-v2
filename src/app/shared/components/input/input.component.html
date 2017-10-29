@@ -1,4 +1,4 @@
-<mat-form-field [class.mat-input-invalid]="formValidateFailed()">
+<mat-form-field [class.mat-form-field-invalid]="formValidateFailed()">
   <input id="{{inputData.name}}"
          matInput
          validateonblur
@@ -6,10 +6,15 @@
          readonly="{{readonly}}"
          [formControl]="formControl"
          (click)="onClick($event)"
+         (blur)="focused = false"
+         (focus)="focused = true"
          placeholder="{{inputData.placeHolder | translate}}">
   <mat-error *ngIf="validateFailed()">
     {{getValidatorError() | translate}}
   </mat-error>
+  <mat-hint *ngIf="!formValidateFailed() && inputData.hint && focused">
+    {{inputData.hint | translate}}
+  </mat-hint>
   <mat-hint *ngIf="formValidateFailed()" style="color: red">
     {{getFormValidateError() | translate}}
   </mat-hint>

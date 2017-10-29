@@ -16,7 +16,8 @@ import {
 import {
   IForm,
   IInputElement,
-  IMessageElement
+  IMessageElement,
+  IFormValidatorData
 } from 'app/config/interfaces';
 import { Util } from 'app/shared/util/util';
 import { slideInDownAnimation } from 'app/shared/util/animations';
@@ -71,7 +72,7 @@ export class ChangePasswordComponent implements AfterViewInit {
     this.message = null;
   }
 
-  getFormValidatorData(controlName: string) {
+  getFormValidatorData(controlName: string): IFormValidatorData {
     if (controlName === 'confirmPassword') {
       return {'validateFunc': this.formValidateFailed, 'errorFunc': this.getFormValidateError};
     }
