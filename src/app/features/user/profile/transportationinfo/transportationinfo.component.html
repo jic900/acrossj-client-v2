@@ -2,6 +2,47 @@
 <aj-profiledetail [title]="formData.name">
   <form novalidate [formGroup]="formGroup" (ngSubmit)="onSave($event)">
     <aj-message *ngIf="message" [data]="message"></aj-message>
+    <aj-input
+      [inputData]="formElements.station"
+      [type]="'text'"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <aj-input
+      [inputData]="formElements.driverLicense"
+      [type]="'text'"
+      (clicked)="onClicked($event)"
+      (bindControl)="onBindControl($event)">
+    </aj-input>
+    <div class="own-vehicle-checkbox">
+      <mat-checkbox
+        #vehicleInfoToggle
+        [disableRipple]="true"
+        [color]="'primary'"
+        (change)="toggleShowVehicleInfo()">{{formElements.ownVehicle.display | translate}}
+      </mat-checkbox>
+    </div>
+    <div [@tdCollapse]="!showVehicleInfo">
+      <aj-input
+        [inputData]="formElements.vehicleMakeModel"
+        [type]="'text'"
+        (clicked)="onClicked($event)"
+        (bindControl)="onBindControl($event)">
+      </aj-input>
+      <aj-input
+        [inputData]="formElements.vehicleCapacity"
+        [type]="'text'"
+        (clicked)="onClicked($event)"
+        (bindControl)="onBindControl($event)">
+      </aj-input>
+      <aj-simple-select
+        [data]="formElements.vehicleOtherInfo"
+        [mode]="formElements.vehicleOtherInfo.mode"
+        [layout]="formElements.vehicleOtherInfo.layout"
+        (clicked)="onClicked($event)"
+        (bindControl)="onBindControl($event)">
+      </aj-simple-select>
+    </div>
     <div class="profile-btn-container">
       <button
         class="profile-btn"

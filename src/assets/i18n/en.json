@@ -271,6 +271,30 @@
       },
       "TRANSPORTATION_INFO": {
         "LABEL": "Transportation",
+        "STATION": {
+          "LABEL": "Train station",
+          "HINT": "Enter the train station close to your home"
+        },
+        "DRIVER_LICENSE": {
+          "LABEL": "Driver License",
+          "HINT": "Enter your driver license if you have; otherwise leave it blank"
+        },
+        "VEHICLE": {
+          "LABEL": "Check if you own a vehicle",
+          "MAKE_MODEL": {
+            "LABEL": "Vehicle Make / Model",
+            "HINT": "e.g., Toyota / Camry"
+          },
+          "CAPACITY": {
+            "LABEL": "Vehicle Capacity",
+            "HINT": "Enter the number of seats including the driver seat"
+          },
+          "OTHER_INFO": {
+            "LABEL": "Other Vehicle Related Information",
+            "WINTER_TIRES": "Your vehicle is equipped with winter tires",
+            "RACK": "Your vehicle is equipped with rack to hold ski/snow boards"
+          }
+        },
         "BTN_LABEL": "Save"
       },
       "GROUP_INFO": {

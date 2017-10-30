@@ -52,9 +52,13 @@ mat-form-field {
     width: 15px;
     height: 15px;
     margin-right: 10px;
+    // make checkbox aligned with multi line text on top
+    margin-top: 5px;
   }
   mat-form-field .mat-checkbox-label {
     font-size: 14px !important;
     font-weight: normal;
+    // to wrap long text into multi lines
+    white-space: normal !important;
   }
 }

@@ -68,7 +68,7 @@ export class GeneralInfoConfig implements IForm {
     },
     {
       name: 'organizational',
-      type: 'select',
+      type: 'simple-select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.GENERAL.ORGANIZATIONAL.LABEL',
       mode: SelectMode.MULTI,
       layout: SelectLayout.COLUMN,

@@ -5,7 +5,6 @@ export interface IProfile {
   group: IGroup;
 }
 
-
 export interface IPersonal {
   fullname?: string;
   gender?: any;
@@ -16,7 +15,12 @@ export interface IPersonal {
 }
 
 export interface ITransportation {
-  subwayStation?: string;
+  station?: string;
+  driverLicense?: string;
+  ownVehicle?: boolean;
+  vehicleMakeModel?: string;
+  vehicleCapacity?: string;
+  vehicleOtherInfo?: any;
 }
 
 export interface IEventRelated {

@@ -85,16 +85,22 @@ export class SimpleSelectComponent implements OnChanges, OnInit {
   }
 
   onSelectedValueChange(event: ISelectItem[]): void {
-    this.value.forEach((selectedItem, index) => {
-      for (const listItem of this.data.selectList) {
-        if (selectedItem.name === listItem.name) {
-          listItem.value = true;
-          if (this.mode === SelectMode.SINGLE) {
-            this.selected = selectedItem.name;
+    if (this.value && this.value.length > 0) {
+      this.value.forEach((selectedItem, index) => {
+        for (const listItem of this.data.selectList) {
+          if (selectedItem.name === listItem.name) {
+            listItem.value = true;
+            if (this.mode === SelectMode.SINGLE) {
+              this.selected = selectedItem.name;
+            }
           }
         }
+      });
+    } else {
+      for (const listItem of this.data.selectList) {
+        listItem.value = false;
       }
-    });
+    }
   }
 
   validateFailed(): boolean {
