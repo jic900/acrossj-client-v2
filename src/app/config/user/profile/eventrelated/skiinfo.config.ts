@@ -248,8 +248,8 @@ export class SkiInfoConfig implements IForm {
       name: 'otherSkills',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.OTHER_SKILLS.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.SKI.OTHER_SKILLS.HINT',
       mode: SelectMode.MULTI,
-      readOnly: true,
       chipOptions: {
         selectable: true,
         removable: true,

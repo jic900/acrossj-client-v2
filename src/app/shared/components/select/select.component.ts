@@ -102,10 +102,8 @@ export class SelectComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   onBlur(event: any): void {
-    setTimeout(() => {
-      this.inputFocused = false;
-      this.formControl.markAsTouched();
-    });
+    this.inputFocused = false;
+    this.formControl.markAsTouched();
     setTimeout(() => {
       if (! this.inputFocused) {
         this.collapsed = true;

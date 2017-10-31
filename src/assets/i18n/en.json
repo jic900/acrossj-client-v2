@@ -243,6 +243,7 @@
           },
           "OTHER_SKILLS": {
             "LABEL": "Other Specialized Skills",
+            "HINT": "Enter any skills if not listed below",
             "JUMP": "Jump",
             "PIPE": "Pipe",
             "MOGUL": "Mogul"
