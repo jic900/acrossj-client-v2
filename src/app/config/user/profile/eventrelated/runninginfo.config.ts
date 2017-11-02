@@ -31,6 +31,7 @@ export class RunningInfoConfig implements IForm {
       name: 'shoeSize',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.RUNNING.SHOE_SIZE.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.RUNNING.SHOE_SIZE.HINT',
       mode: SelectMode.SINGLE,
       chipOptions: {
         selectable: false,
@@ -86,6 +87,7 @@ export class RunningInfoConfig implements IForm {
       name: 'tShirtSize',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.RUNNING.TSHIRT_SIZE.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.RUNNING.TSHIRT_SIZE.HINT',
       mode: SelectMode.SINGLE,
       readOnly: true,
       chipOptions: {
@@ -129,12 +131,14 @@ export class RunningInfoConfig implements IForm {
     {
       name: 'runnetId',
       type: 'input',
-      placeHolder: 'USER.PROFILE.EVENT_RELATED.RUNNING.RUNNET_ID.LABEL'
+      placeHolder: 'USER.PROFILE.EVENT_RELATED.RUNNING.RUNNET_ID.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.RUNNING.RUNNET_ID.HINT'
     },
     {
       name: 'marathon',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.RUNNING.MARATHON.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.RUNNING.MARATHON.HINT',
       mode: SelectMode.MULTI,
       readOnly: true,
       chipOptions: {

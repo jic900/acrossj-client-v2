@@ -34,6 +34,7 @@ export class SkiInfoConfig implements IForm {
       name: 'proficient',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.PROFICIENT.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.SKI.PROFICIENT.HINT',
       mode: SelectMode.MULTI,
       readOnly: true,
       chipOptions: {
@@ -58,6 +59,7 @@ export class SkiInfoConfig implements IForm {
       name: 'license',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.LICENSE.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.SKI.LICENSE.HINT',
       mode: SelectMode.SINGLE,
       readOnly: true,
       chipOptions: {
@@ -87,6 +89,7 @@ export class SkiInfoConfig implements IForm {
       name: 'bootsSize',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.BOOTS_SIZE.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.SKI.BOOTS_SIZE.HINT',
       mode: SelectMode.SINGLE,
       readOnly: true,
       chipOptions: {
@@ -131,6 +134,7 @@ export class SkiInfoConfig implements IForm {
       name: 'jacketSize',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.JACKET_SIZE.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.SKI.JACKET_SIZE.HINT',
       mode: SelectMode.SINGLE,
       readOnly: true,
       chipOptions: {
@@ -175,6 +179,7 @@ export class SkiInfoConfig implements IForm {
       name: 'pantsSize',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.PANTS_SIZE.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.SKI.PANTS_SIZE.HINT',
       mode: SelectMode.SINGLE,
       readOnly: true,
       chipOptions: {
@@ -219,6 +224,7 @@ export class SkiInfoConfig implements IForm {
       name: 'skillLevel',
       type: 'select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.SKILL_LEVEL.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.SKI.SKILL_LEVEL.HINT',
       mode: SelectMode.SINGLE,
       readOnly: true,
       chipOptions: {
@@ -276,7 +282,8 @@ export class SkiInfoConfig implements IForm {
     {
       name: 'certificate',
       type: 'input',
-      placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.CERTIFICATE.LABEL'
+      placeHolder: 'USER.PROFILE.EVENT_RELATED.SKI.CERTIFICATE.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.SKI.CERTIFICATE.HINT',
     },
     {
       name: 'saveButton',

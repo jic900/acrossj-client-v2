@@ -145,22 +145,25 @@
         "GENERAL": {
           "LABEL": "General",
           "LANGUAGE": {
-            "LABEL": "Language Skill",
-            "HINT": "Enter any other languages not listed below",
+            "LABEL": "Language Proficiency",
+            "HINT": "Choose languages provided below and enter others if not listed",
             "ENGLISH": "English",
             "CHINESE": "Chinese",
             "JAPANESE": "Japanese"
           },
           "HEIGHT": {
-            "LABEL": "Height  (CM)"
+            "LABEL": "Height  (CM)",
+            "HINT": "Your height in centimeter"
           },
           "WEIGHT": {
-            "LABEL": "Weight  (KG)"
+            "LABEL": "Weight  (KG)",
+            "HINT": "Your weight in kilogram"
           },
           "ORGANIZATIONAL": {
             "LABEL": "Organizational Skill",
-            "SKILL": "Previous organizational experience",
-            "MOTIVATION": "Motivation of being an organizer"
+            "HINT": "Contribution to organizing events is highly appreciated",
+            "SKILL": "Check if you have organizational skill",
+            "MOTIVATION": "Willing to be an event organizer and contribute"
           },
           "BTN_LABEL": "Save"
         },
@@ -168,6 +171,7 @@
           "LABEL": "Running",
           "SHOE_SIZE": {
             "LABEL": "Shoe Size",
+            "HINT": "Provide your shoe size with one selection of unit provided below",
             "UNIT": {
               "US": "US",
               "EUROPE": "Europe",
@@ -178,6 +182,7 @@
           },
           "TSHIRT_SIZE": {
             "LABEL": "T-shirt Size",
+            "HINT": "Select your T-shirt size from the size chart below",
             "XXL": "XXL",
             "XL": "XL",
             "L": "L",
@@ -186,10 +191,12 @@
             "XS": "XS"
           },
           "RUNNET_ID": {
-            "LABEL": "Runnet ID"
+            "LABEL": "Runnet ID (Optional)",
+            "HINT": "Provide your Runnet ID if you have"
           },
           "MARATHON": {
             "LABEL": "Marathon Race",
+            "HINT": "Choose one or both types of Marathons that you are capable of",
             "FULL": "Full Distance",
             "HALF": "Half Distance"
           },
@@ -198,18 +205,21 @@
         "SKI": {
           "LABEL": "Ski",
           "PROFICIENT": {
-            "LABEL": "Proficient In",
+            "LABEL": "Ski Proficiency",
+            "HINT": "Choose one or both ski types that you are proficient in",
             "SKI": "Ski",
             "SNOWBOARD": "Snowboard"
           },
           "LICENSE": {
-            "LABEL": "Ski License",
+            "LABEL": "Ski License (Optional)",
+            "HINT": "Choose one from the list below if you have a ski license",
             "GRADE_1": "Grade 1",
             "GRADE_2": "Grade 2",
             "GRADE_3": "Grade 3"
           },
           "BOOTS_SIZE": {
             "LABEL": "Ski Boots Size",
+            "HINT": "Select your ski boots size from the size chart below",
             "XXL": "XXL",
             "XL": "XL",
             "L": "L",
@@ -219,6 +229,7 @@
           },
           "JACKET_SIZE": {
             "LABEL": "Ski Jacket Size",
+            "HINT": "Select your ski jacket size from the size chart below",
             "XXL": "XXL",
             "XL": "XL",
             "L": "L",
@@ -228,6 +239,7 @@
           },
           "PANTS_SIZE": {
             "LABEL": "Ski Pants Size",
+            "HINT": "Select your ski pants size from the size chart below",
             "XXL": "XXL",
             "XL": "XL",
             "L": "L",
@@ -236,7 +248,8 @@
             "XS": "XS"
           },
           "SKILL_LEVEL": {
-            "LABEL": "Skill Level",
+            "LABEL": "Ski Skill Level",
+            "HINT": "Choose one skill level from the below list",
             "ADVANCED": "Advanced",
             "INTERMEDIATE": "Intermediate",
             "ENTRY": "Entry"
@@ -249,7 +262,8 @@
             "MOGUL": "Mogul"
           },
           "CERTIFICATE": {
-            "LABEL": "Certification"
+            "LABEL": "Ski Certification (Optional)",
+            "HINT": "Enter the detail of your certification (e.g., name and issuer)"
           },
           "BTN_LABEL": "Save"
         },

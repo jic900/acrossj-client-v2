@@ -40,11 +40,6 @@ export class GeneralInfoConfig implements IForm {
       },
       selectList: [
         {
-          name: 'english',
-          display: 'USER.PROFILE.EVENT_RELATED.GENERAL.LANGUAGE.ENGLISH',
-          value: false
-        },
-        {
           name: 'chinese',
           display: 'USER.PROFILE.EVENT_RELATED.GENERAL.LANGUAGE.CHINESE',
           value: false
@@ -53,23 +48,31 @@ export class GeneralInfoConfig implements IForm {
           name: 'japanese',
           display: 'USER.PROFILE.EVENT_RELATED.GENERAL.LANGUAGE.JAPANESE',
           value: false
+        },
+        {
+          name: 'english',
+          display: 'USER.PROFILE.EVENT_RELATED.GENERAL.LANGUAGE.ENGLISH',
+          value: false
         }
       ]
     },
     {
       name: 'height',
       type: 'input',
-      placeHolder: 'USER.PROFILE.EVENT_RELATED.GENERAL.HEIGHT.LABEL'
+      placeHolder: 'USER.PROFILE.EVENT_RELATED.GENERAL.HEIGHT.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.GENERAL.HEIGHT.HINT'
     },
     {
       name: 'weight',
       type: 'input',
-      placeHolder: 'USER.PROFILE.EVENT_RELATED.GENERAL.WEIGHT.LABEL'
+      placeHolder: 'USER.PROFILE.EVENT_RELATED.GENERAL.WEIGHT.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.GENERAL.WEIGHT.HINT'
     },
     {
       name: 'organizational',
       type: 'simple-select',
       placeHolder: 'USER.PROFILE.EVENT_RELATED.GENERAL.ORGANIZATIONAL.LABEL',
+      hint: 'USER.PROFILE.EVENT_RELATED.GENERAL.ORGANIZATIONAL.HINT',
       mode: SelectMode.MULTI,
       layout: SelectLayout.COLUMN,
       selectList: [
