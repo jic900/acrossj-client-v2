@@ -175,9 +175,7 @@ export class SelectComponent implements OnChanges, OnInit, OnDestroy {
       }
       this.chips[0] = this.data.selectList[selectedIndex];
     }
-    if (this.inputValue && this.inputValue.trim() !== '') {
-      this.formControl.markAsDirty();
-    }
+    this.formControl.markAsDirty();
     this.formControl.updateValueAndValidity();
     if (! this.data.readOnly) {
       this.selectInput.nativeElement.focus();
